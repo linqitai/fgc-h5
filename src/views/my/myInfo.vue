@@ -614,7 +614,9 @@ export default {
 			let _this = this;
 			Dialog.confirm({
 			  title: '系统提示',
-			  message: '安全密码是实名认证的时候所设置的，若忘记了，得重新提交实名，请问是否要去重新实名？',
+			  message: `安全密码是实名认证的时候所设置的，您的安全密码头2位是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号，或重新提交实名，请问是否要去重新实名？`,
+			  confirmButtonText:'重新实名',
+			  cancelButtonText:'我再想想'
 			}).then(() => {
 			  // on close resetRealName
 			  _this.$ajax.ajax(_this.$api.resetRealName, 'POST', null, function(res){

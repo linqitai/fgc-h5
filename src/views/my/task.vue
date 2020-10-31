@@ -25,20 +25,9 @@
 			overflow: hidden;
 			padding: $boxPadding2;
 			color: $main-box-fh-text-color;
+			clear: both;
 			&.finishInfo{
 				background-color: $main-adorn-color;
-			}
-			&.share{
-				background-color: $main-blue-color;
-			}
-			&.activity{
-				background-color: #5e008d;
-			}
-			&.level{
-				background-color: $main-green-color;
-			}
-			&.area{
-				background-color: $main-purple-color;
 			}
 			.flexLeft{
 				flex: 1;
@@ -83,10 +72,10 @@
 		<i class="iconfont iconfont-question rightBox icon" @click="showTip"></i>
 	</m-header>
 	<div class="taskList">
-		<div class="box finishInfo" @click="toView('info')">
+		<div class="box finishInfo">
 			<div class="flexLeft">
 				<div class="line title">
-					任务1 
+					基础任务1 
 				</div>
 				<div class="line text margT10">
 					实名认证<br>
@@ -94,14 +83,14 @@
 				</div>
 			</div>
 			<div class="flexRight">
-				<i class="iconfont iconfont-finished" v-if="userInfo.actived==1||userInfo.actived==3"></i>
+				<i class="iconfont iconfont-finished" v-if="userInfo.actived==1"></i>
 			</div>
 		</div>
 		<div class="placeholderLine10"></div>
-		<div class="box finishInfo" @click="toView('buyMill')">
+		<div class="box finishInfo">
 			<div class="flexLeft">
 				<div class="line title">
-					任务2
+					基础任务2
 				</div>
 				<div class="line text margT10">
 					激活账户<br>
@@ -109,7 +98,97 @@
 				</div>
 			</div>
 			<div class="flexRight">
-				<i class="iconfont iconfont-finished" v-if="userInfo.actived==3||userInfo.buyTimes>0"></i>
+				<i class="iconfont iconfont-finished" v-if="userInfo.isActived==1"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务1
+				</div>
+				<div class="line text margT10">
+					成为青铜级工会会长<br>
+					需要：<br>
+					有效直推10名 + 个人持币10个 + 一代团队持币1000个<br>
+					完成后:<br>
+					奖励10个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==1"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务2
+				</div>
+				<div class="line text margT10">
+					成为白银级工会会长<br>
+					需要：<br>
+					有效直推100名 + 个人持币100个 + 一代团队持币10000个+三个青铜会长<br>
+					完成后:<br>
+					奖励100个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==2"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务3
+				</div>
+				<div class="line text margT10">
+					成为黄金级工会会长<br>
+					需要：<br>
+					有效直推200名 + 个人持币500个 + 一代团队持币50000个+三个白银会长<br>
+					完成后:<br>
+					奖励1000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==3"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务4
+				</div>
+				<div class="line text margT10">
+					成为铂金级工会会长<br>
+					需要：<br>
+					有效直推300名 + 个人持币1000个 + 一代团队持币200000个+三个黄金会长<br>
+					完成后:<br>
+					奖励2000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==4"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务5
+				</div>
+				<div class="line text margT10">
+					成为钻石级工会会长<br>
+					需要：<br>
+					有效直推400名 + 个人持币5000个 + 一代团队持币600000个+三个铂金会长<br>
+					完成后:<br>
+					奖励10000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==5"></i>
 			</div>
 		</div>
 		<van-divider>我是有底线的</van-divider>

@@ -238,7 +238,7 @@
 		<van-notice-bar
 		  mode = "closeable"
 		  left-icon="volume-o"
-		  text="流通中心每日开放的时间为9~20点;个人信誉度:顺利完成交易增加10,交易超时确认于违规操作信誉度减20;"
+		  text="流通中心每日开放的时间为9~20点;个人信誉度:顺利完成交易增加10,交易超时确认等违规操作信誉度减20;"
 		/>
 		<!-- <van-notice-bar left-icon="volume-o" :scrollable="true">
 		  <van-swipe
@@ -273,7 +273,8 @@
 		
 		<div class="statistics" v-if="dealPageInfo.currentBuyNum">
 			<div class="line clearBoth flexCenter f-14">
-				<div class="left title">智能统计小助手</div>
+				<div class="left title">FGC感恩链</div>
+				<div class="right">手续费低至10%</div>
 				<!-- <div class="right">历史最高价 {{(parseFloat(dealPageInfo.currentPlatformPrice)/7).toFixed(3)}}$/{{dealPageInfo.currentPlatformPrice}}￥</div> -->
 			</div>
 			<div class="line clearBoth">
@@ -623,7 +624,7 @@ export default {
 				price:"",
 				safePassword:"",
 			},
-			serviceCharge:'',
+			serviceCharge:1,
 			//挂所选择的卖单
 			form4pickSellBill:{
 				sellAmount:100,
@@ -643,7 +644,7 @@ export default {
 			form4AppointDeal:{
 				sellAmount:'',
 				price:'',
-				serviceCharge:0,
+				serviceCharge:1,
 				safePassword:"",
 			},
 			errorInfo4AppointDeal:{
@@ -896,8 +897,10 @@ export default {
 				_this.buyMaxPrice = parseFloat(parseFloat(_this.dealPageInfo.currentPlatformPrice).toFixed(1)); 
 				_this.form4pickSellBill.price = _this.minPrice;
 				_this.max4Price = parseFloat(_this.dealPageInfo.currentMaxPrice)*25;
-				_this.form4pickSellBill.serviceCharge = 0;
-				_this.serviceCharge = `${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`;
+				_this.form4pickSellBill.serviceCharge = 1;
+				_this.serviceCharge = `总金额10%的感恩券`;
+				/* _this.form4pickSellBill.serviceCharge = 0;
+				_this.serviceCharge = `${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`; */
 				_this.columns4ServiceCharge = [{id:1,text:'总金额10%的感恩券'},{id:0,text:`${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`}];
 				_this.form4BuyBill.price = parseFloat(_this.dealPageInfo.maxPrice);
 				_this.clickIconTip.buyLowestAmount = `最低匹配数量请填写${_this.minBuyAmount}~${_this.dealPageInfo.minBuyBillNum}之间`;
@@ -1128,8 +1131,10 @@ export default {
 					//console.log("_this.dealPageInfo.maxPrice：",_this.dealPageInfo.maxPrice);
 					//console.log("_this.max4Price:",_this.max4Price);
 					_this.dealPageInfo.currentBuyNum = _this.dealPageInfo.currentBuyNum.toFixed(2);
-					_this.form4pickSellBill.serviceCharge = 0;
-					_this.serviceCharge = `${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`;
+					_this.form4pickSellBill.serviceCharge = 1;
+					_this.serviceCharge = `总金额10%的感恩券`;
+					//_this.form4pickSellBill.serviceCharge = 0;
+					// _this.serviceCharge = `${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`;
 					_this.columns4ServiceCharge = [{id:1,text:'总金额10%的感恩券'},{id:0,text:`${parseFloat(_this.dealPageInfo.dealRatio)*100}%FGC`}];
 					//_this.form4BuyBill.price = parseFloat(_this.dealPageInfo.currentMaxPrice)/2;
 					_this.form4BuyBill.price = parseFloat(_this.dealPageInfo.maxPrice);

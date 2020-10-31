@@ -155,7 +155,7 @@ export default new Router({
 				},
 				{
 					path: '/mill',
-					name: '矿场',
+					name: '矿机商城',
 					component: resolve => require(['./views/mill/mill'],resolve),
 					meta:{footer:true,keepAlive:false},
 					//meta:{footer:true,question:true,questionName:'mill',showMillRecordIcon:true},
@@ -173,6 +173,20 @@ export default new Router({
 					// 		meta:{footer:false},
 					// 	},
 					// ]
+				},
+				{
+					path: '/raiseApplyList',
+					name: '申请列表',
+					component: resolve => require(['./views/raise/raiseApplyList'],resolve),
+					meta:{footer:true,keepAlive:true},
+					/* children:[
+						{
+							path: '/myDeal4Deal',
+							name: '我的交易',
+							component: () => import('./views/my/myDeal'),
+							meta:{footer:false},
+						},
+					] */
 				},
 				{
 					path: '/my',
@@ -539,12 +553,6 @@ export default new Router({
 					meta:{footer:true,keepAlive:true},
 				},
 			]
-		},
-		{
-			path: '/raiseApplyList',
-			name: '申请列表',
-			component: resolve => require(['./views/raise/raiseApplyList'],resolve),
-			meta:{footer:true,keepAlive:true},
 		},
 		{
 			path: '/raise4Other',

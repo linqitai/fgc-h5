@@ -9,7 +9,6 @@ export default {
 	tabActiveColor:'#ffae00',
 	projectName:'感恩链',
 	projectEnglishName:'',
-	numUnit:'个',
 	coinUnit:'矿石',
 	ticketName:'帮扶券',
 	restTimeStart:'21:00:00',
@@ -155,6 +154,7 @@ export default {
 	getAssistContributionValueListByUserId: host + "assist/contributionValue/getAssistContributionValueListByUserId",
 	getAssistContributionValueList: host + "assist/contributionValue/getAssistContributionValueList",
 	//machine
+	getHoldFGCReceipt: host + "assist/myMachine/getHoldFGCReceipt",
 	getAssistMiningMachineList: host + "assist/miningMachine/getAssistMiningMachineList",
 	getAssistMiningMachineList4MillShop: host + "assist/miningMachine/getAssistMiningMachineList4MillShop",
 	getAssistMiningMachineList4MillShopToString: host + "assist/miningMachine/getAssistMiningMachineList4MillShopToString",
@@ -284,6 +284,8 @@ export default {
 	insertAssistComplain: host + "assist/complain/insertAssistComplain",
 	getAssistComplainListPage: host + "assist/complain/getAssistComplainListPage",
 	//raise
+	getAssistRaiseReplyListPage: host + "assist/raise/reply/getAssistRaiseReplyListPage",
+	insertAssistReplyRaise: host + "assist/raise/reply/insertAssistReplyRaise",
 	getAssistRaiseListPage: host + "assist/raise/getAssistRaiseListPage",
 	insertAssistRaise: host + "assist/raise/insertAssistRaise",
 	getRaiseMineralNum: host + "assist/raise/getRaiseMineralNum",

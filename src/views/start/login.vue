@@ -305,25 +305,6 @@
 					//console.log("res.code",res.code);
 				})
 			},
-			let48HMachinesStop(){
-				let _this = this;
-				_this.$ajax.ajax(_this.$api.let48HMachinesStop, 'POST', null, function(res) {
-					if (res.code == _this.$api.CODE_OK) { // 200  60 * 60 * 12
-						if(res.data == 1){
-							//_this.$toast(res.message);
-							Dialog.alert({
-							  title: '系统提示',
-							  message: '您有矿机超过48小时未领取，【该矿机】的开启时间和截止时间都自动延后了[当前时间-上次领取时间或开机时间]，但总产不变，现在上次领取时间已经被系统自动设置成[当前时间]，矿机需要重新启动，再过24~48小时再领取就又会有收益。'
-							}).then(() => {
-							  // on close
-							  //_this.getMyPastMachinesReceipt();
-							});
-						}else{
-							/* _this.getMyPastMachinesReceipt(); */
-						}
-					}
-				})
-			},
 			getAssistMaintainInfo(){
 				let _this = this;
 				_this.$ajax.ajax(_this.$api.getAssistMaintainInfo, 'POST', null, function(res) {

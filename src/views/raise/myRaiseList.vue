@@ -71,7 +71,7 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				我所申请的帮扶筹
+				我所发布的
 			</div>
 			<i class="iconfont iconfont-edit rightBox icon" @click="toApplyList"></i>
 		</m-header>
@@ -80,12 +80,12 @@
 		<van-pull-refresh v-model="loading" @refresh="refreshEvent">
 			<van-tabs v-model="activeName" :background="$api.tabBgColor" :color="$api.tabActiveColor" :title-active-color="$api.tabActiveColor"
 				:title-inactive-color="$api.tabTextColor" :border="false" @change="tabChange" animated sticky>
-				<van-tab title="待审核" name="onLoad4">
+				<van-tab title="贴子" name="onLoad4">
 					<van-list v-model="loading4" :finished="finished4" finished-text="没有更多了" @load="onLoad4">
 						<div class="wordList">
 							<div class="item" v-for="item in list4" :key="item.id" @click="toRaise4OtherView(item.id)">
 								<!-- @click="toRaise4OtherView(item.id)"  v-if="item.pic"-->
-								<div class="itemLeft">
+								<div class="itemLeft" v-if="item.pic">
 									<!-- <img :src="item.pic.split('|')[0]" alt=""> -->
 									<van-image
 									  width="100px"
@@ -96,13 +96,13 @@
 								</div>
 								<div class="itemRight">
 									<div class="title">
-										<i class="yellow">{{item.nickName}}</i> <span>{{item.status|filterStatus}} </span> <span class="underline blue">查看详情</span>
+										<i class="gray646464">{{item.story}}</i> <span v-if="item.status">{{item.status|filterStatus}} </span> <span class="underline blue">查看详情</span>
 										<!-- <i class="iconfont iconfont-right-arrow2 f-11"></i> -->
 									</div>
-									<div class="remark margT10">{{item.title}}</div>
+									<div class="remark margT10" v-if="item.title">{{item.title}}</div>
 									<div class="time margT6">{{item.createTime}}</div>
-									<div class="time margT6">总筹矿石：{{item.needMineral}}</div>
-									<div class="time margT6">已筹矿石：{{item.getedMineral}}</div>
+									<!-- <div class="time margT6">总筹矿石：{{item.needMineral}}</div>
+									<div class="time margT6">已筹矿石：{{item.getedMineral}}</div> -->
 								</div>
 							</div>
 						</div>

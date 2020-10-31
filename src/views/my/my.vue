@@ -276,14 +276,17 @@
 			</div>
 			<div class="line1pxbgcolor"></div>
 			<div class="box box2">
-				<!-- <div class="flex flex1">
+				<div class="flex flex1">
 					<div class="value" @click="toBookView('1')">{{userInfo.teamCalculationPower}}</div>
-					<div class="text" @click="showTip('teamCalculationPower')">团队持币 <i class="iconfont iconfont-question"/></div>
-				</div> -->
+					<div class="text" @click="showTip('teamCalculationPower')">团队算力 <i class="iconfont iconfont-question"/></div>
+				</div>
 				<div class="flex flex4">
 					<!-- <div>{{userInfo.platformTicket}}</div> -->
-					<div class="value" @click="toBookView('2')">{{userInfo.platformTicket}}</div>
-					<div class="text" @click="showTip('platformTicket')">感恩券 <i class="iconfont iconfont-question"/></div>
+					<div class="value"><i @click="toBookView('2')">{{userInfo.platformTicket}}</i> <van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" url="http://pay.8gesy.com/payment/fenqu.html?id=D7501BC7C9641EDE">购买</van-button></div>
+					<div class="text" @click="showTip('platformTicket')">
+						感恩券
+						<i class="iconfont iconfont-question margR2"/>
+					</div>
 				</div>
 				<div class="flex flex2">
 					<!-- <div>{{userInfo.thisWeekMineral}}</div> -->
@@ -293,10 +296,10 @@
 			</div>
 			<div class="line1pxbgcolor"></div>
 			<div class="box box3">
-				<!-- <div class="flex flex1">
+				<div class="flex flex1">
 					<div>{{userInfo.myCalculationPower}}</div>
-					<div class="text" @click="showTip('myCalculationPower')">个人持币<i class="iconfont iconfont-question"/></div>
-				</div> -->
+					<div class="text" @click="showTip('myCalculationPower')">个人算力<i class="iconfont iconfont-question"/></div>
+				</div>
 				<div class="flex flex4">
 					<div>{{userInfo.temporaryFreezePlatformTicket}}</div>
 					<!-- <NumberGrow :value="userInfo.temporaryFreezePlatformTicket"></NumberGrow> -->
@@ -324,7 +327,7 @@
 						<div class="text">任务中心</div>
 					</router-link>
 				</div>
-				<!-- <div class="infoBox">
+				<div class="infoBox">
 					<router-link to="/myMill">
 						<div class="iconBox">
 							<div class="iconBackground iconBackgroundMill">
@@ -333,7 +336,7 @@
 						</div>
 						<div class="text">我的矿机</div>
 					</router-link>
-				</div> -->
+				</div>
 				<div class="infoBox">
 					<router-link to="/myDeal">
 						<div class="iconBox">
@@ -405,7 +408,7 @@
 				<router-link to="transferTicket">
 					<div class="my-cell">
 						<div class="flex1">
-							定向转让感恩卷
+							定向转让感恩券
 						</div>
 						<div class="flex2">
 							<i class="iconfont iconfont-right-arrow2"></i>
@@ -417,7 +420,7 @@
 				<router-link to="myRaiseList">
 					<div class="my-cell">
 						<div class="flex1">
-							我的帮扶筹申请列表
+							我所发布的帖子
 						</div>
 						<div class="flex2">
 							<i class="iconfont iconfont-right-arrow2"></i>
@@ -484,7 +487,7 @@
 			<!-- <div class="paddingAll">
 				<van-button color="#c7c7c7" size="normal" :block="true" @click="cancelAccount" loading-type="spinner">注销账户(暂对尚未实名的用户开放)</van-button>
 			</div> -->
-			<div class="items">
+			<!-- <div class="items">
 				<div class="my-cell">
 					<div class="flex1">
 						更换上级
@@ -493,7 +496,7 @@
 						<i class="iconfont iconfont-right-arrow2"></i>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="items">
 				<router-link to="destroyAccount">
 					<div class="my-cell">
@@ -537,6 +540,7 @@
 			<div class="placeholderLine10"></div>
 		</van-dialog> -->
 	</div>
+	<m-refresh @refreshEvent="refreshEvent"></m-refresh>
 	<transition name="van-fade">
 	  <router-view></router-view>
 	</transition>
@@ -545,7 +549,7 @@
 
 <script>
 	import mHeader from '@/components/Header.vue';
-	//import mRefresh from '@/components/Refresh2.vue';
+	import mRefresh from '@/components/Refresh2.vue';
 	import { Dialog } from 'vant';
 	import clip from '@/assets/js/clipboard';
 	// import mFullscreen from '@/components/Fullscreen.vue';
@@ -579,7 +583,7 @@
 		},
 		components: {
 			mHeader,
-			/* mRefresh, */
+			mRefresh,
 			// mFullscreen
 		},
 		// beforeRouteEnter(to,from,next) {
@@ -933,9 +937,9 @@
 				//console.log(val);
 				let message = '';
 				if(val=='mineral'){
-					message = 'FGC：当前所能用来流通的FGC。卖出的时候要额外收20%的手续费(服务费)，比如卖100个FGC要使用110个FGC(其中10个销毁)+价值10个FGC价格的感恩卷(其中部分存入基金池，做为线下帮扶时的启动资金，无形中，大家的每笔交易都给自己增加了福报，行善积德，大慈大悲，感谢有您的支持)。获得途径：矿机产出、买入。';
+					message = 'FGC：当前所能用来交易的FGC。获得途径：矿机产出、买入、感恩值释放、直推领取收益的奖励。';
 				}else if(val=='platformTicket'){
-					message = '感恩卷：可用于交易的时候当手续费。获取途径：从志愿者那儿购买。';
+					message = '感恩券：可用于交易的时候当手续费。获取途径：购买。';
 				}else if(val=='contribution'){
 					message = '感恩值：由系统奖励或母币兑换而来，每天签到释放1%。';
 				}else if(val=='credit'){

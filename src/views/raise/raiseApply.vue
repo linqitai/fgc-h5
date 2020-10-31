@@ -97,31 +97,31 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text" style="z-index: 100;">
-				帮扶筹申请
+				发帖
 			</div>
 			<i class="rightBox icon"></i>
 		</m-header>
 		<div class="raiseApplyPage">
-			<div class="myCell">
+			<!-- <div class="myCell">
 				<van-field label="标题" required clearable @blur="validate('title')" v-model="form.title" maxlength="30" placeholder="请填写求助申请的标题" />
-			</div>
+			</div> -->
 			<div class="myCell">
-				<van-field label="原因"
+				<van-field label="帖子内容"
 				  v-model="form.story" @blur="validate('story')"
 				  rows="2" required
 				  autosize clearable
 				  type="textarea"
 				  maxlength="500"
-				  placeholder="请填写发起求助的原因"
+				  placeholder="请编辑文本内容"
 				  show-word-limit
 				/>
 			</div>
 			<!-- <div class="myCell">
 				<van-field label="需要帮扶券" required clearable @blur="validate('needTicket')" v-model="form.needTicket" type="number" placeholder="请填写您所需要的帮扶券" />
 			</div> -->
-			<div class="tip4model3 paddingAll myCell">
+			<!-- <div class="tip4model3 paddingAll myCell">
 				筹款数额现阶段统一为100个矿石
-			</div>
+			</div> -->
 			<!-- <div class="label">
 				<span class="star">*</span>
 				<span class="text">商品展示图(最多传1张)</span>
@@ -131,7 +131,7 @@
 					<van-uploader v-model="form.fileShowList" multiple image-fit='cover' :max-count="1"  :before-read="beforeRead"/>
 				</div>
 			</div> -->
-			<div class="label">
+			<!-- <div class="label">
 				<span class="star">*</span>
 				<span class="text">手持证件图</span>
 			</div>
@@ -150,17 +150,13 @@
 					<van-uploader v-model="form.fileDetailList" multiple image-fit='cover' :max-count="4"  :before-read="beforeRead"/>
 				</div>
 				<div class="placeholderLine10"></div>
-			</div>
+			</div> -->
 			<div class="tip4model3 paddingAll myCell">
-				申请说明:<br>
-				1.求助者必须是帮扶链会员。<br>
-				2.会员需注册实名并已完成基础任务2。<br>
-				3.会员直系亲属非会员（未满18周岁）可以由会员自行申请救助并提供一些相关证明材料进行审核。<br>
-				4.大病求助需提供近期医院出具的病情证明材料。<br>
-				5.需上传提交本人手持身份证附加当天日期照片。<br>
-				6.必须有一名会长作为担保人，同时上传担保人开具的担保申请书。<br>
-				7.申请所传照片：第一张为手持照，第二张为生活照，第三张为材料证明照，第四张为会长担保申请书照。<br>
-				8.审核通过后，筹款时间为10天，10天后无论筹到多少都会被系统设置为筹款完结。
+				发布说明:<br>
+				1.禁止广告。<br>
+				2.禁止负能量。<br>
+				3.禁止发无关链接。<br>
+				4.禁止讨论别项目。<br>
 			</div>
 			<div class="sureBtn">
 				<!-- <div class="tip">点击登录即表示您同意<span class="agreement">《服务协议》</span></div> -->
@@ -243,7 +239,7 @@
 					}
 				}else if(flag == 'story'){
 					if(_this.form.story==''){
-						_this.$toast('请填写您的自我介绍或故事');
+						_this.$toast('请填写内容');
 						return;
 					}
 				}else if(flag == 'needTicket'){
@@ -263,7 +259,7 @@
 				let _this = this;
 				// _this.$toast(`即将开放`);
 				
-				let headPic=[];
+				/* let headPic=[];
 				_this.form.headPic.forEach((item,index)=>{
 					headPic.push(item.content);
 				})
@@ -271,13 +267,13 @@
 				let pic=[];
 				_this.form.fileDetailList.forEach((item,index)=>{
 					pic.push(item.content);
-				})
+				}) */
 				let params = {
-					title:_this.form.title,
+					/* title:_this.form.title, */
 					/* needTicket:_this.form.needTicket, */
 					story:_this.form.story,
-					headPic:headPic[0],
-					pic:pic.join('|'),
+					/* headPic:headPic[0],
+					pic:pic.join('|'), */
 				}
 				console.log('params',params);
 				if(_this.$utils.hasNull(params)){
@@ -290,7 +286,7 @@
 							//_this.$toast(`提交成功，请等待审核`);
 							Dialog.alert({
 								title: "系统提示",
-								message: "提交成功，请等待审核"
+								message: "发布成功"
 							}).then(() => {
 							  // on confirm
 							  _this.back();

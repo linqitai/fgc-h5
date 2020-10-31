@@ -104,7 +104,6 @@
 		  show-action
 		  shape="round"
 		  maxlength="11"
-		  @search="searchEvent"
 		>
 		  <div slot="action" @click="searchEvent">搜索</div>
 		</van-search>

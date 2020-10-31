@@ -10,146 +10,8 @@
 		.van-field__label{
 			width: 66px !important;
 		}
-		.helpBox{
-			position:relative;
-			display: flex;
-			padding: 0 $boxPadding2;
-			box-sizing: border-box;
-			align-items: center;
-			height: 30px;
-			line-height: 30px;
-			.leftBox{
-				flex: 0 0 24px;
-				color: red;
-				font-size: 1.2rem;
-			}
-			.centerBox{
-			  flex: 1;
-			  text-align: center;
-			  font-size: 0.75rem;
-			}
-			.rightBox{
-				flex: 0 0 24px;
-				text-align: right;
-				&.text{
-					color: $main-adorn-color;
-					font-size: 0.75rem;
-				}
-				&.icon{
-					font-size: 11px;
-				}
-			}
-		}
-		.iconTextBox{
-			display: flex;
-			flex-direction: row;
-			align-content: center;
-			align-items: center;
-			.leftIcon{
-				flex: 0 0 20px;
-				font-size: 20px;
-				color: red;
-			}
-			.iconText{
-				flex: 1;
-				font-size: 16px;
-				margin-left: 6px;
-			}
-			.rightBox{
-				flex: 0 0 100px;
-			}
-		}
-		.raiseHeader{
-			padding:$boxPadding2 $boxPadding2;
-		}
-		$avatorHeight: 20px;
-		.whoAreYou{
-			display: flex;
-			padding:$boxPadding2 $boxPadding2;
-			flex-direction: row;
-			align-content: center;
-			align-items: center;
-			justify-content: center;
-			.avator{
-				flex: 0 0 $avatorHeight;
-			}
-			.textInfo{
-				flex: 1;
-				font-size: 0.812rem;
-				height: 1em;
-				display: table-cell;
-				.text1{font-weight: bold;}
-				.text2{color: #e7e7e7;margin-left: 5px;}
-			}
-			.rightBox{
-				flex: 0 0 80px;
-				height: $avatorHeight;
-				text-align: right;
-			}
-		}
-		.content1{
-			padding: 0 $boxPadding2;
-			.title{
-				font-size: 1.125rem;
-				line-height: 1.375em;
-			}
-			.box{
-				display: flex;
-				background-color: inherit;
-				padding:$boxPadding2 0;
-				box-sizing:border-box !important;
-			}
-			.box2{
-				margin-top: $marginTop2;
-				text-align: center;
-				.flexC{
-					flex:1;
-					.digit{
-						font-size: 16px;
-						color: $main-adorn-color;
-					}
-					.text{
-						font-size: $fs-1;
-						margin-top: 3px;
-					}
-				}
-			}
-		}
-		.flex{
-			display: flex;
-			background-color: inherit;
-			padding:$boxPadding2 0;
-			box-sizing:border-box !important;
-			flex-direction: row;
-			align-content: center;
-			align-items: center;
-			justify-content: center;
-			.flexMedial{
-				flex: 1;
-			}
-			.flexLeft{
-				flex: 0 0 24px;
-				.ticket{
-					font-size: 1.5rem;
-					color: $main-adorn-color;
-				}
-			}
-			.flexCenter{
-				flex: 1;
-				font-size: 0.75rem;
-				line-height: 1.3em;
-				padding: 0 0.375rem;
-			}
-			.flexRight{
-				flex: 0 0 1.25rem;
-				.iconfont-i{
-					color: $main-adorn-color;
-				}
-			}
-		}
 		.story,.materialProve{
-			padding-left: $boxPadding2;
-			padding-right: $boxPadding2;
+			padding: $boxPadding2;
 			.title{
 				font-size: 0.875rem;
 				font-weight: bold;
@@ -174,83 +36,54 @@
 					margin-right: 3px;
 					margin-top: 3px;
 				}
-				/* img{
-					flex: 0 0 100px;
-					width: 100px;
-					height: 100px;
-					padding: 3px;
-					&::last-child{
-						padding-right: 0;
-					}
-					&::first-child{
-						padding-left: 0;
-					}
-				} */
+			}
+			.dianzan{
+				clear: both;
+				padding-top: 12px;
+				padding-bottom: 12px;
 			}
 		}
-		.materialProve{
-			.flexProveLeft{
-				flex: 0 0 30px;
-				.iconfont-pass{
-					color: #DE0000;
-					font-size: 28px;
-				}
+		
+		.replyList{
+			padding-left: $boxPadding2;
+			padding-right: $boxPadding2;
+			padding-bottom: $boxPadding2;
+			.title{
+				font-size: 0.875rem;
+				font-weight: bold;
 			}
-			.proveText1{
-				font-size: 11px;
+			.textRight{
+				text-align: right;
+				color: $main-adorn-color;
+			}
+			.content{
+				letter-spacing: 1px;
 				line-height: 1.2em;
-				padding-left: 4px;
-				justify-content:space-between;
 			}
-			.proveContent{
-				color:$mainTextColor;
-				padding: $boxPadding2;
-				background-color: $main-box-color;
-				.flex{
-					padding-top: 0px !important;
-				}
-				.contentBox{
-					.title2{
-						font-size: 11px;
-						padding-top: $boxPadding2;
-					}
-					.contentText1{
-						margin-top: 8px;
-						font-size: 11px;
-						line-height: 1.2em;
-						letter-spacing: 1px;
-					}
-				}
-				.knowMore{
-					font-size: 0.75rem;
-					color: $main-adorn-color;
-					margin-top: 10px;
+			.imageList{
+				flex-wrap: wrap;
+				flex-direction: row;
+				align-content: left;
+				align-items: center;
+				justify-content: left;
+				
+				.van-image{
+					margin-right: 3px;
+					margin-top: 3px;
 				}
 			}
-			.proverList{
-				margin-top: 12px;
-				.proveLabel{
-					font-size: 14px !important;
-					span{
-						color: $main-adorn-color;
-					}
-				}
-				.iDo{
-					flex: 0 0 70px;
-					font-size: 12px !important;
-					text-align: right;
-					text-decoration: underline;
-					color: $main-adorn-color;
-				}
-				.flexProveMore{
-					flex: 0 0 50px;
-					text-align: right;
-					.iconfont-right-arrow{
-						font-size: 30px;
-					}
-				}
+			.dianzan{
+				clear: both;
+				padding-top: 6px;
+				padding-bottom: 12px;
+			}
+			.item{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				/* border-bottom: 1px solid $main-blue-black-color; */
 			}
 		}
+		
 		.records{
 			padding: $boxPadding2;
 			padding-top: 3px;
@@ -333,229 +166,51 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				帮扶筹
+				帖子详情
 			</div>
 			<i class="iconfont rightBox icon"></i>
 		</m-header>
 		<div>
-			<van-notice-bar mode="link" color="#fff" background="#ff0004" v-if="list1.remark">
-			  驳回原因：{{list1.remark}}
-			</van-notice-bar>
-			<van-notice-bar mode="link" @click="toView(list1.id)">
-			  查看捐赠记录
-			</van-notice-bar>
-			<div class="raiseHeader borderBottom">
-				<div class="iconTextBox">
-					<i class="iconfont iconfont-love2 leftIcon"></i>
-					<div class="iconText">爱心·水滴·帮扶筹</div>
-				</div>
-			</div>
-			<div class="textCenter margT20" v-if="!list1">
-				暂无申请记录
-			</div>
 			<div v-if="list1">
-				<div class="whoAreYou">
-					<div class="textInfo">
-						<span class="text1 unSelect">{{$JsCrypto.myDecode1(list1.realName)}}</span>
-						<span class="text2 unSelect">发起筹款</span>
-						<span class="text2 unSelect">{{list1.createTime}}</span>
-					</div>
-				</div>
-				<div class="content1">
-					<div class="title">{{list1.title}}</div>
-					<div class="box box2">
-						<van-skeleton :row="2" :loading="loading">
-						<div class="flexC flex1" v-if="list1.needMineral==0">
-							<div class="digit">{{list1.needTicket}}+</div>
-							<div class="text">总筹帮扶券</div>
-						</div>
-						<div class="flexC flex2" v-if="list1.needMineral==0">
-							<div class="digit">{{list1.getedTicket}}</div>
-							<div class="text">已筹帮扶券</div>
-						</div>
-						<div class="flexC flex1" v-if="list1.needMineral>0">
-							<div class="digit">{{list1.needMineral}}+</div>
-							<div class="text">总筹矿石</div>
-						</div>
-						<div class="flexC flex3" v-if="list1.needMineral>0" @click="toView(list1.id)">
-							<div class="digit">{{list1.getedMineral}}</div>
-							<div class="text underline">已筹到矿石</div>
-						</div>
-						<div class="flexC flex3">
-							<div class="digit">{{list1.beHelpTimes}}</div>
-							<div class="text">被帮扶次数</div>
-						</div>
-						</van-skeleton>
-					</div>
-					<div class="flex borderBottom">
-						<div class="flexCenter f-10 letterSpacing">提前声明：求助者所筹到的是矿石，这矿石是直接筹到求助者账户里，然后所筹到的矿石无论是复投还是卖出，由求助者自行安排。审核通过后，筹款时间为10天，10天后无论筹到多少都会被系统设置为筹款完结。</div>
-					</div>
-				</div>
 				<div class="story borderBottom">
-					<div class="flex">
-						<div class="title flexMedial">求助者的故事</div>
+					<div class="content justify f-14 textBold" v-html="list1.story"/>
+					<div class="dianzan">
+						<i class="left">{{list1.createTime}}</i>
+						<i class="iconfont iconfont-oppose f-14 right margL10"  @click="showAttitudeBtn(1,'oppose',null,null)">{{list1.opposeTimes || 0}}</i>
+						<i class="iconfont iconfont-support f-14 right margL10" @click="showAttitudeBtn(1,'support',null,null)">{{list1.supportTimes || 0}}</i>
+						<i class="iconfont iconfont-word f-14 right" @click="showRaiseModel=true"></i>
 					</div>
-					<div class="content unSelect justify" v-html="list1.story"/>
-					<div class="imageList flex" v-if="list1">
-						<van-image
-						  width="70px"
-						  height="70px"
-						  fit="cover"
-						  v-for="(item,index) in images" :src="item" :key="index" @click="imagePreviewEvent(index)"
-						/>
-					</div>
-					<van-image-preview
-					  v-model="showImagePreview"
-					  :images="images"
-					  :startPosition="imageIndex"
-					  @change="onChangeImageIndex"
-					>
-					  <template v-slot:index><span class="bg_black padding4Text">第{{ imageIndex+1 }}页</span></template>
-					</van-image-preview>
 				</div>
-				<!-- v-if="list1.status==5" -->
-				<div class="materialProve borderBottom">
-					<div class="flex textCenter">
-						<div class="title flexMedial">节点<i class="yellow">支持</i>信息</div>
-					</div>
-					<div class="textCenter">
-						<!-- <div class="lineHeight">支持的票数超过500，即可激活此申请，<br>并开放此帮扶筹</div> -->
-						<div class="lineHeight"><span class="yellow">支持票数 {{list1.supportTimes || 0}}</span></div>
-					</div>
-					<div class="placeholderLine10"></div>
-					<div class="textCenter">
-						<van-button size="small" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="isSupportLoading" @click="supportBtn">支持TA</van-button>
-					</div>
-					<div class="placeholderLine10"></div>
-				</div>
-				<div class="materialProve borderBottom">
-					<div class="flex">
-						<div class="title flexMedial">材料证明</div>
-					</div>
-					<div class="proveContent">
-						<div class="flex borderBottom">
-							<div class="flexProveLeft">
-								<i class="iconfont iconfont-pass"></i>
-							</div>
-							<div class="flexMedial proveText1">
-								求助者身份及基本求助信息已通过平台初步审核，帮扶者也可加求助者好友，表示关心、慰问以及进一步了解求助者，以确保整个过程属实。
-							</div>
-						</div>
-						<div class="contentBox">
-							<div class="title2">求助者承诺：</div>
-							<div class="contentText1 justify">
-								求助者已承诺所提交的文字与图片资料完全真实，无任何虚构事实及隐瞒真相的情况，如有不实，求助者愿承担全部法律责任。
-							</div>
-							<div class="title2">求助者昵称：{{(list1.nickName)}}</div>
-							<div class="title2">求助者姓名：{{$JsCrypto.myDecode1(list1.realName)}}</div>
-							<div class="title2">求助者团队算力：{{(list1.teamCalculationPower)}}</div>
-							<div class="title2">求助者手机号：{{$JsCrypto.myDecode1(list1.mobilePhone)}} <span @click="handleCopy($JsCrypto.myDecode1(list1.mobilePhone),$event)">复制</span></div>
-							<div class="title2">求助者微信：{{$JsCrypto.myDecode1(list1.wechartNum)}} <span @click="handleCopy($JsCrypto.myDecode1(list1.wechartNum),$event)">复制</span></div>
-							<div class="title2">求助者支付宝：{{$JsCrypto.myDecode1(list1.alipayNum)}} <span @click="handleCopy($JsCrypto.myDecode1(list1.alipayNum),$event)">复制</span></div>
-						
+				<div class="replyList" v-if="list1.replyList">
+					<div class="item borderBottom" v-for="(item,index) in list1.replyList" :key="item.id">
+						<div class="content justify f-12">{{item.nickName}}:{{item.content}}</div>
+						<div class="dianzan">
+							<i class="left">{{item.createTime}}</i>
+							<i class="iconfont iconfont-oppose f-14 right margL10"  @click="showAttitudeBtn(2,'oppose',item.id,index)">{{item.opposeTimes || 0}}</i>
+							<i class="iconfont iconfont-support f-14 right margL10" @click="showAttitudeBtn(2,'support',item.id,index)">{{item.supportTimes || 0}}</i>
+							<!-- <i class="iconfont iconfont-word f-14 right" @click="showRaiseModel=true"></i> -->
 						</div>
 					</div>
-					<!-- <div class="proverList">
-						<div class="flex">
-							<div class="flexMedial proveLabel">已有<span>38</span>人证明情况属实</div>
-							<div class="iDo">我也来证明</div>
-						</div>
-						<div class="flex">
-							<div class="flexMedial">
-								<van-image round width="50" height="50" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg"/>
-							</div>
-							<div class="flexMedial">
-								<van-image round width="50" height="50" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg"/>
-							</div>
-							<div class="flexMedial">
-								<van-image round width="50" height="50" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg"/>
-							</div>
-							<div class="flexMedial">
-								<van-image round width="50" height="50" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg"/>
-							</div>
-							<div class="flexProveMore">
-								<i class="iconfont-right-arrow iconfont"></i>
-							</div>
-						</div>
-					</div> -->
-					<div class="placeholderLine20"></div>
-					<div class="placeholderLine20"></div>
-					<div class="placeholderLine20"></div>
 				</div>
 			</div>
 		</div>
-		<van-action-sheet v-model="showRaiseModel" title="捐赠">
-			<div class="materialProve borderBottom" v-if="list1.status==3&&list1.needTicket>0">
-				<div class="flex">
-					<div class="title flexMedial white">我要捐赠<i class="yellow">帮扶券</i></div>
-				</div>
+		<van-action-sheet v-model="showRaiseModel" title="回帖">
+			<div class="materialProve borderBottom">
 				<div>
-					<van-field label="爱心问候"
+					<van-field label="回帖内容"
 					  v-model="word"
 					  rows="2"
 					  autosize clearable
 					  type="textarea"
-					  maxlength="100"
-					  placeholder="顺便给求助者捎一句问候/慰问,送人玫瑰,手留余香,感恩有你"
+					  maxlength="500"
+					  placeholder="请填写回帖内容"
 					  show-word-limit
 					/>
 				</div>
 				<div class="placeholderLine10"></div>
-				<div>
-					<van-button round type="info" @click="addTicket(1)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">1个</van-button>
-					<van-button round type="info" @click="addTicket(10)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">10个</van-button>
-					<van-button round type="info" @click="addTicket(50)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">50个</van-button>
-					<van-button round type="info" @click="addTicket(100)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">100个</van-button>
-					<van-button round type="info" @click="addTicket(300)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">300个</van-button>
-				
-					<div class="placeholderLine10"></div>
-					<van-field v-model="number" center clearable placeholder="自定义捐赠帮扶券数量">
-						<van-button slot="button" size="small" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="getNumberLoading" @click="addTicket(number)">确认</van-button>
-					</van-field>
-				</div>
-				<div class="placeholderLine10"></div>
 			</div>
-			<div class="materialProve borderBottom" v-if="list1.status==3&&list1.needMineral>0">
-				<div class="flex">
-					<div class="title flexMedial white">我要捐赠<i class="yellow">矿石</i></div>
-				</div>
-				<div>
-					<van-field label="爱心问候"
-					  v-model="word4Mineral"
-					  rows="2"
-					  autosize clearable
-					  type="textarea"
-					  maxlength="100"
-					  placeholder="顺便给求助者捎一句问候/慰问,送人玫瑰,手留余香,感恩有你"
-					  show-word-limit
-					/>
-				</div>
-				<div class="placeholderLine10"></div>
-				<div>
-					<van-button round type="info" @click="addMineral(1)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">1个</van-button>
-					<van-button round type="info" @click="addMineral(3)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">3个</van-button>
-					<van-button round type="info" @click="addMineral(5)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">5个</van-button>
-					<van-button round type="info" @click="addMineral(10)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">10个</van-button>
-					<van-button round type="info" @click="addMineral(20)" size="mini" color="linear-gradient(to right, #ffae00, #ff8400)">20个</van-button>
-					<div class="placeholderLine10"></div>
-					<van-field v-model="number4Mineral" center clearable placeholder="自定义捐赠矿石数量">
-						<van-button slot="button" size="small" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="getNumberLoading" @click="addMineral(number4Mineral)">确认</van-button>
-					</van-field>
-				</div>
-				<div class="placeholderLine10"></div>
-			</div>
+			<van-button @click="sureReplyEvent" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true" :loading="getNumberLoading">确认</van-button>
 		</van-action-sheet>
-		<van-dialog v-model="showPasswordBoxDialog" title="系统提示" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
-			<div class="paddingWing">
-				<div class="placeholderLine20"></div>
-				<div class="yellow textCenter">您是否要捐赠{{num}}个{{textTip}}给求助者？</div>
-				<div class="placeholderLine20"></div>
-				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
-				<div class="placeholderLine20"></div>
-			</div>
-			<!-- <van-button type="info" @click="buyMillLoading=true;" :disabled="buyMillLoading" :block="true">租赁</van-button> -->
-			<van-button type="info" @click="sureRaiseEvent" :loading="getNumberLoading" :disabled="getNumberLoading" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">确认</van-button>
-		</van-dialog>
 		<div class="raiseBtn" @click="showRaiseModelBtn()" v-if="list1.status==3">我要捐赠</div>
 		<transition name="van-fade">
 		  <router-view></router-view>
@@ -667,12 +322,14 @@
 					_this.getAssistRaiseRecordListPage4();
 				}
 			},
-			supportBtn(){
+			showAttitudeBtn(type,remark,replyId,index){
 				//console.log("submit");
 				let _this = this;
 				let params = {
 					voteId:_this.list1.id,
-					type:1
+					questionId:replyId||0,
+					type:type,//1-贴吧表 2-回复表
+					remark:remark//support支持 oppose反对
 				}
 				/* if(_this.userInfo.myCalculationPower<0.1){
 					Dialog.alert({
@@ -687,16 +344,21 @@
 					// console.log('res', res);
 					if (res.code == _this.$api.CODE_OK) { // 200
 						if(res.data == 1){
-							_this.$toast('投票成功');
-							_this.list1.supportTimes = _this.list1.supportTimes + 1;
-							//_this.getVoteInfo();
-						}else if(res.data == 0){
-							Dialog.alert({
-							  title: '系统提示',
-							  message: '每人投一票，您已投过票'
-							}).then(() => {
-							  // on close
-							});
+							_this.$toast('操作成功');
+							if(type==1){
+								if(remark=='support'){
+									_this.list1.supportTimes = _this.list1.supportTimes + 1;
+								}else{
+									_this.list1.opposeTimes = _this.list1.opposeTimes + 1;
+								}
+							}else{
+								if(remark=='support'){
+									_this.list1.replyList[index].supportTimes = _this.list1.replyList[index].supportTimes + 1;
+								}else{
+									_this.list1.replyList[index].opposeTimes = _this.list1.replyList[index].opposeTimes + 1;
+									//console.log(type,this.list1.replyList[index].opposeTimes);
+								}
+							}
 						}else{
 							_this.$toast(res.message);
 						}
@@ -735,7 +397,7 @@
 				  word: _this.word4Mineral||'加油',
 				  type: 0
 				}
-				console.log("params",params);
+				//console.log("params",params);
 				if(_this.$utils.hasNull(params)){
 					_this.$toast('请填写完整信息');
 					return;
@@ -787,6 +449,44 @@
 				  _this.addTicketRequest();
 				}) */
 				
+			},
+			sureReplyEvent(){
+				let _this = this;
+				let params = {
+				  raiseId: _this.list1.id,
+				  content: _this.word,
+				}
+				if(_this.$utils.hasNull(params)){
+					_this.$toast('请填写完整信息');
+					return;
+				}
+				_this.getNumberLoading = true;
+				_this.$ajax.ajax(_this.$api.insertAssistReplyRaise, 'POST', params, function(res) {
+					if (res.code == _this.$api.CODE_OK) {
+						//_this.$toast("捐赠成功");
+						_this.showRaiseModel = false;
+						_this.getAssistRaise();
+						
+						Dialog.alert({
+							title: "系统提示",
+							message: "操作成功"
+						}).then(() => {
+						  // on confirm
+						  //_this.getCurrentAuction();
+						})
+					}else{
+						Dialog.alert({
+							title: "系统提示",
+							message: res.message
+						}).then(() => {
+						  // on confirm
+						  //_this.getCurrentAuction();
+						})
+					}
+				},function(){
+					_this.getNumberLoading = false;
+					_this.showPasswordBoxDialog = false;
+				})
 			},
 			sureRaiseEvent(){
 				let _this = this;
@@ -1007,16 +707,19 @@
 									images.push(item);
 								}
 							}else{
-								let picArr = _this.list1.pic.split('|');
-								for(let i=0;i<picArr.length;i++){
-									let item = picArr[i];
-									images.push(item);
+								if(_this.list1.pic){
+									let picArr = _this.list1.pic.split('|');
+									for(let i=0;i<picArr.length;i++){
+										let item = picArr[i];
+										images.push(item);
+									}
 								}
 							}
 							_this.images=images;
 							//_this.images = _this.list1.pic.split('|');
 							//_this.getAssistRaiseRecordListPage();
 							//_this.getRaiseMineralNum(_this.list1.id);
+							//console.log("replyList",_this.list1.replyList);
 						}else{
 							_this.list1 = '';
 						}
@@ -1039,7 +742,7 @@
 			},
 			imagePreviewEvent(index){
 				this.showImagePreview = true;
-				console.log("index",index);
+				//console.log("index",index);
 				this.imageIndex = index;
 			},
 			onChangeImageIndex(index) {

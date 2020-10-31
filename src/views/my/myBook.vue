@@ -75,6 +75,18 @@
 			<van-pull-refresh v-model="loading" @refresh="refreshEvent">
 				<van-tabs v-model="activeName" :background="$api.tabBgColor" :color="$api.tabActiveColor" :title-active-color="$api.tabActiveColor"
 			 :title-inactive-color="$api.tabTextColor" :border="false" @change="tabChange" animated sticky>
+					<van-tab title="团队算力" name="calculation">
+						<div class="list">
+							<div class="item" v-for="item in list2" :key="item.id">
+								<div class="flex">
+									<div class="line">{{item.createTime}}</div>
+									<div class="line margT6">{{item.type | calculationType}}后拥有算力 {{item.currentCalculationNum}}</div>
+								</div>
+								<div class="flexRight">{{item.addOrReduce}} {{item.calculation}}</div>
+							</div>
+						</div>
+						<van-button @click="loadingMore2Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading2" loading-type="spinner">加载更多</van-button>
+					</van-tab>
 					<van-tab title="FGC" name="mineral">
 						<div class="list">
 							<div class="item" v-for="item in list1" :key="item.id">

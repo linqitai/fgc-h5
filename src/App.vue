@@ -169,7 +169,7 @@ b{font-weight: bold;}
 .width80{width: 80px !important;}.width100{width: 100px !important;}.width120{width: 120px !important;}.width140{width: 140px !important;}.width160{width: 160px !important;}.width200 {width: 200px !important;}.width220{width: 220px;}.width240{width: 240px;}.width260{width: 260px;}.width280{width: 280px;}.width300 {width: 300px !important;}.width400 {width: 400px !important;}
 .margint{margin-top: 6px;}.marginb{margin-bottom: 6px;}
 .margL6{margin-left: 6;}.margL10{margin-left: 10;}
-.margR2{margin-right: 2px;}.margR20{margin-right: 20px;}
+.margR2{margin-right: 2px;}.margR5{margin-right: 5px;}.margR20{margin-right: 20px;}
 .margT3{margin-top: 3px;}.margT6{margin-top: 6px;}.margT8{margin-top: 8px;}.margT10{margin-top: 10px;}.margT16{margin-top: 16px;}.margT20{margin-top: 20px;}.margTHeader{margin-top: $header-height + 10px;}
 .margL1{margin-left: 1px;}margL4{margin-left: 4px;}.margL10{margin-left: 10px;}.margL12{margin-left: 12px;}.margL20{margin-left: 20px;}.margL40{margin-left: 40px;}
 .margL100{margin-left: 100px;}.margL200{margin-left: 200px;}

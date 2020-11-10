@@ -1,7 +1,7 @@
 <style lang="scss">
 	@import '~@/assets/scss/index.scss';
-	.myMillDetailPage{
-		@include newPage();
+	.myMillDetailPage2{
+		@include pageHaveHeight4Scroll();
 		.millDetailContent{
 			overflow: hidden;
 			position: relative;
@@ -29,8 +29,8 @@
 				text-align: center;
 			}
 			.info{
-				position: absolute;
-				top:0;
+				position: fixed;
+				top:$header-height;
 				bottom: 0;
 				left: 0;
 				z-index: 1;
@@ -46,11 +46,11 @@
 	}
 </style>
 <template>
-	<div class="myMillDetailPage">
+	<div class="myMillDetailPage2">
 		<m-header>
-			<i class="leftBox iconfont"></i>
+			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				矿场
+				持钻挖矿
 			</div>
 			<i class="rightBox icon"></i>
 		</m-header>
@@ -62,14 +62,14 @@
 			<div class="loading">
 				<van-loading color="#ff8400" type="spinner" size="36px"/>
 				<div class="placeholderLine10"></div>
-				<van-button type="info" size="normal" @click="getReceiptSure" :loading="getRecieptLoading">领取持币挖矿收益</van-button>
+				<van-button type="info" size="normal" @click="getReceiptSure" :loading="getRecieptLoading">领取持钻挖矿收益</van-button>
 			</div>
 			<div class="info">
 				<!-- <div class="">全网已实名会员量 {{millInfo.userNum}}</div>
 				<div class="placeholderLine10"></div> -->
-				<div class="">个人拥有FGC {{userInfo.thisWeekMineral}}</div>
-				<div class="">全网拥有FGC {{millInfo.totalFGC}}</div>
-				<div class="">周期内全网可挖FGC总量 {{millInfo.nowCBDN}}</div>
+				<div class="">个人拥有钻石 {{userInfo.thisWeekMineral}}</div>
+				<div class="">全网拥有钻石 {{millInfo.totalFGC}}</div>
+				<div class="">周期内全网持钻可挖钻石总量 {{millInfo.nowCBDN}}</div>
 				<div class="placeholderLine20"></div>
 				<!-- <div class="">当前可领取收益 {{millInfo.nowCBDN}}</div> -->
 			</div>
@@ -158,7 +158,11 @@
 				}
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
 				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -223,7 +227,7 @@
 						if(res.data){
 							Dialog.alert({
 							  title: '系统提示',
-							  message: `此次领取收益为${res.data}个FGC`
+							  message: `此次领取收益为${res.data}个钻石`
 							}).then(() => {
 							  // on close
 							  _this.$cookies.set('isRefreshUserInfo',1,_this.$api.cookiesTime);

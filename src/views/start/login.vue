@@ -9,6 +9,7 @@
 		width: 100%;
 		box-sizing: border-box;
 		.logoBox{
+			width: 100%;
 			img{
 				width: 100%;
 			}
@@ -129,6 +130,7 @@
 		<!-- <div class="formHeader">
 			<div class="welcomeText green_text">{{welcomeText}}</div>
 		</div> -->
+		<!-- <img class="logoBox" src="../../assets/image/fgcLogo2.jpg" alt=""> -->
 		<div class="placeholderLine10"></div>
 		<div class="title">欢迎来到感恩链</div>
 		<!-- <div class="wing">
@@ -442,7 +444,7 @@
 					if (res.code == _this.$api.CODE_OK) { // 200  60 * 60 * 12
 						_this.userInfo = res.data.assistUserInfoVo4Web;
 						_this.$cookies.remove('userId');
-						_this.$cookies.set("userId", _this.userInfo.userId,60*60*72);
+						_this.$cookies.set("userId", _this.userInfo.userId);
 						_this.$cookies.remove('token');
 						_this.$cookies.set('token',res.data.token,60*60*72);
 						_this.$cookies.remove('hasNoticeList4Swipe');

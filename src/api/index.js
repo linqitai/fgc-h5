@@ -26,7 +26,7 @@ export default {
 	/* welcomeText:"欢迎来到感恩链,让我们携手共同打造公平、公正、公开、透明、去中心化的公益型创业平台。", */
 	bsTip:'您若是在微信中打开感恩链，在[提交实名]与[交易矿石]的时候，建议优先使用UC等主流浏览器打开感恩链并进行操作。',
 	manType1Tip:'经系统检测，您的账号数据异常(没买入量也没怎么发展团队为何刚开始就有那么高的产量?)。若是第一批对接的团队长，得了中型而没去发展团队的，请直推实名超过30名且团队算力大于30G且买入个数大于300个，才能进行该操作。',
-	raiseTip:'为了保证赠与人的每一个帮扶券都能全额给付求助者，FGC感恩链平台不收取任何手续费。求助者筹到多少兑现多少，不让任何一份爱心流失。帮扶券：成本价0.7CNY，求助者筹到多少，平台就以0.7CNY的价格向求助者购买多少。',
+	raiseTip:'为了保证赠与人的每一个帮扶券都能全额给付求助者，钻石感恩链平台不收取任何手续费。求助者筹到多少兑现多少，不让任何一份爱心流失。帮扶券：成本价0.7CNY，求助者筹到多少，平台就以0.7CNY的价格向求助者购买多少。',
 	HOST_IMG: hostImg,
 	cookiesTime: 60 * 60 * 72,
 	cookiesTime8h: 60 * 60 * 8,
@@ -54,6 +54,8 @@ export default {
 	innerRegister: host + 'assist/register/innerRegister',
 	//securityp
 	securitypInsert: host + 'assist/securitypg/insert',
+	//group
+	getGroupPic: host + "assist/admin/group/getGroupPic",
 	//game
 	createGameAccount: host + "assist/register/createGameAccount",
 	isCreateAccount: host + "assist/userInfo/isCreateAccount",
@@ -246,6 +248,7 @@ export default {
 	//上下级转矿石
 	insertTransaction4LevelTeamBill: host + "assist/transaction/insertTransaction4LevelTeamBill",
 	//统计
+	getTransactionInfo: host + "assist/statistics/getTransactionInfo",
 	getMillPageInfo: host + "assist/statistics/getMillPageInfo",
 	excuteProfit: host + "assist/statistics/excuteProfit",
 	getNDayProfitNum: host + "assist/statistics/getNDayProfitNum",

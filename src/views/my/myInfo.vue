@@ -294,7 +294,7 @@
 				maxlength="20" type="password"
 			  @click-right-icon="$toast(errorHint['originalPassword'])"
 			  @blur="validate('originalPassword')"
-			  :error-message="errorInfo['sureNewPassword']"/>
+			  :error-message="errorInfo['originalPassword']"/>
 			<van-field v-model="form[flag]" required clearable :label="label" right-icon="question-o" :placeholder="errorHint[flag]" type="password"
 			  maxlength="20" @click-right-icon="$toast(errorHint[flag])"
 			  @blur="validate(flag)"
@@ -385,7 +385,7 @@ export default {
 			isRealName:true,
 			loading4logout:false,
 			userId:'',
-			mobilePhone:'',
+			mobilePhone:''
 		}
 	},  
 	components:{
@@ -406,13 +406,15 @@ export default {
 		let userInfo = localStorage.getItem("_USERINFO_");
 		if(userInfo){
 			_this.userInfo = JSON.parse(userInfo);
-			console.log(_this.userInfo,'_this.userInfo')
 			_this.userId = _this.userInfo.userId;
 			_this.mobilePhone = _this.userInfo.mobilePhone;
 		}else{
-			/* localStorage.removeItem('_USERINFO_');
+			_this.$toast(_this.$api.loginAgainTipText);
+			localStorage.removeItem('_USERINFO_');
 			_this.$cookies.remove('userId');
-			_this.$cookies.remove('token'); */
+			_this.$cookies.remove('token');
+			_this.$cookies.remove('isRefreshDealInfo');
+			_this.$cookies.remove('tab_raise_list');
 			_this.$router.replace('login');
 			return;
 		}
@@ -612,14 +614,13 @@ export default {
 		},
 		toUpdateSecurityPassword(){
 			let _this = this;
-			Dialog.confirm({
+			Dialog.alert({
 			  title: '系统提示',
-			  message: `安全密码是实名认证的时候所设置的，您的安全密码头2位是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号，或重新提交实名，请问是否要去重新实名？`,
-			  confirmButtonText:'重新实名',
-			  cancelButtonText:'我再想想'
+			  message: `安全密码是实名认证的时候所设置的，您的安全密码头2位是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号！`,
+			  confirmButtonText:'好的，我再试试'
 			}).then(() => {
 			  // on close resetRealName
-			  _this.$ajax.ajax(_this.$api.resetRealName, 'POST', null, function(res){
+			  /* _this.$ajax.ajax(_this.$api.resetRealName, 'POST', null, function(res){
 			  	// console.log('res',res);
 			  	if(res.code == _this.$api.CODE_OK){
 					_this.$ajax.ajax(_this.$api.getAssistUserInfo, 'GET', null, function(res){
@@ -643,7 +644,7 @@ export default {
 			  	}
 			  },function(){
 			  	_this.update1Loading = false;
-			  })
+			  }) */
 			});
 		},
 		sureUpdate(type){
@@ -786,11 +787,32 @@ export default {
 				}else{
 					_this.errorInfo.loginPassword = _this.$reg.passwordHint;
 				}
+				if(_this.form.loginPassword.length<6){
+					_this.errorInfo.loginPassword = '密码长度请填写6~16位之间';
+				}
 			}else if(key == 'securityPassword') {
 				if(_this.$reg.safePassword.test(_this.form.securityPassword)){
 					_this.errorInfo.securityPassword = '';
 				}else{
 					_this.errorInfo.securityPassword = _this.$reg.securityPasswordHint;
+				}
+				if(_this.form.securityPassword.length<6){
+					_this.errorInfo.securityPassword = '密码长度请填写6~16位之间';
+				}
+			}else if(key == 'sureNewPassword'){
+				if(_this.flag=='loginPassword'){
+					if(_this.form.sureNewPassword==_this.form.loginPassword){
+						_this.errorInfo.sureNewPassword = '';
+					}else{
+						_this.errorInfo.sureNewPassword = '两次密码不一致';
+					}
+				}
+				if(_this.flag=='securityPassword'){
+					if(_this.form.sureNewPassword==_this.form.securityPassword){
+						_this.errorInfo.sureNewPassword = '';
+					}else{
+						_this.errorInfo.sureNewPassword = '两次密码不一致';
+					}
 				}
 			}else if(key == 'bankCard') {
 				if(_this.$reg.bankCard.test(_this.form.bankCard)){

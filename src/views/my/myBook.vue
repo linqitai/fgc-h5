@@ -87,13 +87,13 @@
 						</div>
 						<van-button @click="loadingMore2Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading2" loading-type="spinner">加载更多</van-button>
 					</van-tab>
-					<van-tab title="FGC" name="mineral">
+					<van-tab title="钻石" name="mineral">
 						<div class="list">
 							<div class="item" v-for="item in list1" :key="item.id">
 								<div class="flex">
 									<div class="line">{{item.createTime}}</div>
 									<div class="line margT6" v-if="item.type==2||item.type==3||item.type==16">从<i class="mainAdornColor">{{item.fromUserName}}</i>到<i class="mainAdornColor">{{item.toUserName}}</i></div>
-									<div class="line margT6">{{item.type | mineralBookType}}后拥有FGC {{item.currentMineralNum}}</div>
+									<div class="line margT6">{{item.type | mineralBookType}}后拥有钻石 {{item.currentMineralNum}}</div>
 								</div>
 								<div class="flexRight">{{item.addOrReduce}} {{item.number}}</div>
 							</div>
@@ -113,12 +113,12 @@
 						</div>
 						<van-button @click="loadingMore4Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading4" loading-type="spinner">加载更多</van-button>
 					</van-tab>
-					<van-tab title="感恩值" name="contribution">
+					<van-tab title="钻石值" name="contribution">
 						<div class="list">
 							<div class="item" v-for="item in list3" :key="item.id">
 								<div class="flex">
 									<div class="line">{{item.createTime}}</div>
-									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有感恩值 {{item.currentContributionValue}}</div>
+									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有钻石值 {{item.currentContributionValue}}</div>
 								</div>
 								<div class="flexRight">{{item.addOrReduce}} {{item.contributionValue}}</div>
 							</div>
@@ -226,11 +226,22 @@
 			}else{
 				_this.activeName = "mineral";
 			}
-			_this.userId = _this.$cookies.get('userId');
-			if(_this.$utils.isNUll(_this.userId)){
+			let userInfo = localStorage.getItem("_USERINFO_");
+			if(userInfo){
+				////console.log("userInfo_localStorage");
+				_this.userInfo = JSON.parse(userInfo);
+				_this.userId = _this.userInfo.userId;
+				if(_this.userInfo.accountStatus==1){
+					//退出登录
+					_this.logout();
+				}
+			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
 				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
 				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}

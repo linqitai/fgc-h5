@@ -197,13 +197,13 @@
 			<div class="textJustify lineHeight">
 				尊敬的原始矿工实名前请认真阅读以下规则：<br>
 				<div class="placeholderLine4"></div>
-				【1】会员的注册实名信息是用户之间交换FGC时的重要凭据，<b class="blue">一旦提交则无法修改，若信息有误，只能注销账号然后重新注册实名</b>。<br>
+				【1】平台为保证交易的顺利进行，<b class="blue">【真实姓名务必和支付宝、微信中的实名信息一致，且支付宝和微信都要设置照片头像，不然会当作违规账号且冻结处理】</b>。<br>
 				<div class="placeholderLine4"></div>
-				【2】平台为保证交易的顺利进行，<b class="blue">【真实姓名务必和支付宝、微信中的实名信息一致，且支付宝和微信都要设置照片头像，不然会当作违规账号且冻结处理】</b>，交易的时候若遇到实名信息不一致的问题欢迎向平台反馈，情况属实买方会得到感恩值奖励。<br>
+				【2】<i class="textBold">支付宝</i>默认为注册手机号，您的支付宝若没绑定该手机号，请先在微信的【我的--设置--安全设置】中绑定，且在【设置--隐私--常用隐私设置】里开启【向好友公开我的真实姓名】和【通过手机号查找到我】的功能。<br>
 				<div class="placeholderLine4"></div>
-				【3】<i class="textBold">支付宝</i>默认为注册手机号，您的支付宝若没绑定该手机号,请先在微信的【我的--设置--安全设置】中绑定，且在【设置--隐私--常用隐私设置】里开启【向好友公开我的真实姓名】和【通过手机号查找到我】的功能。否则交易的时候买家若无法查找到您的支付宝而无法完成交易的，客服介入调查属实后会取消交易且处理卖方账号。<br>
+				【3】<i class="textBold">微信号</i>默认为注册手机号，您的微信若没绑定该手机号，请先在微信的【我--设置--账号与安全】中绑定，且在【设置--隐私--添加我的方式】里打开用手机号搜索到我的功能。<br>
 				<div class="placeholderLine4"></div>
-				【4】<i class="textBold">微信号</i>默认为注册手机号，您的微信若没绑定该手机号，请先在微信的【我--设置--账号与安全】中绑定，且在【设置--隐私--添加我的方式】里打开用手机号搜索到我的功能；若被发现没绑定或搜索不到，客服介入调查属实后会取消交易且冻结处理卖方账号。<br>
+				【注意】会员的注册实名信息是用户之间交换钻石时的重要凭据，<b class="blue">一旦提交则无法修改，若因违反实名规则而被投诉，一律冻结账号处理，0撸的只能注销账号然后重新注册实名，投资者若违反实名规则需提供手持证件照来解冻</b>。<br>
 			</div>
 			<div class="placeholderLine10"></div>
 			<van-button color="linear-gradient(to right, #0e7de5, #0b6cc7)" @click="showPickRealNameModel=false" size="normal" :block="true" :disabled="isDealDisabled" loading-type="spinner">{{timeRead}}</van-button>
@@ -329,6 +329,11 @@ export default {
 			}
 		}else{
 			_this.$toast(_this.$api.loginAgainTipText);
+			localStorage.removeItem('_USERINFO_');
+			_this.$cookies.remove('userId');
+			_this.$cookies.remove('token');
+			_this.$cookies.remove('isRefreshDealInfo');
+			_this.$cookies.remove('tab_raise_list');
 			_this.$router.replace('login');
 			return;
 		}
@@ -358,7 +363,7 @@ export default {
 			let result = setInterval(function(){
 				if(_this.timeRead==0){
 					_this.isDealDisabled = false;
-					_this.timeRead = "确认";
+					_this.timeRead = "已阅读";
 					clearInterval(result);
 				}else{
 					_this.timeRead = _this.timeRead - 1;

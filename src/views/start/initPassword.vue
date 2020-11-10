@@ -59,7 +59,7 @@
 			<!-- <van-button color="inherit" size="normal" :block="true" @click="loginBtn">已有账号，去登录</van-button> -->
 			<div class="tip4model3">
 				Tip：<br>
-				初始化密码之前，请客服先通过手机号在微信搜索对方，若搜索得到对方的微信，就代表对方是本人，给于修改，否者就不是本人，不给修改。<br>
+				初始化密码之前，请客服先通过手机号在微信搜索对方，若搜索得到对方的微信，就代表对方是本人，给于修改，否者就不是本人，不给修改。密码初始化的结果为：“fgc+手机号”。<br>
 			</div>
 		</div>
 	</div>

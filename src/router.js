@@ -157,14 +157,14 @@ export default new Router({
 					path: '/mill',
 					name: '矿机商城',
 					component: resolve => require(['./views/mill/mill'],resolve),
-					meta:{footer:true,keepAlive:false},
+					meta:{footer:true,keepAlive:false,toMyMill:true,showMillRecordIcon:true},
 					//meta:{footer:true,question:true,questionName:'mill',showMillRecordIcon:true},
 				},
 				{
 					path: '/deal',
 					name: '交易中心',
 					component: resolve => require(['./views/deal/deal'],resolve),
-					meta:{footer:true,question:true,questionName:'deal',showRecordIcon:true,keepAlive:true},
+					meta:{footer:true,question:true,questionName:'deal',showRecordIcon:true,keepAlive:true,toMyDeal:true},
 					// children:[
 					// 	{
 					// 		path: '/myDeal4Deal',
@@ -405,6 +405,13 @@ export default new Router({
 					name: '担保交易审核',
 					component: resolve => require(['./views/my/myDealCheck'],resolve),
 					meta:{footer:false,keepAlive:true},
+				},
+				{
+					path: '/mill2',
+					name: '持钻挖矿',
+					component: resolve => require(['./views/mill/mill2'],resolve),
+					meta:{footer:true,keepAlive:false},
+					//meta:{footer:true,question:true,questionName:'mill',showMillRecordIcon:true},
 				},
 				{
 					path: '/myMill',

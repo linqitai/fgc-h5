@@ -17,11 +17,11 @@ module.exports = {
 	devServer: {
 		port: 8089,
 		proxy: {
-			'/bflApp': {
+			'/fgcApp': {
 				target: 'http://localhost:8003/',
 				changeOrigin: true,
 				pathRewrite: {
-					'/bflApp': ''
+					'/fgcApp': ''
 				}
 			},
 			/* '/ms':{

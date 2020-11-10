@@ -198,9 +198,9 @@
 									<span class="millName">{{item.type | machineTypeType}}</span>
 									<span class="calcullatePower">算力 {{item.calculationPower}}GH/s</span>
 								</div>
-								<div class="line">租金 {{item.price}} 个FGC</div>
-								<div class="line">总产 {{item.totalOutput}} 个FGC</div>
-								<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(2)}}</b> 个FGC</div>
+								<div class="line">租金 {{item.price}} 个钻石</div>
+								<div class="line">总产 {{item.totalOutput}} 个钻石</div>
+								<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(2)}}</b> 个钻石</div>
 								<!-- <div class="line">增加流通值 <b class="yellow">{{item.type<10?(parseFloat(item.price)/2).toFixed(2):(parseFloat(item.price)).toFixed(2)}}</b></div> -->
 								<!-- <div class="line">运行总时长 {{item.allRuntime}}小时</div> -->
 								<div class="line">租赁上限 <b class="yellow">{{item.limitBuy}}</b>台 <b class="margL10">当前拥有</b> <b class="yellow">{{item.haveMill}}</b> 台</div>
@@ -222,12 +222,12 @@
 	  <van-dialog v-model="showSelectBox" title="请选择用什么租赁" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 	  		<div class="paddingWing">
 				<div class="placeholderLine20"></div>
-				<div class="f-14">您背包中拥有{{userInfo.thisWeekMineral}}FGC</div>
+				<div class="f-14">您背包中拥有{{userInfo.thisWeekMineral}}钻石</div>
 				<div class="placeholderLine10"></div>
-				<div class="f-14">租赁此矿机要花{{price}}个FGC</div>
+				<div class="f-14">租赁此矿机要花{{price}}个钻石</div>
 				<div class="placeholderLine10"></div>
 				<!-- <van-radio-group v-model="selectRadioValue" @change="selectRadioChange">
-				  <van-radio name="1">FGC</van-radio>
+				  <van-radio name="1">钻石</van-radio>
 				  <div class="placeholderLine10"></div>
 				  <van-radio name="2">贡献值</van-radio>
 				</van-radio-group> -->
@@ -336,8 +336,10 @@
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
 				localStorage.removeItem('_USERINFO_');
-				_this.$cookies.remove('token');
 				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -492,7 +494,7 @@
 				_this.machineId = item.id;
 				// Dialog.confirm({
 				//   title: '确认弹窗',
-				//   message: `您当前可用FGC${_this.userInfo.thisWeekMineral}个,租赁此矿机要花${item.price}FGC,是否确定租赁？`
+				//   message: `您当前可用钻石${_this.userInfo.thisWeekMineral}个,租赁此矿机要花${item.price}钻石,是否确定租赁？`
 				// }).then(() => {
 				//   // on confirm
 				//   if(_this.userInfo.thisWeekMineral<item.price){
@@ -510,7 +512,7 @@
 				_this.buyMillLoading = true;
 				if(_this.selectRadioValue==1){
 					if(_this.userInfo.thisWeekMineral<_this.price){
-						_this.$toast("您所拥有的FGC不够租赁该矿机");
+						_this.$toast("您所拥有的钻石不够租赁该矿机");
 						_this.buyMillLoading = false;return;
 					}
 				}

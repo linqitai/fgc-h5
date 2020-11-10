@@ -529,9 +529,8 @@
 			<div class="detailBox" v-if="showSellerDetailLoading==false&&detail4sellerInfo">
 				<div class="tip4modelNew">
 					<b class="textBold">买家需知：</b><br>
-					1.<b class="blue textBold">若卖家支付宝或微信号异常，请买家点申诉</b>；匹配后卖家若没第一时间发短信提醒，被申诉后客服会介入调查，并给予卖家相应处罚。<br>
-					2.交易默认收款方式为支付宝，若用微信转账，<b class="blue textBold">严禁微信红包转账</b>，只可通过【支付--收付款】中的向手机号转账；若是小额转账，务必使用支付宝或微信完成，银行卡转账只应对大额交易。<br>
-					3.平台为保证交易的顺利进行，请买家务必校对卖家的真实姓名，<b class="blue textBold">若卖家的真实姓名若与收款账户里的不一致将会被冻结账号处理</b>，交易的时候买方若遇到此问题请不要付款，务必第一时间向平台申诉，情况属实买方会得到贡献值奖励。
+					1.交易默认收款方式为支付宝，若用微信转账，<b class="yellow textBold">请不要用微信红包转账</b>，只可通过【支付--收付款】中的向手机号转账；若是小额转账，务必使用支付宝或微信完成，银行卡转账只应对大额交易。<br>
+					2.平台为保证交易的顺利进行，请买家务必校对卖家的真实姓名，<b class="yellow textBold">若卖家的支付宝未实名</b>或<b class="yellow textBold">真实姓名若与收款账户里的不一致，请买家点申诉反馈问题</b>，情况属实买方会得到钻石值奖励。
 				</div>
 				<div class="line" v-if="detail4sellerInfo.id">
 					<span class="label">订单编号</span>
@@ -685,12 +684,12 @@
 				<div class="tipText2" v-if="detail4buyerInfo.status==1">
 					{{buyerHaveWord}}
 				</div>
-				<van-button v-if="detail4buyerInfo.status==4" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :loading="sureLetLoading" :block="true" @click="letMineralBtn">我已收到款 确认并释放FGC</van-button>
+				<van-button v-if="detail4buyerInfo.status==4" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :loading="sureLetLoading" :block="true" @click="letMineralBtn">我已收到款 确认并释放钻石</van-button>
 				<div class="margT10" v-if="detail4buyerInfo.status==4">
 					<img class="selectedImg" :src="detail4buyerInfo.imgUrl"/>
 				</div>
 				<div class="margT10" v-if="detail4buyerInfo.status==2">
-					<van-button color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :loading="sureLetLoading" :block="true" @click="letMineralBtn">我已收到款 确认并释放FGC</van-button>
+					<van-button color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :loading="sureLetLoading" :block="true" @click="letMineralBtn">我已收到款 确认并释放钻石</van-button>
 					<div class="placeholderLine10"></div>
 					<van-button color="linear-gradient(to right, #c7c7c7 , #aaaaaa)" @click="notReciveCNYBtn" size="normal" :block="true">我没收到款 请对方上传付款凭证</van-button>
 				</div>
@@ -717,7 +716,7 @@
 		</van-action-sheet>
 		<van-action-sheet v-model="showSureCancelTransactionModel4buyer" title="温馨提示">
 			<div class="cancelSellTip">
-				<div class="tipText2">为了避免买方随意取消交易而导致扰乱市场的现象，经平台研究决定，买方主动取消交易或因超时未打款而被动取消交易，要扣2~5个贡献值。若卖方实名信息不符或者有其他问题，请向平台申诉，让客服来处理单子。</div>
+				<div class="tipText2">为了避免买方随意取消交易而导致扰乱市场的现象，经平台研究决定，买方主动取消交易或因超时未打款而被动取消交易，要扣20信誉分。若卖方实名信息不符或者有其他问题，请向平台申诉，让客服来处理单子。</div>
 			</div>
 			<div class="sureAppointBtnBox">
 				<van-button @click="cancel4buyer" :loading="sureCancelBtnLoading" loading-type="spinner" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true">确认取消</van-button>
@@ -762,7 +761,7 @@
 				</div>
 				<div class="flex flex2">
 					<div class="value" @click="toBookView('4',sellerUserInfo.userId)">{{sellerUserInfo.thisWeekMineral}}</div>
-					<div class="text">FGC</div>
+					<div class="text">钻石</div>
 				</div>
 			</div> -->
 			<!-- <div class="box box3">
@@ -776,7 +775,7 @@
 				</div>
 				<div class="flex flex2">
 					<div>{{sellerUserInfo.temporaryFreezeMineral}}</div>
-					<div class="text">交易中<br>FGC</div>
+					<div class="text">交易中<br>钻石</div>
 				</div>
 			</div> -->
 			<div class="margT10">
@@ -923,27 +922,22 @@
 		},
 		created() {
 			let _this = this;
-			//_this.pen = _this.$api.projectEnglishName;
-			_this.userId = _this.$cookies.get('userId');
-			// _this.tipText = _this.$api.tipText;
-			if(_this.$utils.isNUll(_this.userId)){
-				_this.$toast(_this.$api.loginAgainTipText);
-				_this.$router.replace('login');
-			}
 			let userInfo = localStorage.getItem("_USERINFO_");
 			if(userInfo){
 				//////console.log("userInfo_localStorage");
 				_this.userInfo = JSON.parse(userInfo);
-				//_this.userId = _this.userInfo.userId;
+				_this.userId = _this.userInfo.userId;
 				if(_this.userInfo.accountStatus==1){
 					//退出登录
 					_this.logout();
 				}
 			}else{
-				/* localStorage.removeItem('_USERINFO_');
-				_this.$cookies.remove('userId');
-				_this.$cookies.remove('token'); */
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -959,14 +953,14 @@
 				if(_this.$route.query.dealType==1){
 					if(_this.$route.query.isSelf) {
 						_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请给对方发个短信提醒。";
-						_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个FGC已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
+						_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
 					}else{
 						_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请提醒代理审核单子。";
 						_this.smsContent = `【${_this.$api.projectName}】我的定向交易单子选择了您做担保，请审核，谢谢。`;
 					}
 				}else{
 					_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请给对方发个短信提醒。";
-					_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个FGC已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
+					_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
 				}
 				_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 				//发送短信提示end
@@ -1893,7 +1887,7 @@
 				// _this.showBuyDetailModel = false;
 				Dialog.confirm({
 				  title: '提示信息',
-				  message: '请先查看您的收款账户，确认已经收到款后再放FGC！',
+				  message: '请先查看您的收款账户，确认已经收到款后再放钻石！',
 				  cancelButtonText:'先去查看',
 				  confirmButtonText:'确认已收到'
 				}).then(() => {
@@ -1915,16 +1909,16 @@
 				  		if(res.data==1){
 							_this.showAgentDetailModel = false;
 							//发送短信提示start
-							_this.sendSmsTipText = "交易已经顺利完成！请最后告知对方您已经确认收款并释放FGC。";
+							_this.sendSmsTipText = "交易已经顺利完成！请最后告知对方您已经确认收款并释放钻石。";
 							if(_this.type==2){
 								////console.log('_this.mobilePhone',_this.mobilePhone);
 								////console.log("localStorage.getItem('mobilePhone')",localStorage.getItem('mobilePhone'));
 								_this.mobilePhone = _this.appointDealDetail.assistAppointDealBuyerInfo.mobilePhone || _this.appointDealDetail.assistAppointAgentInfo.mobilePhone;
-								//_this.smsContent = `【${_this.$api.projectName}】我已确认并释放FGC，谢谢。`;
+								//_this.smsContent = `【${_this.$api.projectName}】我已确认并释放钻石，谢谢。`;
 							}else{
 								_this.mobilePhone = _this.detail4buyerInfo.mobilePhone;
 							}
-							_this.smsContent = `【${_this.$api.projectName}】我已经确认收款并释放FGC，谢谢你。`;
+							_this.smsContent = `【${_this.$api.projectName}】我已经确认收款并释放钻石，谢谢你。`;
 							_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 							//发送短信提示end
 							_this.$cookies.set('isRefreshUserInfo',1,_this.$api.cookiesTime);
@@ -1949,7 +1943,7 @@
 				}else if(phoneType=='i'){
 					// let tempUrl = encodeURI(_this.smsContent);
 					let encodeUrl = encodeURI(smsContent);
-					// let encodeUrl = "FGC"
+					// let encodeUrl = "钻石"
 					_this.sendSmsHref = `sms:${mobilePhone}&body=${encodeUrl}`;
 				}else{
 					_this.sendSmsHref = `sms:${mobilePhone}?body=${smsContent}`;
@@ -1983,21 +1977,21 @@
 				  	if (res.code == _this.$api.CODE_OK) {
 				  		// let list = res.data.list;
 				  		if(res.data==1){
-							//服务费类型(0:FGC 1:FGC+平台券 2平台券)
+							//服务费类型(0:钻石 1:钻石+平台券 2平台券)
 							_this.showSendSMSTipModel = true;
 							if(_this.type == 0 || _this.type == 1 || _this.type == 3){
 								//发送短信提示start
-								_this.sendSmsTipText = "提交已付款状态成功，为了让交易顺利进行，请发个短信提醒对方确认收款并释放FGC。";
+								_this.sendSmsTipText = "提交已付款状态成功，为了让交易顺利进行，请发个短信提醒对方确认收款并释放钻石。";
 								_this.mobilePhone = _this.detail4sellerInfo.mobilePhone;
-								_this.smsContent = `【${_this.$api.projectName}】所匹配的${item.num}个FGC已付款，请确认收款，并在“个人中心--我的单子--待收款”的订单详情中确认收款并释放FGC。FGC帮扶链感恩有您的支持!`;
+								_this.smsContent = `【${_this.$api.projectName}】所匹配的${item.num}个钻石已付款，请确认收款，并在“个人中心--我的单子--待收款”的订单详情中确认收款并释放钻石。感恩链感恩有您的支持!`;
 								_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 								//发送短信提示end
 								_this.showSellerDetailModel = false;
 							}else if(_this.type == 2){
 								//发送短信提示start
-								_this.sendSmsTipText = "提交已付款状态成功，为了让交易顺利进行，请发个信息提醒对方确认收款并释放FGC。";
+								_this.sendSmsTipText = "提交已付款状态成功，为了让交易顺利进行，请发个信息提醒对方确认收款并释放钻石。";
 								_this.mobilePhone = _this.appointDealDetail.assistAppointAgentInfo.mobilePhone;
-								_this.smsContent = `【${_this.$api.projectName}】我已付款，请确认收款并释放FGC，谢谢你。`;
+								_this.smsContent = `【${_this.$api.projectName}】我已付款，请确认收款并释放钻石，谢谢你。`;
 								_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 								//发送短信提示end
 								_this.showAgentDetailModel = false;

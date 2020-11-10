@@ -209,12 +209,12 @@
 			/>
 			<div class="statistics" v-if="remainCount">
 				<div class="line clearBoth flexCenter f-14">
-					<div class="right">待产出FGC ≈ {{(parseFloat(remainCount)).toFixed(3)}} 个</div>
+					<div class="right">待产出钻石 ≈ {{(parseFloat(remainCount)).toFixed(3)}} 个</div>
 				</div>
 			</div>
 			<!-- <div class="statistics">
 				<div class="line clearBoth flexCenter f-14">
-					<div>系统提示:由于总资产的统计是根据矿机所产来计算的，而每台矿机所产都四舍五入保留了几位小数，所以每次领取矿机后，总资产会在近似值内上下浮动。只有矿机到期后，才会产生最准确的FGC数据。</div>
+					<div>系统提示:由于总资产的统计是根据矿机所产来计算的，而每台矿机所产都四舍五入保留了几位小数，所以每次领取矿机后，总资产会在近似值内上下浮动。只有矿机到期后，才会产生最准确的钻石数据。</div>
 				</div>
 			</div>
 			<div class="statistics" v-if="remainCount">
@@ -223,8 +223,8 @@
 					<div class="right">总资产 ≈ {{parseFloat(Number(userInfo.thisWeekMineral)+Number(remainCount)).toFixed(3)}}个</div>
 				</div>
 				<div class="line clearBoth">
-					<div class="left">背包中FGC {{userInfo.thisWeekMineral.toFixed(3)}}个</div>
-					<div class="right">待产出FGC ≈ {{(parseFloat(remainCount)).toFixed(3)}}个</div>
+					<div class="left">背包中钻石 {{userInfo.thisWeekMineral.toFixed(3)}}个</div>
+					<div class="right">待产出钻石 ≈ {{(parseFloat(remainCount)).toFixed(3)}}个</div>
 				</div>
 			</div> -->
 			<van-pull-refresh v-model="loadingMyMill" @refresh="refreshEvent">
@@ -236,7 +236,7 @@
 						</div>
 						<div class="getMineral" v-if="isShowOneReciept">
 							<!-- <div class="tip4model3 textCenter">每次矿机收益需要在24~168小时之间领取</div> -->
-							<van-button type="info" size="normal" @click="getReceiptSure" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="getRecieptLoading" :block="true"><span class="letterSpacing">一键领取收益</span></van-button>
+							<van-button type="info" size="normal" @click="getReceipt" color="linear-gradient(to right, #ffae00, #ff8400)" :disabled="getRecieptLoading" :loading="getRecieptLoading" :block="true"><span class="letterSpacing">一键领取收益</span></van-button>
 						</div>
 						<van-list v-model="loadingMyMill" :finished="finished1" :finished-text="finishedMyMillText" @load="onLoadMyMill">
 							<div class="millList">
@@ -255,10 +255,10 @@
 										</div>
 										<div class="line" v-if="item.turnOnTime">{{item.turnOnTime.substring(0,19)}} 启动</div>
 										<div class="line" v-if="item.turnOffTime">{{item.turnOffTime}} 到期</div>
-										<div class="line">租金 <b class="yellow">{{item.price}}</b> 个FGC</div>
-										<div class="line">总产 <b class="yellow">{{item.totalOutput}}</b> 个FGC</div>
-										<div class="line">已产 <b class="yellow">{{item.alreadyGet}}</b> 个FGC</div>
-										<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(2)}}</b> 个FGC</div>
+										<div class="line">租金 <b class="yellow">{{item.price}}</b> 个钻石</div>
+										<div class="line">总产 <b class="yellow">{{item.totalOutput}}</b> 个钻石</div>
+										<div class="line">已产 <b class="yellow">{{item.alreadyGet}}</b> 个钻石</div>
+										<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(2)}}</b> 个钻石</div>
 										<!-- <div class="line">总运行时长 {{item.allRuntime}}小时</div> -->
 										<!-- <div class="line" v-if="item.turnOnTime">开机 {{item.turnOnTime}}</div> -->
 										<div class="line" v-if="item.alreadyGet">上次操作矿机时间 {{item.beforeReceipt.substring(0,19) || '--'}}</div>
@@ -297,7 +297,7 @@
 											<!-- <div class="status inline">{{item.status | machineStatus}}</div>
 											<div class="calcullatePower inline">算力 {{item.calculationPower}}GH/s</div> -->
 										</div>
-										<div class="line">租金{{item.price}} 个FGC 总产{{item.totalOutput}} 个FGC 已产{{item.alreadyGet}} 个FGC</div>
+										<div class="line">租金{{item.price}} 个钻石 总产{{item.totalOutput}} 个钻石 已产{{item.alreadyGet}} 个钻石</div>
 										<!-- <div class="line">总运行时长 {{item.allRuntime}}小时</div> -->
 										<!-- <div class="line" v-if="item.turnOnTime">开机时间 {{item.turnOnTime}}</div> -->
 										<div class="line" v-if="item.turnOffTime">到期时间 {{item.turnOffTime}}</div>
@@ -410,9 +410,20 @@
 			let _this = this;
 			let userInfo = localStorage.getItem("_USERINFO_");
 			if(userInfo){
+				////console.log("userInfo_localStorage");
 				_this.userInfo = JSON.parse(userInfo);
+				_this.userId = _this.userInfo.userId;
+				if(_this.userInfo.accountStatus==1){
+					//退出登录
+					_this.logout();
+				}
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -508,47 +519,57 @@
 			},
 			getReceipt(){
 				let _this = this;
-				let nowTimestamp = Number(new Date().getTime());
-				let lastReceiptTimestamp = Number(new Date(_this.userInfo.lastReceiptTime).getTime());
-				let timestamp = (nowTimestamp - lastReceiptTimestamp)/1000;
-				if(_this.safePassword==''||_this.safePassword==null){
-					_this.$toast("安全密码不能为空");
-					return;
-				}
-				let params = {
-					safePassword:_this.safePassword
-				}
-				_this.getRecieptLoading = true;
-				params.safePassword = _this.$JsEncrypt.encrypt(params.safePassword);
-				_this.$ajax.ajax(_this.$api.getMyMachinesReceipt,'POST',params,function(res) {
-					if(res.code == _this.$api.CODE_OK) {
-						if(res.data){
-							_this.mineralNumTip = `此次领取收益为${res.data}个FGC`;
-							_this.isShowMineralNum = true;
-							//_this.$toast(`此次领取收益为${res.data}个FGC`);
-							_this.onLoadMyMill();
-							_this.$cookies.set('isRefreshUserInfo', 1, _this.$api.cookiesTime);
-							_this.$cookies.set("tab_name_book", 'mineral', _this.$api.cookiesTime)
-							//_this.$router.push('/myBook');
-						}else{
-							if(res.data == 0.0){
-								_this.mineralNumTip = `请过24小时后再来领取`;
-								_this.onLoadMyMill();
-							}else{
-								_this.mineralNumTip = `未到领取收益的时间`;
-							}
-						}
-						_this.showReceiptTip = true;
-					}else{
-						_this.$toast(res.message);
-					}
-				},function(){
-					_this.receiptModelTile = "系统提示";
-					_this.isShowConfirmButton = true;
-					_this.isShowReceiptLoading = false;
-					_this.getRecieptLoading = false;
-					_this.isShowMineralNum = true;
-					_this.model4GetRecipt = false;
+				Dialog.confirm({
+				  title: '系统提示',
+				  confirmButtonText:'确认',
+				  closeOnClickOverlay:true,
+				  message: '请问是否领取矿机收益？'
+				}).then(() => {
+				  let nowTimestamp = Number(new Date().getTime());
+				  let lastReceiptTimestamp = Number(new Date(_this.userInfo.lastReceiptTime).getTime());
+				  let timestamp = (nowTimestamp - lastReceiptTimestamp)/1000;
+				  /* if(_this.safePassword==''||_this.safePassword==null){
+				  	_this.$toast("安全密码不能为空");
+				  	return;
+				  }
+				  let params = {
+				  	safePassword:_this.safePassword
+				  }
+				  params.safePassword = _this.$JsEncrypt.encrypt(params.safePassword); */
+				  _this.getRecieptLoading = true;
+				  _this.$ajax.ajax(_this.$api.getMyMachinesReceipt,'POST',null,function(res) {
+				  	if(res.code == _this.$api.CODE_OK) {
+				  		if(res.data){
+				  			_this.mineralNumTip = `此次领取收益为${res.data}个钻石`;
+				  			_this.isShowMineralNum = true;
+				  			//_this.$toast(`此次领取收益为${res.data}个钻石`);
+				  			_this.onLoadMyMill();
+				  			_this.$cookies.set('isRefreshUserInfo', 1, _this.$api.cookiesTime);
+				  			_this.$cookies.set("tab_name_book", 'mineral', _this.$api.cookiesTime)
+				  			//_this.$router.push('/myBook');
+				  		}else{
+				  			if(res.data == 0.0){
+				  				_this.mineralNumTip = `请过24小时后再来领取`;
+				  				_this.onLoadMyMill();
+				  			}else{
+				  				_this.mineralNumTip = `未到领取收益的时间`;
+				  			}
+				  		}
+				  		_this.showReceiptTip = true;
+				  	}else{
+				  		_this.$toast(res.message);
+				  	}
+				  },function(){
+				  	_this.receiptModelTile = "系统提示";
+				  	_this.isShowConfirmButton = true;
+				  	_this.isShowReceiptLoading = false;
+				  	_this.getRecieptLoading = false;
+				  	_this.isShowMineralNum = true;
+				  	_this.model4GetRecipt = false;
+				  });
+				}).catch(() => {
+				  // on cancel
+				  //console.log('cancel');
 				});
 			},
 			getMyPastMachinesReceipt(){

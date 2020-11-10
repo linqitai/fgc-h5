@@ -242,7 +242,10 @@
 						<div class="mlBox left">有效人数 {{userInfo.validNum}}</div>
 					</div> -->
 					<div class="line">
-						<span>信誉度 {{userInfo4Me.credit}}</span>
+						<span @click="toBookView('3')">钻石值 {{userInfo.contributionValue}}</span> <i class="iconfont iconfont-question" @click="showTip('contribution')"/>
+					</div>
+					<div class="line">
+						<span>信誉分 {{userInfo4Me.credit}}</span>
 					</div>
 				</div>
 			</div>
@@ -251,11 +254,11 @@
 				
 				<div class="flex flex4">
 					<div class="value" @click="toBookView('2',userInfo4Me.userId)">{{userInfo4Me.platformTicket}}</div>
-					<div class="text">帮扶券</div>
+					<div class="text">感恩券</div>
 				</div>
 				<div class="flex flex2">
 					<div class="value" @click="toBookView('4',userInfo4Me.userId)">{{userInfo4Me.thisWeekMineral}}</div>
-					<div class="text">FGC</div>
+					<div class="text">钻石</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
@@ -263,11 +266,11 @@
 				
 				<div class="flex flex4">
 					<div>{{userInfo.temporaryFreezePlatformTicket}}</div>
-					<div class="text">交易中<br>帮扶券</div>
+					<div class="text">交易中<br>感恩券</div>
 				</div>
 				<div class="flex flex2">
 					<div>{{userInfo.temporaryFreezeMineral}}</div>
-					<div class="text">交易中<br>FGC</div>
+					<div class="text">交易中<br>钻石</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
@@ -372,7 +375,10 @@
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
 				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
 				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -425,14 +431,14 @@
 				  title: '系统提示',
 				  confirmButtonText:'查看',
 				  showCancelButton:true,
-				  message: "为了保护他人隐私，查看他人敏感信息需花0.1个帮扶券，这0.1个券将会捐入帮扶基金池，请问是否确认查看？"
+				  message: "为了保护他人隐私，查看他人敏感信息需花0.1个感恩券，这0.1个券将会捐入帮扶基金池，请问是否确认查看？"
 				}).then(() => {
 					  // on confirm
 					  let params = {
 						num: 0.1
 					  }
 					  if(Number(_this.userInfo4Me.platformTicket)<Number(params.num)){
-						_this.$toast(`您所拥有的帮扶券不够0.1个`);
+						_this.$toast(`您所拥有的感恩券不够0.1个`);
 						return;
 					  }
 					  const toast = Toast.loading({
@@ -469,7 +475,7 @@
 				Dialog.confirm({
 				  title: '提示信息',
 				  confirmButtonText:'确定',
-				  message: '为了提高告发他人的质量，控告他人的时候原告的个人算力需达到0.4G，且需花0.2个帮扶券，请确认是否真的要控告TA？'
+				  message: '为了提高告发他人的质量，控告他人的时候原告的个人算力需达到0.4G，且需花0.2个感恩券，请确认是否真的要控告TA？'
 				}).then(() => {
 				  // on confirm
 				  //这里调用让对方上传截图接口
@@ -537,11 +543,11 @@
 				//console.log(val);
 				let message = '';
 				if(val=='mineral'){
-					message = 'FGC：当前所能用来流通的FGC。卖出的时候要额外收20%的手续费(服务费)，比如卖100个FGC要使用120个FGC，所收的手续费(服务费)全部销毁，不再它用。获得途径：矿机产出、买入。';
+					message = '钻石：当前所能用来流通的钻石。卖出的时候要额外收20%的手续费(服务费)，比如卖100个钻石要使用120个钻石，所收的手续费(服务费)全部销毁，不再它用。获得途径：矿机产出、买入。';
 				}else if(val=='platformTicket'){
-					message = '帮扶券：可用于交易的时候当手续费(服务费)、用于捐赠给平台上生活遇到困难的会员(此功能即将推出)，后续还会有其他用处......。获取途径：从省市代理那儿购买。';
+					message = '感恩券：可用于交易的时候当手续费(服务费)、用于捐赠给平台上生活遇到困难的会员(此功能即将推出)，后续还会有其他用处......。获取途径：从省市代理那儿购买。';
 				}else if(val=='contribution'){
-					message = '贡献值：贡献值是平台对会员的奖励，可以用来租赁矿机。获取途径：签到、推广、自己复投矿机、直推复投矿机、捐赠帮扶券。';
+					message = '贡献值：贡献值是平台对会员的奖励，可以用来租赁矿机。获取途径：签到、推广、自己复投矿机、直推复投矿机、捐赠感恩券。';
 				}else if(val=='teamCalculationPower'){
 					message = '团队算力：个人算力+近代下级的个人算力。它决定着您的用户等级，分别有：青铜、白银、黄金、铂金、钻石五个等级，具体请查看【我的--任务中心】。';
 				}else if(val=='myCalculationPower'){
@@ -549,9 +555,9 @@
 				}else if(val=='limitBuyNum'){
 					message = '个人限购数量=个人额度+(卖出数量-买入数量)，个人额度可申请提升';
 				}else if(val=='raise'){
-					message = '爱心值：就是您捐赠帮扶券的数量，满10个即可在首页每日释放爱心值';
+					message = '爱心值：就是您捐赠感恩券的数量，满10个即可在首页每日释放爱心值';
 				}else if(val=='circulateValue'){
-					message = '流通值：可通过复投、推广、买入FGC获得，复投2:1增加，推广完成2个基础任务1:2增加，买入1:1增加，卖出1:2扣除。';
+					message = '流通值：可通过复投、推广、买入钻石获得，复投2:1增加，推广完成2个基础任务1:2增加，买入1:1增加，卖出1:2扣除。';
 				}
 				Dialog.alert({
 				  title: '温馨提示',

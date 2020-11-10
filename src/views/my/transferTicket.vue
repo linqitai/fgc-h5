@@ -78,15 +78,18 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				定向转让帮扶券
+				定向转让感恩券
 			</div>
 			<i class="rightBox icon"></i>
 		</m-header>
 		<div class="transferPageT">
 			<div class="placeholderLine10"></div>
 			<!-- 贡献值:{{userInfo.contributionValue.toFixed(2)}}点 -->
-			<div class="paddingWing tip4model3" v-if="userInfo">当前拥有 帮扶券 {{userInfo.platformTicket.toFixed(2)}} 个</div>
-			<div class="placeholderLine10"></div>
+			<div class="paddingWing tip4model3" v-if="userInfo">当前拥有 感恩券 {{userInfo.platformTicket.toFixed(2)}} 个</div>
+			<div class="paddingWing tip4model3">
+				<!-- <b class="textBold">定向转让感恩券的规则：</b><br> -->
+				每个会员都可以向自己的三代伞下会员转感恩券，转让感恩券不收手续费，感恩券恒价1CNY/个。<br>
+			</div>
 			<van-cell-group>
 				<van-field v-model="form4AppointDeal.transferAmount" required clearable label="转让数量" placeholder="请填写转让数量" @blur="validate4AppointDeal('transferAmount')" :error-message="errorInfo4AppointDeal.transferAmount"/>
 				<van-field v-model="form4AppointDeal.mobilePhone" required clearable label="手机号" placeholder="请粘贴对方的手机号" maxlength="11" @blur="validate4AppointDeal('mobilePhone')" :error-message="errorInfo4AppointDeal.mobilePhone"/>
@@ -97,12 +100,6 @@
 				<van-field required clearable @blur="validate('wordTitle')" v-model="form.wordTitle" maxlength="20" placeholder="请输入20字内的留言标题" />
 			</div> -->
 			<div class="placeholderLine10"></div>
-			<div class="paddingWing tip4model3">
-				<b class="textBold">定向转让帮扶券的规则：</b><br>
-				1.购买帮扶券请找个人中心-我的工会中的【上级】，或【首页--志愿者、服务商、省市代理】里的团队长。<br>
-				2.每个会员都可以向自己的三代伞下会员转帮扶券，转让帮扶券不收手续费。<br>
-				3.帮扶券恒价1CNY/个。<br>
-			</div>
 			<div class="sureBtn">
 				<van-button color="linear-gradient(to right, #ffae00, #ff8400)" :loading="loading" size="large" @click="submit">提 交</van-button>
 			</div>
@@ -110,7 +107,7 @@
 		<!-- <van-dialog v-model="showTipModel" title="问题小帮手" confirmButtonText="知道了">
 			<div class="paddingWing f-12 lineHeight tip4model2">
 				<div class="line text margT10 textCenter">
-					省市代理拥有定向转让帮扶券的权限
+					省市代理拥有定向转让感恩券的权限
 				</div>
 			</div>
 		</van-dialog> -->
@@ -199,7 +196,7 @@
 					if(_this.$reg.safePassword.test(_this.form4AppointDeal[key])){
 						_this.errorInfo4AppointDeal.safePassword = '';
 					}else{
-						_this.errorInfo4AppointDeal.safePassword = "安全密码不超过20位，由'字母或数字或._'组成";
+						_this.errorInfo4AppointDeal.safePassword = "安全密码不超过20位，由'字母和数字'组成";
 					}
 				}
 			},
@@ -209,7 +206,7 @@
 				Dialog.confirm({
 				  title: '提示信息',
 				  confirmButtonText:'确定',
-				  message: `请确定是否要给对方转${_this.form4AppointDeal.transferAmount}个帮扶券？`
+				  message: `请确定是否要给对方转${_this.form4AppointDeal.transferAmount}个感恩券？`
 				}).then(() => {
 				  // on confirm
 				  //console.log('sure',_this.imagesList);

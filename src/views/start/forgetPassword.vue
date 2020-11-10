@@ -79,7 +79,7 @@
 				</div>
 				<div class="placeholderLine4"></div>
 				<div class="tip4model3">
-					Tip：由于客服好友数量可能已经满人，加客服微信不一定能通过，但TA会通过您加TA的时候所备注的手机号来查找您的微信，可以查找到且是同一个矿工的微信号，即可将您的登录密码和安全密码初始化为所注册的手机号。
+					Tip：由于客服好友数量可能已经满人，加客服微信不一定能通过，但TA会通过您加TA的时候所备注的手机号来查找您的微信，可以查找到且是同一个矿工的微信号，即可将您的登录密码和安全密码初始化为"fgc+手机号"。
 				</div>
 				<div class="placeholderLine10"></div>
 				<!-- <div><b class="textBold">客服微信号：tiger6878</b><span class="copy margL10" @click="handleCopy('tiger6878',$event)">复制</span></div> -->
@@ -159,9 +159,9 @@
 			validate(key){
 				let _this = this;
 				if(key == 'phone') {
-					if(_this.$reg.phone.test(_this.form.phone)){
+					if(_this.$reg.phone2.test(_this.form.phone)){
 						_this.errorHint.phone = '';
-					_this.getSecurityCode4forget();
+					//_this.getSecurityCode4forget();
 					}else{
 						_this.errorHint.phone = _this.$reg.phoneHint;
 					}
@@ -188,14 +188,15 @@
 					if (res.code == _this.$api.CODE_OK) { // 200  60 * 60 * 12
 						console.log('securityCode4Web',res.data);
 						let initCode = _this.$JsEncrypt.decrypt(res.data.initCode);
-						_this.securityCode = _this.$utils.getSC(initCode);
+						_this.securityCode = initCode;
+						//_this.securityCode = _this.$utils.getSC(initCode);
 					}else{
 						Dialog.alert({
 						  title: '系统提示',
 						  message: res.message,
 						}).then(() => {
 						  // on close
-						  _this.back();
+						  //_this.back();
 						});
 					}
 				},function(){

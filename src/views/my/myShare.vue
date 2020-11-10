@@ -14,8 +14,8 @@
 		box-sizing: border-box;
 		z-index: 2;
 		.header{
-			background-color: #ae0010 !important;
-			border-bottom: 0.0625rem solid #93000e !important;
+			background-color: #012755 !important;
+			border-bottom: 0.0625rem solid #001e41;
 		}
 		.poster {
 			// margin-top: $headerHeight;
@@ -29,7 +29,7 @@
 			.posterBG {
 				position: relative;
 				height: 520px;
-				background-color: #ae0010;
+				background-color: #012755;
 				overflow: hidden;
 				$widthBox1: 240px;
 				$widthBox2: 120px;
@@ -191,7 +191,7 @@
 				}
 				.registerCodeText3 {
 					position: absolute;
-					bottom: 60px;
+					bottom: 66px;
 					left: 0;
 					right: 0;
 					text-align: center;
@@ -204,7 +204,7 @@
 				}
 				.registerCodeText4{
 					position: absolute;
-					bottom: 30px;
+					bottom: 36px;
 					left: 0;
 					right: 0;
 					text-align: center;
@@ -238,7 +238,7 @@
 				<!-- <div class="box5">
 					<img src="../../assets/image/poster/PostText1.png">
 				</div> -->
-				<!-- <img class="registerCode" src="../../assets/image/code.png"> -->
+				<!-- <img class="helpPic" src="../../assets/image/cq.jpg"> -->
 				<img class="helpPic" :src="images[index]">
 				<!-- <div style="width: 100%;">
 					<van-swipe :autoplay="3000" :lazy-render="true">
@@ -251,8 +251,8 @@
 				<!-- <img class="helpPic" src="https://www.assist-china.co.ax/image/banner/banner0057.jpg"> -->
 				<div class="registerCode" id="qrcode" ref="qrcode"></div>
 				<div class="registerCodeText">扫码注册</div>
-				<div class="registerCodeText2">我为帮扶链代言：{{userInfo.nickName}}</div>
-				<div class="registerCodeText3">助学 扶志 助业</div>
+				<div class="registerCodeText2">一路相伴 感谢有你</div>
+				<div class="registerCodeText3">我为感恩链代言：{{userInfo.nickName}}</div>
 				<div class="registerCodeText4" @click="handleCopyShareCode(userInfo.shareCode,$event)">
 					我的推荐码：{{userInfo.shareCode}}
 					<!-- <van-button type="info" size="small" color="linear-gradient(to right, #ffae00, #ff8400)" @click="handleCopyShareCode(userInfo.shareCode,$event)" :block="false">复制推荐码</van-button> -->
@@ -299,9 +299,8 @@
 			return {
 				index:0,
 				images: [
-					this.$api.domainName + '/image/banner/banner0058.jpg',
-					this.$api.domainName + '/image/banner/game01.jpg',
-					this.$api.domainName + '/image/banner/game02.jpg',
+					this.$api.domainName + '/image/banner/master.jpg',
+					this.$api.domainName + '/image/banner/cq.jpg',
 				],
 				showTipModel:false,
 				loading1: false,

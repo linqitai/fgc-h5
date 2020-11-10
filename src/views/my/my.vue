@@ -103,8 +103,8 @@
 			color: $main-box-fh-text-color; */
 			.flex {
 				&.flex1 {
-					flex: 0 0 70px;
-					$heightwidht:70px;
+					flex: 0 0 60px;
+					$heightwidht:60px;
 					.name{
 						width: $heightwidht;
 						height: $heightwidht;
@@ -149,7 +149,9 @@
 			.flex {
 				flex: 1;
 				.value{
-					
+					/* font-size: $fs-3;
+					line-height: 1.375rem;
+					height: 1.375rem; */
 				}
 				.text {
 					font-size: $fs-1;
@@ -222,9 +224,9 @@
 					<!-- <van-image round width="80" height="80" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg" /> -->
 					<!-- <div class="name" @click="toMyInfo">{{$JsEncrypt.decrypt(userInfo.realName) | getLastName}}</div> -->
 					<div class="name" @click="toMyInfo">{{userInfo.realName | getLastName}}</div>
-					<div class="textCenter margT10">
+					<!-- <div class="textCenter margT10">
 						<i class="iconfont iconfont-complaint f-18" @click="toComplainView(userInfo.userId)"></i> <i class="f-16">{{userInfo.beComplaintTimes}}</i>
-					</div>
+					</div> -->
 				</div>
 				<div class="flex flex2">
 					<div class="line1">
@@ -234,10 +236,10 @@
 							
 						</div>
 					</div>
+					<!-- <div class="line margT3">
+						注册时间 {{userInfo.registerTime | getDateYMD}}
+					</div> -->
 					<div class="line margT3">
-						注册实名时间 {{userInfo.registerTime | getDateYMD}}
-					</div>
-					<div class="line">
 						<div class="left">买入次数 {{userInfo.buyTimes}}</div>
 						<div class="mlBox left">买入数量 {{userInfo.buyAmount}}</div>
 					</div>
@@ -246,9 +248,12 @@
 						<div class="mlBox left">卖出数量 {{userInfo.sellAmount}}</div>
 					</div>
 					<div class="line">
-						<span @click="toBookView('3')">感恩值 {{userInfo.contributionValue}}</span> <i class="iconfont iconfont-question" @click="showTip('contribution')"/>
+						<span @click="toBookView('3')">钻石值 {{userInfo.contributionValue}}</span> <i class="iconfont iconfont-question" @click="showTip('contribution')"/>
 						<span class="margL10">
 							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">全球分红</van-button>
+						</span>
+						<span class="margL10">
+							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="giveCashProfit">持钻挖矿</van-button>
 						</span>
 					</div>
 					<div class="line">
@@ -266,8 +271,8 @@
 						<div class="mlBox left">团队算力 {{userInfo.teamCalculationPower}}</div>
 					</div>
 					<div class="line">
-						<div class="left">我的FGC {{userInfo.thisWeekMineral}}</div>
-						<div class="mlBox left">交易中FGC {{userInfo.temporaryFreezeMineral}}</div>
+						<div class="left">我的钻石 {{userInfo.thisWeekMineral}}</div>
+						<div class="mlBox left">交易中钻石 {{userInfo.temporaryFreezeMineral}}</div>
 					</div> -->
 					<!-- <div class="line">
 						<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">领取全球分红</van-button>
@@ -282,16 +287,19 @@
 				</div>
 				<div class="flex flex4">
 					<!-- <div>{{userInfo.platformTicket}}</div> -->
-					<div class="value"><i @click="toBookView('2')">{{userInfo.platformTicket}}</i> <van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" url="http://pay.8gesy.com/payment/fenqu.html?id=D7501BC7C9641EDE">购买</van-button></div>
+					<div class="value">
+						<i class="" @click="toBookView('2')">{{userInfo.platformTicket}}</i> 
+					</div>
 					<div class="text" @click="showTip('platformTicket')">
 						感恩券
-						<i class="iconfont iconfont-question margR2"/>
+						<i class="iconfont iconfont-question margR5"/>
+						<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="buyTicketBtn">购买</van-button>
 					</div>
 				</div>
 				<div class="flex flex2">
 					<!-- <div>{{userInfo.thisWeekMineral}}</div> -->
 					<div class="value" @click="toBookView('4')">{{userInfo.thisWeekMineral}}</div>
-					<div class="text" @click="showTip('mineral')">可用FGC <i class="iconfont iconfont-question"/></div>
+					<div class="text" @click="showTip('mineral')">可用钻石 <i class="iconfont iconfont-question"/></div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
@@ -312,7 +320,7 @@
 				<div class="flex flex2">
 					<div>{{userInfo.temporaryFreezeMineral}}</div>
 					<!-- <NumberGrow :value="userInfo.temporaryFreezeMineral"></NumberGrow> -->
-					<div class="text">交易中<br>FGC</div>
+					<div class="text">交易中<br>钻石</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
@@ -460,7 +468,7 @@
 					</div>
 				</router-link>
 			</div>
-			<div class="items" v-if="userInfo.isAgent>=3" @click="toMyCheck">
+			<div class="items" v-if="userInfo.isAgent>=3">
 				<div class="items">
 					<router-link to="lookInfo">
 						<div class="my-cell">
@@ -577,6 +585,7 @@
 				cityInfo:'',
 				dsPassword:'',
 				giveLevelDealProfitLoading:false,
+				giveCashProfitLoading:false,
 				giveBuyProfitLoading:false,
 				isShowBuyProfit:true
 			}
@@ -627,11 +636,12 @@
 					_this.logout();
 				}
 			}else{
-				/* localStorage.removeItem('_USERINFO_');
-				_this.$cookies.remove('userId');
-				_this.$cookies.remove('token'); */
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
 				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
@@ -685,7 +695,7 @@
 				Dialog.alert({
 				  title: '系统提示',
 				  confirmButtonText:'好的',
-				  message: "为了规范市场，定向转让贡献值通道已经关闭，请大家统一用FGC交易"
+				  message: "为了规范市场，定向转让贡献值通道已经关闭，请大家统一用钻石交易"
 				}).then(() => {
 				  // on confirm
 				})
@@ -700,6 +710,23 @@
 				}).then(() => {
 				  // on confirm
 				})
+			},
+			buyTicketBtn(){
+				let _this = this;
+				Dialog.confirm({
+				  title: '购买提示',
+				  confirmButtonText:'确认',
+				  message: "感恩券1CNY/张，另加少许服务费，请问是否确认要购买感恩券?"
+				}).then(() => {
+				  // on confirm
+				  //_this.account="1234567";
+				  let url = `http://pay.8gesy.com/payment/fenqu.html?id=D7501BC7C9641EDE`;
+				  //window.open(url);
+				  window.open(url,'_self');
+				}).catch(()=>{
+					//cancel
+				})
+				
 			},
 			toBlcokSearchView(){
 				let _this = this;
@@ -745,7 +772,7 @@
 				if(_this.userInfo.buyAmount<100){
 					Dialog.alert({
 					  title: '系统提示',
-					  message: "领取该奖励需昨天收购FGC数达到100颗以上"
+					  message: "领取该奖励需昨天收购钻石数达到100颗以上"
 					}).then(() => {
 					  // on close
 					});
@@ -755,7 +782,7 @@
 				  title: '系统提示',
 				  confirmButtonText:'确认',
 				  closeOnClickOverlay:true,
-				  message: '领取该奖励需昨天收购FGC数达到100颗以上,若今天收购达到100颗以上，要等明天领取，您是否确认领取？'
+				  message: '领取该奖励需昨天收购钻石数达到100颗以上,若今天收购达到100颗以上，要等明天领取，您是否确认领取？'
 				}).then(() => {
 				  _this.giveBuyProfitLoading = true;
 				  _this.$ajax.ajax(_this.$api.givePTRewardYesterday, 'POST', null, function(res){
@@ -783,6 +810,10 @@
 				  //console.log('cancel');
 				});
 			},
+			giveCashProfit(){
+				let _this = this;
+				_this.$router.push('mill2');
+			},
 			giveLevelDealProfit(){
 				let _this = this;
 				/* if(_this.userInfo.level<1){
@@ -798,7 +829,7 @@
 				  title: '系统提示',
 				  confirmButtonText:'确认',
 				  closeOnClickOverlay:true,
-				  message: '是否领取工会会长的每日分红？'
+				  message: '是否领取工会会长的每天分红（钻石值）？'
 				}).then(() => {
 				  _this.giveLevelDealProfitLoading = true;
 				  _this.$ajax.ajax(_this.$api.giveLevelDealProfit, 'POST', null, function(res){
@@ -937,11 +968,11 @@
 				//console.log(val);
 				let message = '';
 				if(val=='mineral'){
-					message = 'FGC：当前所能用来交易的FGC。获得途径：矿机产出、买入、感恩值释放、直推领取收益的奖励。';
+					message = '钻石：当前所能用来交易的钻石。获得途径：矿机产出、买入、钻石值释放、直推领取收益的奖励。';
 				}else if(val=='platformTicket'){
 					message = '感恩券：可用于交易的时候当手续费。获取途径：购买。';
 				}else if(val=='contribution'){
-					message = '感恩值：由系统奖励或母币兑换而来，每天签到释放1%。';
+					message = '钻石值：由系统奖励或母币兑换而来，每天签到释放1%。';
 				}else if(val=='credit'){
 					message = '信誉度：顺利完成交易增加10,交易被取消或交易超时确认减20。';
 				}else if(val=='actived'){

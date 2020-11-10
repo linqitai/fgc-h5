@@ -578,7 +578,7 @@ $noticeHeight:40px;
 				<div class="millInfo">
 					<div class="infoBox">
 						<div>
-							<span class="yellow underline" @click="toBlcokSearchView">区块浏览器·全</span> <i class="iconfont iconfont-question" @click="showTip('blockSearch')"/>
+							<span class="underline" @click="toBlcokSearchView">区块浏览器</span> <i class="iconfont iconfont-question" @click="showTip('blockSearch')"/>
 						</div>
 					</div>
 				</div>
@@ -743,23 +743,23 @@ $noticeHeight:40px;
 								<!-- <div class="freeGet right">2020/08/01 12:12:12</div> -->
 							</div>
 							<!-- <div class="line content margT3 justify">平台小店预热优惠活动：订购此产品需交￥299押金，下单成功且经过商家审核后，奖励299张平台券，每人最多拍1件(备注：激活POS机需要刷卡满￥299，激活成功后再找商家审核，审核确实激活后，您所交的￥299押金可退回)</div> -->
-							<div class="line content margT10"><div class="left">{{item.time}}</div><div class="right underline"><a :href="item.url" target="_self">查看详情</a></div></div>
+							<div class="line content margT10"><div class="left">{{item.time}}</div><div class="right underline"><a :href="item.url" target="_blank">查看详情</a></div></div>
 						</div>
 					</div>
 				</div>
-				<div class="placeholderLine10"></div>
+				<!-- <div class="placeholderLine10"></div>
 				<div class="helpList">
 					<div class="item" v-for="item in list">
 						<div class="textBox">
 							<div class="line">
 								<div class="left title">{{item.title}}</div>
-								<!-- <div class="freeGet right">2020/08/01 12:12:12</div> -->
+							
 							</div>
-							<!-- <div class="line content margT3 justify">平台小店预热优惠活动：订购此产品需交￥299押金，下单成功且经过商家审核后，奖励299张平台券，每人最多拍1件(备注：激活POS机需要刷卡满￥299，激活成功后再找商家审核，审核确实激活后，您所交的￥299押金可退回)</div> -->
+							
 							<div class="line content margT3"><div class="left">{{item.time}}</div><div class="right underline"><a :href="item.url" target="_self">查看详情</a></div></div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- <div class="noticeFlag paddingWing margT8">
 					<div class="title">历史公告</div>
 					<router-link class="lookMore" to="/noticeList">查看更多 </router-link>
@@ -871,23 +871,12 @@ $noticeHeight:40px;
 				serverList:[],
 				account:'',
 				isbubble1:false,
-				list4NewGuide:[
-					{
-						time:'2020/08/20',
-						title:'感恩链注册实名及基础操作流程',
-						url:'http://note.youdao.com/noteshare?id=283685c92247f9c7dd17a81bd022e675'
-					},
-					{
-						time:'2020/10/07',
-						title:'感恩链介绍·新手必看',
-						url:'http://note.youdao.com/noteshare?id=76632e4043500e811d3a38f2126eac85'
-					},
-				],
+				list4NewGuide:[],
 			}
 		},
 		created() {
 			let _this = this;
-			_this.list = _this.$config.helpList;
+			_this.list4NewGuide = _this.$config.guideList;
 			//console.log(_this.list,"_this.list");
 			if(!localStorage.getItem('isbubble1')){
 				_this.isbubble1 = true;
@@ -900,8 +889,12 @@ $noticeHeight:40px;
 				_this.account = localStorage.getItem('mobilePhone');
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
 				_this.$cookies.remove('token');
-				_this.$router.replace('/login');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
+				_this.$router.replace('login');
 				return;
 			}
 			let userInfo = localStorage.getItem("_USERINFO_");
@@ -915,10 +908,13 @@ $noticeHeight:40px;
 				}
 				_this.refreshAttendanceInfo();
 			}else{
-				localStorage.removeItem('_USERINFO_');
-				_this.$cookies.remove('token');
 				_this.$toast(_this.$api.loginAgainTipText);
-				_this.$router.replace('/login');
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
+				_this.$router.replace('login');
 				/* return; */
 			}
 			_this.getHomeMineralStaticInfo();

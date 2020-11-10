@@ -69,9 +69,9 @@
 			<!-- <div class="logoBox" @click="gameBtn">
 				<img src="https://www.assist-china.co.ax/image/banner/game01.jpg" alt="">
 			</div> -->
-			<div class="logoBox" @click="game2Btn">
+			<!-- <div class="logoBox" @click="game2Btn">
 				<img src="../../assets/image/1024.jpg" alt="">
-			</div>
+			</div> -->
 		</div>
 		<van-action-sheet v-model="isShow4Game" title="欢迎来到传奇世界">
 		  <div class="noticeDetail paddingWing" v-if="serverListResult[sLen-1]">
@@ -80,33 +80,17 @@
 			<span class="margR20" v-for="item in serverListResult" :key="item.id">
 				<van-tag type="warning" @click="toServerGameView(item)">服务{{item.id}}区({{item.busy>0.7?'拥挤':item.busy<0.5?'空闲':'繁忙'}})</van-tag>
 			</span>
-			<div class="tip4model3RedText margT10">系统提示：打出FGC后要立马兑换成感恩值，否则将会消失，消失后系统不做补发。</div>
+			<div class="tip4model3RedText margT10">系统提示：<b class="yellow">该游戏电脑上玩体验更佳。</b>升到80级(一转)后即可打神域BOSS爆出HPC，打出HPC后要立马回到该页面兑换成钻石值，否则该HPC将会消失，消失后系统不做补发。</div>
 		  </div>
 		  <div class="placeholderLine20"></div>
 		  <div class="paddingWing">
-			  <van-divider content-position="left">充值</van-divider>
-			  <!-- <van-row type="flex" justify="space-between">
-					<van-col span="24">
-						<div class="underline blue" @click="openChargeModelBtn">通过<b class="textBold">【支付宝/微信】</b>充值元宝</div>
-					</van-col>
-			  </van-row> -->
-			  <div class="placeholderLine20"></div>
-			  <van-row type="flex" justify="space-between">
-				<van-col span="12">
-					<div class="underline blue" @click="showModelBtn">用FGC充值元宝(今日1:{{parseFloat(parameter.maxPrice)*parseFloat(parameter.gameRatio)}})</div>
-				</van-col>
-				<van-col span="12">
-					<div class="underline blue" @click="showCCVModelBtn">用感恩值充值元宝(今日1:{{parseFloat(parameter.maxPrice)*parseFloat(parameter.gameRatio)}})</div>
-				</van-col>
-			  </van-row>
-			  <div class="placeholderLine20"></div>
 			  <van-divider content-position="left">兑换</van-divider>
 			  <van-row type="flex" justify="space-between" v-if="parameter.gameContributionRatio">
 					<!-- <van-col span="12">
-						<div class="underline blue" @click="convertCirBtn">用FGC兑换流通值(今日{{parameter.gameViculateRatio}}:1)</div>
+						<div class="underline blue" @click="convertCirBtn">用钻石兑换流通值(今日{{parameter.gameViculateRatio}}:1)</div>
 					</van-col> -->
 					<van-col span="12">
-						<div class="underline blue" @click="convertConBtn">用FGC兑换感恩值(今日{{parameter.gameContributionRatio}}:1)</div>
+						<div class="underline blue" @click="convertConBtn">用HPC兑换钻石值</div>
 					</van-col>
 			  </van-row>
 		  </div>
@@ -115,10 +99,10 @@
 		  
 		  <div class="placeholderLine20"></div>
 		</van-action-sheet>
-		<van-dialog v-model="showCCVSelectBox" title="用感恩值兑换元宝" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
+		<van-dialog v-model="showCCVSelectBox" title="用钻石值兑换元宝" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 			<div class="paddingWing">
 				<div class="placeholderLine20"></div>
-				<div class="f-14">当前可用感恩值：{{userInfo.contributionValue}}</div>
+				<div class="f-14">当前可用钻石值：{{userInfo.contributionValue}}</div>
 				<div class="placeholderLine20"></div>
 				<div>选择区号：</div>
 				<div class="placeholderLine10"></div>
@@ -128,17 +112,17 @@
 					  <div class="placeholderLine10"></div>
 				  </div>
 				</van-radio-group>
-				<van-field v-model="num" label="感恩值数量" required type="Number" clearable placeholder="请填写所要使用的感恩值数量"/>
+				<van-field v-model="num" label="钻石值数量" required type="Number" clearable placeholder="请填写所要使用的钻石值数量"/>
 				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
 				<div class="tip4model3RedText">安全密码是实名的时候所设置的安全(交易)密码</div>
 				<div class="placeholderLine10"></div>
 			</div>
 			<van-button type="info" size="large" @click="submit4ChargeCV" :loading="submitLoading" :disabled="submitLoading" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">提交</van-button>
 		</van-dialog>
-		<van-dialog v-model="showSelectBox" title="用FGC兑换元宝" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
+		<van-dialog v-model="showSelectBox" title="用钻石兑换元宝" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 			<div class="paddingWing">
 				<div class="placeholderLine20"></div>
-				<div class="f-14">当前可用FGC：{{userInfo.thisWeekMineral}}</div>
+				<div class="f-14">当前可用钻石：{{userInfo.thisWeekMineral}}</div>
 				<div class="placeholderLine20"></div>
 				<div>选择区号：</div>
 				<div class="placeholderLine10"></div>
@@ -148,14 +132,14 @@
 					  <div class="placeholderLine10"></div>
 				  </div>
 				</van-radio-group>
-				<van-field v-model="num" label="FGC数量" required type="Number" clearable placeholder="请填写所要使用的FGC数量"/>
+				<van-field v-model="num" label="钻石数量" required type="Number" clearable placeholder="请填写所要使用的钻石数量"/>
 				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
 				<div class="tip4model3RedText">安全密码是实名的时候所设置的安全(交易)密码</div>
 				<div class="placeholderLine10"></div>
 			</div>
 			<van-button type="info" size="large" @click="submit" :loading="submitLoading" :disabled="submitLoading" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">提交</van-button>
 		</van-dialog>
-		<van-dialog v-model="showConvertCirVBox" title="用FGC兑换流通值" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
+		<van-dialog v-model="showConvertCirVBox" title="用钻石兑换流通值" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 			<div class="paddingWing">
 				<div class="placeholderLine20"></div>
 				<div>选择区号：</div>
@@ -166,15 +150,15 @@
 					  <div class="placeholderLine10"></div>
 				  </div>
 				</van-radio-group>
-				<!-- <van-field v-model="num" label="充值FGC数量" required type="Number" clearable placeholder="请填写所要充值的数量"/>
+				<!-- <van-field v-model="num" label="充值钻石数量" required type="Number" clearable placeholder="请填写所要充值的数量"/>
 				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
 				-->
-				<div class="tip4model3RedText">游戏背包中的FGC需要在第一时间兑换，您是否确认去兑换？</div> 
+				<div class="tip4model3RedText">游戏中所爆出的HPC需要在第一时间兑换，您是否确认去兑换？</div> 
 				<div class="placeholderLine10"></div>
 			</div>
 			<van-button type="info" size="large" @click="sureConvertCirculateValue" :loading="submitLoading" :disabled="submitLoading" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">确认</van-button>
 		</van-dialog>
-		<van-dialog v-model="showConvertConVBox" title="用FGC兑换感恩值" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
+		<van-dialog v-model="showConvertConVBox" title="用HPC兑换钻石值" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 			<div class="paddingWing">
 				<div class="placeholderLine20"></div>
 				<div>选择区号：</div>
@@ -185,10 +169,10 @@
 					  <div class="placeholderLine10"></div>
 				  </div>
 				</van-radio-group>
-				<!-- <van-field v-model="num" label="充值FGC数量" required type="Number" clearable placeholder="请填写所要充值的数量"/>
+				<!-- <van-field v-model="num" label="充值钻石数量" required type="Number" clearable placeholder="请填写所要充值的数量"/>
 				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
 				-->
-				<div class="tip4model3RedText">游戏背包中的FGC需要在第一时间兑换，您是否确认去兑换？</div> 
+				<div class="tip4model3RedText">游戏中所爆出的HPC需要在第一时间兑换，您是否确认去兑换？</div> 
 				<div class="placeholderLine10"></div>
 			</div>
 			<van-button type="info" size="large" @click="sureConvertContributionValue" :loading="submitLoading" :disabled="submitLoading" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">确认</van-button>

@@ -74,8 +74,8 @@
 			<div class="placeholderLine10"></div>
 			<div class="cateInfo">
 				<div class="infoBox">
-					<!-- <img class="ewmBox" src="https://www.helpchain.online/image/wechat.png" alt=""> -->
-					<img class="ewmBox" src="../../assets/image/wechat.jpg">
+					<img class="ewmBox" :src="groupPic">
+					<!-- <img class="ewmBox" src="../../assets/image/wechat.jpg"> -->
 					<div class="text">扫码进群</div>
 				</div>
 			</div>
@@ -135,6 +135,7 @@
 		},
 		data() {
 			return {
+				groupPic:'',
 				serviceList:[],
 				qqList:[],
 				wxList:[],
@@ -159,6 +160,7 @@
 				return;
 			}
 			_this.getAdminUserPageList();
+			_this.getGroupPic();
 			/* let qqFlock = _this.$cookies.get('qqFlock');
 			if(qqFlock){
 				_this.qqFlock = qqFlock;
@@ -175,6 +177,16 @@
 				clip(text,event,function(res){
 					_this.$toast(`复制成功`);
 				});
+			},
+			getGroupPic(){
+				let _this = this;
+				_this.$ajax.ajax(_this.$api.getGroupPic, 'GET', null, function(res) {
+					if (res.code == _this.$api.CODE_OK) { // 200
+						_this.groupPic = res.data.pic;
+					}else{
+						_this.$toast(res.message);
+					}
+				})
 			},
 			addInCheck(){
 				let _this = this;

@@ -148,6 +148,7 @@ b{font-weight: bold;}
 .placeholderLine{height: 4px;}
 .placeholderLine1{height: 1px;}
 .placeholderLine2{height: 2px;}
+.placeholderLine3{height: 3px;}
 .placeholderLine4{height: 4px;}
 .placeholderLine6{height: 6px;}
 .placeholderLine8{height: 8px;}

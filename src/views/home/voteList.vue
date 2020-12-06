@@ -65,7 +65,7 @@
 		<van-list
 		  v-model="loading1"
 		  :finished="finished1"
-		  finished-text="没有更多了"
+		  finished-text="暂无投票记录"
 		  @load="onLoad1"
 		>
 			<div class="voteList">

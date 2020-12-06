@@ -327,6 +327,12 @@ export default new Router({
 							meta:{footer:false,keepAlive:true},
 						},
 						{
+							path: '/abandonFirst',
+							name: '放弃首码',
+							component: resolve => require(['./views/my/abandonFirst'],resolve),
+							meta:{footer:false,keepAlive:true},
+						},
+						{
 							path: '/destroyAccount',
 							name: '销毁账号',
 							component: resolve => require(['./views/my/destroyAccount'],resolve),

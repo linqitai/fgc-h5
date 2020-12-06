@@ -1,7 +1,7 @@
 <style lang="scss">
 	@import '~@/assets/scss/index.scss';
 	$cellHeight:50px;
-	.destroyAccount{
+	.abandonFirst{
 		font-size: 0.75rem;
 		@include pageNoHeight4Scroll();
 		background-color: $main-box-color;
@@ -53,19 +53,18 @@
 	
 </style>
 <template>
-	<div class="destroyAccount">
+	<div class="abandonFirst">
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				销毁账户
+				放弃首码
 			</div>
-			<i class="iconfont iconfont-question rightBox icon" @click="showTipModel=true"></i>
+			<i class="iconfont rightBox icon"></i>
 		</m-header>
 		<div class="unFreezePage">
 			<div class="paddingWing f-12 lineHeight tip4model1">
-				账户可销毁的条件：<br>
-				1.还没进行过推广。<br>
-				2.还没进行过交易。<br>
+				放弃首码的条件：团队算力为0。<br>
+				放弃首码后上级会变回帮扶链里的上级
 			</div>
 			<van-cell-group>
 				<van-field v-model="idCard" clearable label="身份证号校验" placeholder="请填写身份证号" maxlength="18"/>
@@ -79,7 +78,7 @@
 			</div> -->
 		</div>
 		<div class="sureBtn">
-			<van-button color="linear-gradient(to right, #ffae00, #ff8400)" :loading="loading" size="large" @click="submit">确认销毁</van-button>
+			<van-button color="linear-gradient(to right, #ffae00, #ff8400)" :loading="loading" size="large" @click="submit">确认放弃首码</van-button>
 		</div>
 		<van-dialog v-model="showTipModel" title="问题小帮手" confirmButtonText="知道了">
 			<div class="paddingWing f-12 lineHeight tip4model2">
@@ -143,43 +142,33 @@
 			submit(){
 				let _this = this;
 				Dialog.confirm({
-				  title: '销毁确认',
-				  message: '你确定要销毁/注销/删除这个账号？'
+				  title: '放弃首码确认',
+				  message: '请问是否要放弃首码，然后转移到原来帮扶券的上级下面？'
 				}).then(() => {
 				  // on confirm
 				  console.log("sure");
-				  if(_this.userInfo.teamateNum>0){
+				  if(_this.userInfo.teamCalculationPower>0){
 					  Dialog.alert({
 					    title: '系统提示',
 					    confirmButtonText:'好的',
-					    message: "您已有直推，无法销毁该账号"
+					    message: "您已有团队算力，无法放弃该账号的首码"
 					  }).then(() => {
 					    // on confirm
-					  })
-					  return;
-				  }
-				  if(_this.userInfo.sellTimes>0||_this.userInfo.buyTimes>0){
-					  Dialog.alert({
-						title: '系统提示',
-						confirmButtonText:'好的',
-						message: "您已有交易记录，无法销毁该账号"
-					  }).then(() => {
-						// on confirm
 					  })
 					  return;
 				  }
 				  let params = {
 					  idCard:_this.idCard
 				  }
-				  _this.$ajax.ajax(_this.$api.cancelAccount, 'GET', params, function(res){
+				  _this.$ajax.ajax(_this.$api.abandonFirst, 'POST', params, function(res){
 				  	if(res.code == _this.$api.CODE_OK){
 						Dialog.alert({
 						  title: '系统提示',
 						  confirmButtonText:'好的',
-						  message: "销毁成功，可重新注册"
+						  message: "操作成功，请查看我的工会里的上级"
 						}).then(() => {
 						  // on confirm
-						  _this.$router.replace('login');
+						  //_this.$router.replace('login');
 						})
 				  	}else{
 				  		Dialog.alert({

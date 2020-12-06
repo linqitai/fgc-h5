@@ -34,12 +34,12 @@ $noticeHeight:40px;
 				}
 			}
 			.textBox{
-				padding: 4px 10px;
+				padding: 8px 10px;
 				.freeGet{color: $main-adorn-color !important;}
-				.title{font-size: $fs-title;font-weight: bold;color: $mainTextColor !important;}
+				.title{font-size: $fs-title;font-weight: bold;color: $mainTextColor !important;line-height: 1.4em;}
 				.line{
 					overflow: hidden;clear: both;
-					&.content{font-size: $fs-content;line-height: 1.3em;color: $mainTextColor !important;}
+					&.content{font-size: $fs-content;line-height: 1.4em;color: $mainTextColor !important;}
 				}
 				
 			}
@@ -359,7 +359,7 @@ $noticeHeight:40px;
 				</div>
 				<div class="placeholderLine20"></div>
 				<div class="title">{{attendanceTitle}}</div>
-				<div class="tomorrowContribution">签到可释放感恩值，连续签到30天可额外获得1个感恩券</div>
+				<div class="tomorrowContribution">签到可释放钻石值，连续签到30天可额外获得0.1个感恩券</div>
 				<div class="tomorrowContribution">系统提示：日常签到建议在白天完成，若因特殊因素而导致错过签到的，原则上不补签</div>
 				<!-- <div class="tomorrowContribution">随着矿石价值的增加，签到所得贡献值会不定期做调整</div> -->
 				<div class="placeholderLine10"></div>
@@ -419,81 +419,81 @@ $noticeHeight:40px;
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(13)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(13)">0.03</div>
 						<div class="day">13天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(14)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(14)">0.03</div>
 						<div class="day">14天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(15)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(15)">0.03</div>
 						<div class="day">15天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(16)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(16)">0.03</div>
 						<div class="day">16天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(17)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(17)">0.03</div>
 						<div class="day">17天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(18)">0.04</div>
+						<div class="circle" :class="getAttendanceBgColor(18)">0.03</div>
 						<div class="day">18天</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(19)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(19)">0.04</div>
 						<div class="day">19天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(20)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(20)">0.04</div>
 						<div class="day">20天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(21)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(21)">0.04</div>
 						<div class="day">21天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(22)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(22)">0.04</div>
 						<div class="day">22天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(23)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(23)">0.04</div>
 						<div class="day">23天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(24)">0.06</div>
+						<div class="circle" :class="getAttendanceBgColor(24)">0.04</div>
 						<div class="day">24天</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(25)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(25)">0.05</div>
 						<div class="day">25天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(26)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(26)">0.05</div>
 						<div class="day">26天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(27)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(27)">0.05</div>
 						<div class="day">27天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(28)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(28)">0.05</div>
 						<div class="day">28天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(29)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(29)">0.05</div>
 						<div class="day">29天</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(30)">0.08</div>
+						<div class="circle" :class="getAttendanceBgColor(30)">0.05</div>
 						<div class="day">30天</div>
 					</div>
 				</div>
@@ -506,7 +506,7 @@ $noticeHeight:40px;
 					<div class="textCenter red f-13">今日签到已领取{{getTodayAttendanceValue}}感恩券</div>
 					<div class="tomorrowContribution" v-if="dayNum<30">明日签到可领取{{getTomorrowContributionValue}}感恩券</div>
 					<!-- <div class="tomorrowContribution" v-if="dayNum==30">恭喜您：今日已成功获取一台体验矿机，明日将重置签到</div> -->
-					<div class="tomorrowContribution" v-if="dayNum==30">恭喜您：签到满30天，已成功额外领得1个感恩券奖励，明日将重置签到</div>
+					<div class="tomorrowContribution" v-if="dayNum==30">恭喜您：签到满30天，已成功额外领得0.1个感恩券奖励，明日将重置签到</div>
 					<div class="placeholderLine20"></div>
 				</div>
 			</div>
@@ -556,7 +556,7 @@ $noticeHeight:40px;
 					    </template> -->
 					</van-swipe>
 				</div>
-				<div class="placeholderLine4"></div>
+				<div class="placeholderLine2"></div>
 				<!-- <van-notice-bar :text="qqFlock" left-icon="volume-o" @click="toServicePage"/> -->
 				<!-- <div class="notice">
 					<van-notice-bar :text="lastNoticeItem.noticeTitle" left-icon="volume-o" @click="toNoticeDetail(lastNoticeItem)" />
@@ -575,47 +575,31 @@ $noticeHeight:40px;
 						<div class="amount">{{ statistics.allMineralNum - statistics.beDigNum - statistics.awardNum - statistics.beDestroyNum  || 0}}</div>
 						<div class="margT6">所剩数量</div>
 				</div> -->
-				<div class="millInfo">
+				<!-- <div class="millInfo">
 					<div class="infoBox">
 						<div>
 							<span class="underline" @click="toBlcokSearchView">区块浏览器</span> <i class="iconfont iconfont-question" @click="showTip('blockSearch')"/>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="cateInfo">
 					<div class="infoBox">
 						<router-link to="/volunteer">
 							<div class="iconBox">
-								<div class="iconBackground iconBackgroundRaise">
+								<div class="iconBackground iconBackgroundAttendance">
 									<van-icon class-prefix="iconfont" name="love2" />
 								</div>
 							</div>
 							<div class="text">志愿者</div>
 						</router-link>
 					</div>
-					<!-- <div class="infoBox" @click="releaseLove">
-						<div class="iconBox">
-							<div class="iconBackground iconBackgroundAttendance">
-								<van-icon class-prefix="iconfont" name="free-love" size="35"/>
-							</div>
-						</div>
-						<div class="text">释放爱心</div>
-					</div> -->
-					<!-- <div class="infoBox" @click="releaseLove">
-						<div class="iconBox">
-							<div class="iconBackground iconBackgroundAttendance">
-								<van-icon class-prefix="iconfont" name="word" size="35"/>
-							</div>
-						</div>
-						<div class="text">感恩感言</div>
-					</div> -->
-					<div class="infoBox" @click="toRanking">
+					<div class="infoBox" @click="toBlcokSearchView">
 						<div class="iconBox">
 							<div class="iconBackground iconBackgroundRank">
 								<van-icon class-prefix="iconfont" name="rank" />
 							</div>
 						</div>
-						<div class="text">排行榜</div>
+						<div class="text">区块浏览器</div>
 						<!-- <router-link to="/ranking">
 						</router-link> -->
 					</div>
@@ -637,7 +621,7 @@ $noticeHeight:40px;
 							游戏模块已开通！
 						</div>
 						<div class="triangleRight" v-if="isbubble1"></div>
-						<div class="iconBox" @click="toGameView">
+						<div class="iconBox" @click="waiting">
 							<div class="iconBackground iconBackground1">
 								<van-icon class-prefix="iconfont" name="game" size="35"/>
 							</div>
@@ -645,44 +629,6 @@ $noticeHeight:40px;
 						<div class="text">娱乐游戏</div>
 					</div>
 				</div>
-				<!-- <div class="cateInfo">
-					<div class="infoBox">
-						<router-link to="/agency">
-							<div class="iconBox">
-								<div class="iconBackground iconBackground3">
-									<van-icon class-prefix="iconfont" name="crown" />
-								</div>
-							</div>
-							<div class="text">省市代理</div>
-						</router-link>
-					</div>
-					<div class="infoBox">
-						<router-link to="/rankingDeal">
-							<div class="iconBox">
-								<div class="iconBackground iconBackground1">
-									<van-icon class-prefix="iconfont" name="merchant" />
-								</div>
-							</div>
-							<div class="text">服务商</div>
-						</router-link>
-					</div>
-					<div class="infoBox" @click="toRanking4Level">
-						<div class="iconBox">
-							<div class="iconBackground iconBackground2">
-								<van-icon class-prefix="iconfont" name="merchant" />
-							</div>
-						</div>
-						<div class="text">工会会长</div>
-					</div> -->
-					<!-- <div class="infoBox" @click="waiting">
-						<div class="iconBox">
-							<div class="iconBackground iconBackgroundRaise">
-								<van-icon class-prefix="iconfont" name="love2" />
-							</div>
-						</div>
-						<div class="text">水滴感恩筹</div>
-					</div>
-				</div> -->
 				<div class="cateInfo">
 					<!-- <div class="infoBox" @click="waiting">
 						<div class="iconBox">
@@ -743,7 +689,7 @@ $noticeHeight:40px;
 								<!-- <div class="freeGet right">2020/08/01 12:12:12</div> -->
 							</div>
 							<!-- <div class="line content margT3 justify">平台小店预热优惠活动：订购此产品需交￥299押金，下单成功且经过商家审核后，奖励299张平台券，每人最多拍1件(备注：激活POS机需要刷卡满￥299，激活成功后再找商家审核，审核确实激活后，您所交的￥299押金可退回)</div> -->
-							<div class="line content margT10"><div class="left">{{item.time}}</div><div class="right underline"><a :href="item.url" target="_blank">查看详情</a></div></div>
+							<div class="line content margT6"><div class="left">{{item.time}}</div><div class="right underline"><a :href="item.url" target="_blank">查看详情</a></div></div>
 						</div>
 					</div>
 				</div>
@@ -842,7 +788,7 @@ $noticeHeight:40px;
 				currentPage:1,
 				pageSize:3,
 				images: [
-					this.$api.domainName + '/image/banner/1009.jpg',
+					this.$api.domainName + '/image/banner/master.jpg',
 				],
 				mill: {
 					zl: "",
@@ -971,37 +917,7 @@ $noticeHeight:40px;
 					//console.log('sure');
 				})
 			},
-			logout(){
-				let _this = this;
-				_this.$ajax.ajax(_this.$api.loginOut, 'GET', null, function(res){
-					if(res.code == _this.$api.CODE_OK){
-						_this.$toast('账户异常且退出登录');
-						// localStorage.clear();//若不允许多账号登录，请把这个给去掉
-						// //console.log("_this.$cookies.keys()",_this.$cookies.keys());
-						// _this.$cookies.remove('_USERINFO_');
-						// _this.$cookies.remove('buyAndSellInfo');
-						_this.$cookies.remove('userId');
-						_this.$cookies.remove('token');
-						// //console.log("_this.$cookies.keys()",_this.$cookies.keys());
-					}else{
-						_this.$toast(res.message);
-					}
-				},function(){
-					_this.$router.replace('login');
-				})
-			},
 			waiting(){
-				let _this = this;
-				/* _this.$toast("此功能正在努力建设中"); */
-				Dialog.alert({
-				  title: '系统提示',
-				  confirmButtonText:'好的',
-				  message: "该通道正在努力建设中"
-				}).then(() => {
-				  // on confirm
-				})
-			},
-			waiting2(){
 				let _this = this;
 				/* _this.$toast("此功能正在努力建设中"); */
 				Dialog.alert({
@@ -1014,48 +930,6 @@ $noticeHeight:40px;
 			},
 			closeBtn(){
 				this.showAttendanceModel = false;
-			},
-			submit4Raise(){
-				let _this = this;
-				let params = {
-				  num: _this.form4FundPool.raiseNum
-				}
-				if(Number(params.num)<=0){
-					_this.$toast('请填写大于0的正整数');
-					return;
-				}
-				if(_this.$utils.hasNull(params)){
-					_this.$toast('请填写完整信息');
-					return;
-				}
-				if(!_this.$reg.positive_integer.test(params.num)){
-					_this.$toast(`请填写正整数的感恩券`);
-					return;
-				}
-				if(Number(_this.userInfo.platformTicket)<Number(params.num)){
-					_this.$toast(`您所拥有的感恩券不够${params.num}个`);
-					return;
-				}
-				_this.loading4Raise = true;
-				//console.log("p",params)
-				_this.$ajax.ajax(_this.$api.insertFundPoolRecord, 'POST', params, function(res) {
-					if (res.code == _this.$api.CODE_OK) {
-						_this.$toast("捐赠成功");
-						_this.form4FundPool.raiseNum = "";
-						_this.showRaiseModel = false;
-						_this.getHomeMineralStaticInfo();
-					}else{
-						Dialog.alert({
-							title: "系统提示",
-							message: res.message
-						}).then(() => {
-						  // on confirm
-						  //_this.getCurrentAuction();
-						})
-					}
-				},function(){
-					_this.loading4Raise = false;
-				})
 			},
 			addFundPoolBtn(){
 				let _this = this;
@@ -1378,6 +1252,15 @@ $noticeHeight:40px;
 							})
 						}
 					}
+				}else{
+					_this.$toast(_this.$api.loginAgainTipText);
+					localStorage.removeItem('_USERINFO_');
+					_this.$cookies.remove('userId');
+					_this.$cookies.remove('token');
+					_this.$cookies.remove('isRefreshDealInfo');
+					_this.$cookies.remove('tab_raise_list');
+					_this.$router.replace('login');
+					return;
 				}
 			},
 			refreshEvent() {

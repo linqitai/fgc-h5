@@ -176,11 +176,13 @@
 		<van-field v-model="mobilePhone" readonly clearable label="手机号"/>
 		<van-field v-model="form.wechartNum" readonly clearable label="微信号" maxlength="20" :placeholder="errorHint.wechartNum" @click="validate('wechartNum')" :error-message="errorInfo.wechartNum"/>
 		<van-field v-model="form.alipayNum" readonly clearable label="支付宝" maxlength="24" :placeholder="errorHint.alipayNum" @click="validate('alipayNum')" :error-message="errorInfo.alipayNum"/>
+		<van-field v-model="form.realName" clearable label="真实姓名" :placeholder="errorHint.realName" maxlength="20" @blur="validate('realName')" :error-message="errorInfo.realName"/>
+		<van-field v-model="form.idCard" clearable label="身份证号" :placeholder="errorHint.idCard" maxlength="20" @blur="validate('idCard')" :error-message="errorInfo.idCard"/>
 		<van-field v-model="form.nickName" required clearable label="昵称" :placeholder="errorHint.nickName" maxlength="20" @blur="validate('nickName')" :error-message="errorInfo.nickName"/>
 		<van-field v-model="form.securityPassword" required clearable label="设置安全密码" type="password" :placeholder="errorHint.securityPassword" maxlength="20" @blur="validate('securityPassword')" :error-message="errorInfo.securityPassword"/>
 		<van-field v-model="form.securityPassword2" required clearable label="确认安全密码"  type="password" :placeholder="errorHint.securityPassword2" maxlength="20" @blur="validate('securityPassword2')" :error-message="errorInfo.securityPassword2"/>
 		<div class="line tip4modelRedText">
-			安全密码会在交易、领取收益等地方用到，请抄写在本子上妥善保管，以免日后忘记
+			安全密码会在交易、领取收益等地方用到，请和登录密码一起抄写在本子上妥善保管，以免日后忘记
 		</div>
 		<div class="placeholderLine10"></div>
 		<div class="tip4model2">
@@ -203,7 +205,7 @@
 				<div class="placeholderLine4"></div>
 				【3】<i class="textBold">微信号</i>默认为注册手机号，您的微信若没绑定该手机号，请先在微信的【我--设置--账号与安全】中绑定，且在【设置--隐私--添加我的方式】里打开用手机号搜索到我的功能。<br>
 				<div class="placeholderLine4"></div>
-				【注意】会员的注册实名信息是用户之间交换钻石时的重要凭据，<b class="blue">一旦提交则无法修改，若因违反实名规则而被投诉，一律冻结账号处理，0撸的只能注销账号然后重新注册实名，投资者若违反实名规则需提供手持证件照来解冻</b>。<br>
+				【注意】会员的注册实名信息是用户之间交换钻石时的重要凭据，<b class="blue">一旦提交则无法修改，若因违反实名规则而被投诉，一律冻结账号处理，0撸的只能注销账号然后重新注册实名，投资者若违反实名规则需提供手持证件照来解冻并完善资料</b>。<br>
 			</div>
 			<div class="placeholderLine10"></div>
 			<van-button color="linear-gradient(to right, #0e7de5, #0b6cc7)" @click="showPickRealNameModel=false" size="normal" :block="true" :disabled="isDealDisabled" loading-type="spinner">{{timeRead}}</van-button>
@@ -220,8 +222,7 @@
 import mHeader from '@/components/Header.vue';
 import clip from '@/assets/js/clipboard';
 /* import EXIF from 'exif-js'; */
-import { Dialog } from 'vant';
-import { Toast } from 'vant';
+import { Dialog,Toast } from 'vant';
 import { ImagePreview } from 'vant';
 
 export default {
@@ -315,18 +316,7 @@ export default {
 		_this.$cookies.set('isRefreshUserInfo',1,_this.$cookies.cookiesTime);
 		let userInfo = localStorage.getItem("_USERINFO_");
 		if(userInfo){
-			_this.userInfo = JSON.parse(userInfo);
-			_this.mobilePhone = _this.userInfo.mobilePhone;
-			_this.form.wechartNum = _this.userInfo.mobilePhone;
-			_this.form.alipayNum = _this.userInfo.mobilePhone;
-			/* _this.mobilePhone = _this.$JsEncrypt.decrypt(_this.userInfo.mobilePhone); */
-			/* _this.form.wechartNum = _this.userInfo.mobilePhone;
-			 */
-			//console.log(_this.mobilePhone,_this.form.wechartNum,_this.form.alipayNum);
-			if(_this.userInfo.actived==2){
-				_this.form = _this.userInfo;
-				_this.getAssistUserInfoPicByUserId();
-			}
+			
 		}else{
 			_this.$toast(_this.$api.loginAgainTipText);
 			localStorage.removeItem('_USERINFO_');
@@ -338,6 +328,7 @@ export default {
 			return;
 		}
 		_this.initializeHintInfo();
+		_this.getAssistUserInfo4RealName();
 		//_this.bsTip();
 	},
 	methods:{
@@ -357,6 +348,29 @@ export default {
 			_this.timeRead = 10;
 			_this.showPickRealNameModel=true;
 			_this.timeReadEvent();
+		},
+		getAssistUserInfo4RealName(){
+			let _this = this;
+			Toast.loading({
+			  message: '加载中...',
+			  forbidClick: true,
+			  loadingType: 'spinner'
+			});
+			_this.$ajax.ajax(_this.$api.getAssistUserInfo4RealName, 'GET', null, function(res){
+				//console.log('res',res);
+				if(res.code == _this.$api.CODE_OK){
+					_this.userInfo = res.data;
+					_this.mobilePhone = _this.userInfo.mobilePhone;
+					_this.form.wechartNum = _this.userInfo.mobilePhone;
+					_this.form.alipayNum = _this.userInfo.mobilePhone;
+					_this.form.realName = _this.userInfo.realName;
+					_this.form.idCard = _this.userInfo.idCard;
+				}else{
+					_this.$toast(res.message);
+				}
+			},function(){
+				Toast.clear();
+			})
 		},
 		timeReadEvent(){
 			let _this = this;
@@ -382,208 +396,6 @@ export default {
 				});
 			}
 		}, */
-		getAssistUserInfoPicByUserId(){
-			let _this = this;
-			_this.$ajax.ajax(_this.$api.getAssistUserInfoPicByUserId, 'GET', null, function(res){
-				if(res.code == _this.$api.CODE_OK){
-					_this.form.idCardPic = res.data.idCardPic;
-					_this.pic2 = res.data.gesturePic;
-					_this.form = res.data;
-					//console.log("form",_this.form);
-				}
-			})
-		},
-		uploadIMG4File2(e){
-			let _this = this;
-			var formdata = new FormData();
-			formdata.append("file", document.getElementById("file1").files[0]);
-			formdata.append('submit', false);
-			_this.$ajax.ajax4FileUpload(_this.$api.fileUpload1, 'POST', formdata, function(res){
-				if (res.code == _this.$api.CODE_OK) { //
-					console.log(res.data);
-				}else{
-					Dialog.alert({
-					  title: '系统提示',
-					  message: res.message
-					}).then(() => {
-					});
-				}
-			},function(){
-				
-			})
-		},
-		uploadIMG(e) {
-			let _this = this;
-			console.log("into uploadImg");
-			_this.toast = Toast.loading({
-			  duration: 3000, // 持续展示 toast
-			  closeOnClickOverlay:true,
-			  message: "正在解析图片"
-			});
-			let files = e.target.files || e.dataTransfer.files;
-			if (!files.length) return;
-			//console.log("pic_size(MB)", files[0].size / 1024 / 1024);
-			if (files[0].size / 1024 / 1024 > 2) {
-			   // _this.$toast('上传图片大小不能超过 3MB');
-			   Dialog.alert({
-			     title: '系统提示',
-			     message: '上传图片大小不能超过 2MB，请先在相册里的照片编辑中进行裁剪处理'
-			   }).then(() => {
-			     // on close
-			   });
-			} else {
-			  //console.log('正在获取图片');
-			  _this.toast.message = `正在获取图片`;
-			  _this.imgPreview(files[0]);
-			}
-		},
-		//获取图片
-		imgPreview(file) {
-			let _this = this;
-			_this.toast.message = `正在压缩图片`;
-			let Orientation = null;
-			//判断支不支持FileReader
-			if (!file || !window.FileReader) return false;
-			if (/^image/.test(file.type)) {
-				/* EXIF.getData(file, function() {
-					EXIF.getAllTags(this);   
-					Orientation = EXIF.getTag(this, 'Orientation');  
-				}); */
-			  //创建一个reader  
-			  let reader = new FileReader();
-			  //将图片转成base64格式
-			  reader.readAsDataURL(file);
-			  //读取成功后的回调
-			  reader.onloadend = function(res) {
-				let result = this.result;
-				let image = new Image();
-				image.src = result;//base64
-				image.onload = function() {
-					//alert("image.onload");
-				    let expectWidth = this.naturalWidth;  
-				    let expectHeight = this.naturalHeight; 
-				    let scale = expectWidth / expectHeight;
-				    let canvas = document.createElement("canvas");
-				    let ctx = canvas.getContext("2d");
-				    canvas.width = expectWidth;
-				    canvas.height = expectHeight;
-					//如果方向角不为1，都需要进行旋转
-					ctx.drawImage(image,0,0,expectWidth,expectHeight);
-				    let dataOri = canvas.toDataURL("image/png");
-					let img = new Image();
-					img.src = dataOri;//base64
-					// //console.log("dataOri",dataOri);
-					//console.log('********未压缩前的图片大小(KB)********');
-					//console.log(dataOri.length / 1024);
-					img.onload = function() {
-						let data = _this.$utils.compress(img, 0.2);//调整压缩比例
-						_this.form.idCardPic = data;
-					}
-				}
-			  }
-			}
-		},
-		uploadIMG2(e) {
-			let _this = this;
-			// Toast.clear();
-			_this.isShowPic2 = true;
-			_this.toast = Toast.loading({
-			  duration: 3000, // 持续展示 toast
-			  closeOnClickOverlay:true,
-			  message: "正在解析图片"
-			});
-			let files = e.target.files || e.dataTransfer.files;
-			if (!files.length) return;
-			//console.log("pic_size(MB)", files[0].size / 1024 / 1024);
-			if (files[0].size / 1024 / 1024 > 2) {
-			   // _this.$toast('上传图片大小不能超过 8MB');
-			   Dialog.alert({
-			     title: '系统提示',
-			     message: '上传图片大小不能超过 2MB，请先在相册里的照片编辑中进行裁剪处理'
-			   }).then(() => {
-			     // on close
-			   });
-			} else {
-			  //console.log('正在获取图片');
-			  _this.toast.message = `正在获取图片`;
-			  _this.imgPreview2(files[0]);
-			}
-		},
-		imgPreview2(file) {
-			let _this = this;
-			_this.toast.message = `正在压缩图片`;
-			let Orientation = null;
-			//判断支不支持FileReader
-			if (!file || !window.FileReader) return false;
-			if (/^image/.test(file.type)) {
-			  //创建一个reader
-			  /* EXIF.getData(file, function() {
-			      EXIF.getAllTags(this);   
-			      Orientation = EXIF.getTag(this, 'Orientation');  
-			  });  */
-			  let reader = new FileReader();
-			  //将图片转成base64格式
-			  reader.readAsDataURL(file);
-			  //读取成功后的回调
-			  reader.onloadend = function(res) {
-				let result = this.result;
-				let image = new Image();
-				image.src = result;//base64
-				image.onload = function() {
-					//alert("image.onload");
-				    let expectWidth = this.naturalWidth;  
-				    let expectHeight = this.naturalHeight; 
-				    let scale = expectWidth / expectHeight;
-				    let canvas = document.createElement("canvas");
-				    let ctx = canvas.getContext("2d");
-				    canvas.width = expectWidth;
-				    canvas.height = expectHeight;
-				    //如果方向角不为1，都需要进行旋转 
-				    /* if(Orientation && Orientation != "" && Orientation != 1){  
-				        let degree=0;
-				        switch(Orientation){
-				            case 6://需要顺时针（向左）90度旋转  
-				                degree=90;
-				                canvas.width = expectHeight;
-				                canvas.height = expectWidth;
-				                ctx.translate(expectHeight / 2,expectWidth / 2);
-				                ctx.rotate(degree * Math.PI / 180);
-				                ctx.translate(-expectWidth / 2,-expectHeight / 2);
-				                ctx.drawImage(image,0,0,expectWidth,expectHeight);
-				                break;
-				            case 8://需要逆时针（向右）90度旋转
-				                degree=-90;
-				                canvas.width = expectHeight;
-				                canvas.height = expectWidth;
-				                ctx.translate(expectHeight / 2,expectWidth / 2);
-				                ctx.rotate(degree * Math.PI / 180);
-				                ctx.translate(-expectWidth / 2,-expectHeight / 2);
-				                ctx.drawImage(image,0,0,expectWidth,expectHeight);
-				                break;
-				            case 3://需要180度旋转  
-				                degree=-180;
-				                ctx.rotate(degree * Math.PI / 180);
-				                ctx.drawImage(image,-expectWidth,-expectHeight,expectWidth,expectHeight);
-				                break;
-				        }         
-				    }else{
-				        ctx.drawImage(image,0,0,expectWidth,expectHeight);
-				    } */
-					ctx.drawImage(image,0,0,expectWidth,expectHeight);
-				    let dataOri = canvas.toDataURL("image/png");
-					let img = new Image();
-					img.src = dataOri;//base64
-					// //console.log("dataOri",dataOri);
-					//console.log('********未压缩前的图片大小(KB)********');
-					//console.log(dataOri.length / 1024);
-					img.onload = function() {
-						let data = _this.$utils.compress(img, 0.2);//调整压缩比例
-						_this.pic2 = data;
-					}
-				}
-			  }
-			}
-		},
 		showExamplePic(){
 			this.showIdCardPicExmple = true;
 		},

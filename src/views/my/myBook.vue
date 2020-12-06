@@ -100,6 +100,18 @@
 						</div>
 						<van-button @click="loadingMore1Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading1" loading-type="spinner">加载更多</van-button>
 					</van-tab>
+					<van-tab title="钻石值" name="contribution">
+						<div class="list">
+							<div class="item" v-for="item in list3" :key="item.id">
+								<div class="flex">
+									<div class="line">{{item.createTime}}</div>
+									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有钻石值 {{item.currentContributionValue}}</div>
+								</div>
+								<div class="flexRight">{{item.addOrReduce}} {{item.contributionValue}}</div>
+							</div>
+						</div>
+						<van-button @click="loadingMore3Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading3" loading-type="spinner">加载更多</van-button>
+					</van-tab>
 					<van-tab title="感恩券" name="ticket">
 						<div class="list">
 							<div class="item" v-for="item in list4" :key="item.id">
@@ -112,18 +124,6 @@
 							</div>
 						</div>
 						<van-button @click="loadingMore4Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading4" loading-type="spinner">加载更多</van-button>
-					</van-tab>
-					<van-tab title="钻石值" name="contribution">
-						<div class="list">
-							<div class="item" v-for="item in list3" :key="item.id">
-								<div class="flex">
-									<div class="line">{{item.createTime}}</div>
-									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有钻石值 {{item.currentContributionValue}}</div>
-								</div>
-								<div class="flexRight">{{item.addOrReduce}} {{item.contributionValue}}</div>
-							</div>
-						</div>
-						<van-button @click="loadingMore3Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading3" loading-type="spinner">加载更多</van-button>
 					</van-tab>
 					<van-tab title="信誉分" name="circulateValue">
 						<div class="list">
@@ -249,8 +249,8 @@
 		},
 		methods: {
 			back(){
-				// this.$router.replace('my');
-				this.$router.go(-1);
+				this.$router.replace('my');
+				//this.$router.go(-1);
 			},
 			refreshEvent() {
 				// console.log("refresh1")

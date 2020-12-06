@@ -1,6 +1,6 @@
 <style lang="scss">
 	@import '~@/assets/scss/variable.scss';
-	.loginBox{
+	.loginBox2{
 		color: $main-box-fh-text-color;
 		background-color: $main-box-fh-bg-color;
 		position: absolute;
@@ -14,7 +14,7 @@
 				width: 100%;
 			}
 		}
-		.title{
+		.topTitle{
 			padding: $boxPadding1 12px;
 			font-size: 1.5rem;
 			font-weight: bolder;
@@ -41,7 +41,7 @@
 			.van-cell{
 				color: white !important;
 				padding: 10px 0 !important;
-				border-bottom: 1px solid $main-blue-black-color !important;
+				border-bottom: 1px solid $bottomLineColor !important;
 				/* &::last-child{
 					border-bottom: 1px solid #BABABA !important;
 				} */
@@ -116,28 +116,25 @@
 	    -webkit-transform: scaleY(.5);
 	    transform: scaleY(.5);
 	}
+	.marquee {
+	　　white-space: nowrap;
+	　　overflow:-webkit-marquee;
+	　　width: 170px;
+	　　-webkit-marquee-direction:top;
+	　　-webkit-marquee-speed:normal;
+	　　-webkit-marquee-style:scroll;
+	　　-webkit-marquee-repetition:1;
+	}
+	.notice-swipe {
+		height: 40px;
+		line-height: 40px;
+	}
 </style>
 
 <template>
-	<div class="loginBox">
-		<!-- <div class="logoBox">
-			<van-swipe :autoplay="2000" style="height: 190px;" :lazy-render="true">
-			  <van-swipe-item v-for="(image, index) in images" :key="index">
-				<img v-lazy="image" />
-			  </van-swipe-item>
-			</van-swipe>
-		</div> -->
-		<!-- <div class="formHeader">
-			<div class="welcomeText green_text">{{welcomeText}}</div>
-		</div> -->
-		<!-- <img class="logoBox" src="../../assets/image/fgcLogo2.jpg" alt=""> -->
+	<div class="loginBox2">
 		<div class="placeholderLine10"></div>
-		<div class="title">欢迎来到感恩链</div>
-		<!-- <div class="wing">
-			<div class="placeholderLine10"></div>
-			<div class="placeholderLine10"></div>
-			<div class="green_text">欢迎来到HPC帮扶链</div>
-		</div> -->
+		<div class="topTitle">欢迎来到感恩链</div>
 		<div class="formBox paddingWing">
 			<van-cell-group :border="isNo">
 				<div class="labelText">账号</div>
@@ -160,16 +157,26 @@
 				 <van-checkbox v-model="isRemember" @change="isRememberChange" icon-size="18px" shape="square" checked-color="#07c160"><b class="white textBold f-12">记住密码</b></van-checkbox>
 			</div>
 			<div class="placeholderLine6"></div>
-			<van-button color="linear-gradient(to right, #ffae00 , #ffae00)" size="normal" :block="true" :loading="isLoading" @click="loginBtn" loading-type="spinner">登  录</van-button>
+			<van-button color="linear-gradient(to right, #ffae00, #ffae00)" size="normal" :block="true" :loading="isLoading" @click="loginBtn" loading-type="spinner">登  录</van-button>
 		
 			<div class="placeholderLine10"></div>
-			<van-button color="linear-gradient(to right, #e7e7e7, #c5c5c5)" size="normal" :block="true" @click="registerBtn" loading-type="spinner">去注册</van-button>
+			<van-button size="normal" :block="true" @click="registerBtn" loading-type="spinner">去注册</van-button>
 			<div class="placeholderLine10"></div>
 			<!-- <div class="tip4model3">
 				Tip：您若已经参与了内排注册，登录密码初始化为所注册的手机号。
 			</div> -->
 			<div class="placeholderLine10"></div>
 		</div>
+		<van-notice-bar left-icon="volume-o" :scrollable="false">
+		  <van-swipe
+			vertical
+			class="notice-swipe"
+			:autoplay="3000"
+			:show-indicators="false"
+		  >
+			<van-swipe-item v-for="item in remarkList"><b class="f-10">{{item.createTime.substring(0,16)}} {{item.remark}}</b></van-swipe-item>
+		  </van-swipe>
+		</van-notice-bar>
 		<div class="helpList">
 			<div class="item" v-for="item in helpList">
 				<div class="textBox">
@@ -228,7 +235,9 @@
 				getInitCode:'',
 				userInfo:'',
 				isWeixin:false,
-				helpList:[]
+				helpList:[],
+				securityp:'',
+				remarkList:[]
 			}
 		},
 		mounted() {
@@ -244,6 +253,11 @@
 				_this.form.password = localStorage.getItem('password');
 				_this.isRemember = true;
 			}
+			let citySN = returnCitySN;
+			/* _this.securityp = citySN;
+			console.log(citySN,"citySN"); */
+			_this.getAssistMineralBookByRemark(citySN.cip);
+			
 			//_this.$cookies.remove('_USERINFO_')
 			
 			/* if(_this.$cookies.get('token')){
@@ -307,6 +321,18 @@
 					//console.log("res.code",res.code);
 				})
 			},
+			getAssistMineralBookByRemark(securitypd){
+				let _this = this;
+				let params = {
+					securityp:_this.$JsEncrypt.encrypt(securitypd)
+				}
+				//params.securityp = _this.$JsEncrypt.encrypt(_this.securitypd);
+				_this.$ajax.ajax(_this.$api.getAssistMineralBookByRemark, 'GET', params, function(res) {
+					if (res.code == _this.$api.CODE_OK){
+						_this.remarkList = res.data;
+					}
+				})
+			},
 			getAssistMaintainInfo(){
 				let _this = this;
 				_this.$ajax.ajax(_this.$api.getAssistMaintainInfo, 'POST', null, function(res) {
@@ -340,7 +366,7 @@
 					return;
 				}
 				_this.getSCLoading = true;
-				_this.$ajax.ajax(_this.$api.getSecurityCode, 'POST', params, function(res) {
+				_this.$ajax.ajax(_this.$api.getSecurityCode, 'GET', params, function(res) {
 					if (res.code == _this.$api.CODE_OK) { // 200  60 * 60 * 12
 						// console.log('securityCode4Web',res.data);
 						_this.getInitCode = res.data;

@@ -222,7 +222,7 @@
 					 			<div class="line">租金{{item.price}} 算力{{item.calculationPower}}G 租赁时间{{item.getTime}}</div>
 					 		</div>
 					 		<div class="flex flex3">
-								<i class="iconfont iconfont-right-arrow2"></i>
+								<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
 					 			<!-- <div class="line">库存{{item.inventory}}</div>
 					 			<div class="line margT3">
 					 				<van-button round type="info" @click="buyMill(item)" size="small" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">租赁</van-button>
@@ -298,12 +298,6 @@
 					{ text: '体验矿机', value: 0 },
 					{ text: '微型矿机', value: 1 },
 					{ text: '小型矿机', value: 2 },
-					{ text: '中型矿机', value: 3 },
-					{ text: '大型矿机', value: 4 },
-					{ text: '巨型矿机', value: 5 },
-					{ text: '超级矿机', value: 8 },
-					{ text: '晋级矿机I', value: 6 },
-					{ text: '晋级矿机II', value: 7 }
 				],
 				option2: [
 					{ text: '最近7天', value: 7 },

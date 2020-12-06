@@ -109,7 +109,7 @@
 						width: $heightwidht;
 						height: $heightwidht;
 						border-radius: $heightwidht;
-						background-color: $main-blue-color;
+						background-color: $main-adorn-color;
 						color: $main-box-fh-text-color;
 						text-align: center;
 						line-height: $heightwidht;
@@ -214,19 +214,9 @@
 			<i class="iconfont iconfont-set rightBox icon" @click="toMyInfo"></i>
 		</m-header>
 		<van-pull-refresh v-model="loading" @refresh="refreshEvent">
-			<!-- <van-notice-bar
-			  mode = "closeable"
-			  left-icon="volume-o"
-			  text="连续签到15天后可激活账户"
-			/> -->
 			<div class="box box1">
 				<div class="flex flex1">
-					<!-- <van-image round width="80" height="80" lazy-load src="https://img.yzcdn.cn/vant/cat.jpeg" /> -->
-					<!-- <div class="name" @click="toMyInfo">{{$JsEncrypt.decrypt(userInfo.realName) | getLastName}}</div> -->
 					<div class="name" @click="toMyInfo">{{userInfo.realName | getLastName}}</div>
-					<!-- <div class="textCenter margT10">
-						<i class="iconfont iconfont-complaint f-18" @click="toComplainView(userInfo.userId)"></i> <i class="f-16">{{userInfo.beComplaintTimes}}</i>
-					</div> -->
 				</div>
 				<div class="flex flex2">
 					<div class="line1">
@@ -249,34 +239,25 @@
 					</div>
 					<div class="line">
 						<span @click="toBookView('3')">钻石值 {{userInfo.contributionValue}}</span> <i class="iconfont iconfont-question" @click="showTip('contribution')"/>
-						<span class="margL10">
+						<!-- <span class="margL10">
+							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">全球分红</van-button>
+						</span> -->
+					</div>
+					<div class="line">
+						<span @click="toBookView('6')">信誉分 {{userInfo.credit}}</span> <i class="iconfont iconfont-question" @click="showTip('credit')"/>
+						
+					</div>
+					<div class="line">
+						<span class="">
 							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">全球分红</van-button>
 						</span>
 						<span class="margL10">
 							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="giveCashProfit">持钻挖矿</van-button>
 						</span>
+						<span class="margL10">
+							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="buyTicketBtn">购买感恩券</van-button>
+						</span>
 					</div>
-					<div class="line">
-						<span @click="toBookView('6')">信誉分 {{userInfo.credit}}</span> <i class="iconfont iconfont-question" @click="showTip('credit')"/>
-					</div>
-					<!-- <div class="line1 margT3">
-						{{userInfo.mobilePhone}}
-					</div> -->
-					<!-- <div class="line">
-						<div class="left">买入次数 {{userInfo.buyTimes}}</div>
-						<div class="mlBox left">卖出次数 {{userInfo.sellTimes}}</div>
-					</div> -->
-					<!-- <div class="line">
-						<div class="left">个人算力 {{userInfo.myCalculationPower}}</div>
-						<div class="mlBox left">团队算力 {{userInfo.teamCalculationPower}}</div>
-					</div>
-					<div class="line">
-						<div class="left">我的钻石 {{userInfo.thisWeekMineral}}</div>
-						<div class="mlBox left">交易中钻石 {{userInfo.temporaryFreezeMineral}}</div>
-					</div> -->
-					<!-- <div class="line">
-						<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">领取全球分红</van-button>
-					</div> -->
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
@@ -293,7 +274,6 @@
 					<div class="text" @click="showTip('platformTicket')">
 						感恩券
 						<i class="iconfont iconfont-question margR5"/>
-						<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="buyTicketBtn">购买</van-button>
 					</div>
 				</div>
 				<div class="flex flex2">
@@ -390,14 +370,20 @@
 				</div>
 				<div class="infoBox">
 					 <!-- @click="waiting" -->
-					<router-link to="/myShare">
+					 <div class="iconBox" @click="waiting">
+					 	<div class="iconBackground iconBackground1">
+					 		<van-icon class-prefix="iconfont" name="share2"/>
+					 	</div>
+					 </div>
+					 <div class="text">战队招募</div>
+					<!-- <router-link to="/myShare">
 						<div class="iconBox" >
 							<div class="iconBackground iconBackground1">
 								<van-icon class-prefix="iconfont" name="share2"/>
 							</div>
 						</div>
-						<div class="text">我要推广</div>
-					</router-link>
+						<div class="text">战队招募</div>
+					</router-link> -->
 				</div>
 				<div class="infoBox">
 					<router-link to="/myWord">
@@ -411,7 +397,18 @@
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
-			
+			<div class="items">
+				<router-link to="transferMineral4L">
+					<div class="my-cell">
+						<div class="flex1">
+							定向转让钻石(会长)
+						</div>
+						<div class="flex2">
+							<i class="iconfont iconfont-right-arrow2"></i>
+						</div>
+					</div>
+				</router-link>
+			</div>
 			<div class="items">
 				<router-link to="transferTicket">
 					<div class="my-cell">
@@ -481,16 +478,6 @@
 						</div>
 					</router-link>
 				</div>
-				<!-- <router-link to="myCheck">
-					<div class="my-cell">
-						<div class="flex1">
-							实名审核
-						</div>
-						<div class="flex2">
-							<i class="iconfont iconfont-right-arrow2"></i>
-						</div>
-					</div>
-				</router-link> -->
 			</div>
 			<!-- <div class="paddingAll">
 				<van-button color="#c7c7c7" size="normal" :block="true" @click="cancelAccount" loading-type="spinner">注销账户(暂对尚未实名的用户开放)</van-button>
@@ -505,6 +492,18 @@
 					</div>
 				</div>
 			</div> -->
+			<div class="items" v-if="userInfo.userId==userInfo.parentId">
+				<router-link to="abandonFirst">
+					<div class="my-cell">
+						<div class="flex1">
+							放弃首码
+						</div>
+						<div class="flex2">
+							<i class="iconfont iconfont-right-arrow2"></i>
+						</div>
+					</div>
+				</router-link>
+			</div>
 			<div class="items">
 				<router-link to="destroyAccount">
 					<div class="my-cell">
@@ -516,14 +515,6 @@
 						</div>
 					</div>
 				</router-link>
-				<!-- <div class="my-cell" @click="cancelAccountEvent">
-					<div class="flex1">
-						销毁该账户
-					</div>
-					<div class="flex2">
-						<i class="iconfont iconfont-right-arrow2"></i>
-					</div>
-				</div> -->
 			</div>
 		</van-pull-refresh>
 		
@@ -654,9 +645,9 @@
 			if(_this.userInfo.isAgent==2){
 				_this.getAssistAgentInfo4City();
 			}
-			if(_this.userInfo.manType==2){
+			/* if(_this.userInfo.manType==2){
 				_this.getServiceDsPassword();
-			}
+			} */
 		},
 		methods: {
 			getCityName(cityInfo){
@@ -726,7 +717,6 @@
 				}).catch(()=>{
 					//cancel
 				})
-				
 			},
 			toBlcokSearchView(){
 				let _this = this;
@@ -829,14 +819,14 @@
 				  title: '系统提示',
 				  confirmButtonText:'确认',
 				  closeOnClickOverlay:true,
-				  message: '是否领取工会会长的每天分红（钻石值）？'
+				  message: '是否领取工会会长的每天分红？'
 				}).then(() => {
 				  _this.giveLevelDealProfitLoading = true;
 				  _this.$ajax.ajax(_this.$api.giveLevelDealProfit, 'POST', null, function(res){
 				  	if(res.code == _this.$api.CODE_OK){
 				  		if(res.data == 1){
 				  			_this.$toast('领取成功');
-				  			_this.$cookies.set("tab_name_book", 'contribution', _this.$api.cookiesTime)
+				  			_this.$cookies.set("tab_name_book", 'mineral', _this.$api.cookiesTime)
 				  			_this.$router.push('myBook');
 				  		}
 				  	}else{
@@ -968,13 +958,13 @@
 				//console.log(val);
 				let message = '';
 				if(val=='mineral'){
-					message = '钻石：当前所能用来交易的钻石。获得途径：矿机产出、买入、钻石值释放、直推领取收益的奖励。';
+					message = '钻石：当前所能用来交易的钻石。获得途径：矿机产出、买入、钻石值释放、直推领取收益的奖励、全球分红。';
 				}else if(val=='platformTicket'){
 					message = '感恩券：可用于交易的时候当手续费。获取途径：购买。';
 				}else if(val=='contribution'){
 					message = '钻石值：由系统奖励或母币兑换而来，每天签到释放1%。';
 				}else if(val=='credit'){
-					message = '信誉度：顺利完成交易增加10,交易被取消或交易超时确认减20。';
+					message = '信誉分：交易时候的信用度，顺利完成交易增加10,交易被取消或交易超时确认减20，小于70则无法参与交易，小于60则自动被冻结账号。';
 				}else if(val=='actived'){
 					message = '激活账户：连续签到15天后即可激活账户。';
 				}

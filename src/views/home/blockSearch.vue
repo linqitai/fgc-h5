@@ -116,7 +116,7 @@
 									<i class="iconfont iconfont-right-arrow2"></i>
 								</div> -->
 								<div class="line margT6"  @click="toMy4OtherView(item.toUserId)">
-									<span class="nickName"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.toUserName}}</i></span>
+									<span class="nickName"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.toUserId}}</i></span>
 									<i class="iconfont iconfont-right-arrow2"></i>
 								</div>
 								<div class="line margT6">

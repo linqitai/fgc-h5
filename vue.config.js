@@ -15,7 +15,7 @@ module.exports = {
 	publicPath: './',
 	productionSourceMap: false,
 	devServer: {
-		port: 8089,
+		port: 8081,
 		proxy: {
 			'/fgcApp': {
 				target: 'http://localhost:8003/',

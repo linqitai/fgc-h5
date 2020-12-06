@@ -57,70 +57,9 @@
 				<van-button type="info" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true" @click="addInCheck">申请加入HPC督察组</van-button>
 			</div> -->
 			<div class="placeholderLine10"></div>
-			<div class="tip4model3 textBold">有问题请先联系自己的上级或团队长，然后由上级或团队长再联系客服，尽量减少客服的压力，感恩您的配合。若无上级服务，可加首页的志愿者并备注来由，通过好友后让志愿者带您入群。</div>
-			<div class="placeholderLine10"></div>
-			<!-- <div class="title">+++++++++++++++++++++++++</div>
-			<div class="title">问题解决群(让上级邀请进群)：</div>
-			<div class="title">+++++++++++++++++++++++++</div>
-			<div class="placeholderLine10"></div>
-			<div class="cateInfo">
-				<div class="infoBox">
-					<img class="ewmBox" src="../../assets/image/question.png">
-					<div class="text">扫码进群</div>
-				</div>
-			</div> -->
-			<div class="placeholderLine10"></div>
-			<div class="title">矿工工会群：</div>
-			<div class="placeholderLine10"></div>
-			<div class="cateInfo">
-				<div class="infoBox">
-					<img class="ewmBox" :src="groupPic">
-					<!-- <img class="ewmBox" src="../../assets/image/wechat.jpg"> -->
-					<div class="text">扫码进群</div>
-				</div>
-			</div>
-			<div class="placeholderLine10"></div>
-			<!-- <div class="title lineHeight">工会群：若联系不到自己的上级，进工会群可加首页的志愿者好友并备注来由，通过好友后让志愿者带您入群。</div> -->
-			<div class="placeholderLine10"></div>
-			<!-- <div class="cateInfo">
-				<div class="infoBox">
-					<img class="ewmBox" src="../../assets/image/wechat.png">
-					<div class="text">扫码进群</div>
-				</div>
-			</div> -->
+			<div class="tip4model3 textBold">有问题请先联系自己的上级或团队长，然后由上级或团队长再联系客服，尽量减少客服的压力，感恩您的配合。若无上级服务，可加首页的志愿者并备注来由，通过好友后让志愿者带您入群学习。</div>
 			<div class="placeholderLine10"></div>
 			
-			<div class="title">微信客服：</div>
-			<div class="placeholderLine10"></div>
-			<div v-for="item in serviceList" :key="item.id+20" v-if="$JsCrypto.myDecode1(item.weiChart)!='--'">
-				<b class="textBold">{{(item.remark)}}：{{$JsCrypto.myDecode1(item.weiChart)}}</b><span class="copy margL10" @click="handleCopy($JsCrypto.myDecode1(item.weiChart),$event)">复制</span>
-				<div class="placeholderLine10"></div>
-			</div>
-			<!-- <div class="title">QQ客服：</div>
-			<div class="placeholderLine10"></div>
-			<div v-for="item in serviceList" :key="item.id" v-if="item.qq!='--'">
-				<b class="textBold">{{item.remark}}：{{item.qq}}</b><span class="copy margL10" @click="handleCopy(item.qq,$event)">复制</span>
-				<div class="placeholderLine10"></div>
-			</div> -->
-			<!-- <div class="placeholderLine4"></div>
-			<van-row gutter="10">
-			  <van-col span="12">
-				  <div class="cateInfo">
-				  	<div class="infoBox">
-				  		<img class="ewmBox" src="../../assets/image/zjwx.png" alt="">
-				  		<div class="text">帮扶1号</div>
-				  	</div>
-				  </div>
-			  </van-col>
-			  <van-col span="12">
-				  <div class="cateInfo">
-				  	<div class="infoBox">
-				  		<img class="ewmBox" src="../../assets/image/zjwx.png" alt="">
-				  		<div class="text">帮扶1号</div>
-				  	</div>
-				  </div>
-			  </van-col>
-			</van-row> -->
 		</div>
 	</div>
 </template>

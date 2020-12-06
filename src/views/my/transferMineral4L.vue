@@ -87,11 +87,11 @@
 		<div class="transferPageL">
 			<div class="placeholderLine10"></div>
 			<!-- 贡献值:{{userInfo.contributionValue.toFixed(2)}}点 -->
-			<div class="paddingWing tip4model3">当前拥有<br>矿石:{{userInfo.thisWeekMineral.toFixed(2)}}个  帮扶券:{{userInfo.platformTicket.toFixed(2)}}个</div>
+			<div class="paddingWing tip4model3">当前拥有<br>钻石:{{userInfo.thisWeekMineral.toFixed(2)}}个  感恩券:{{userInfo.platformTicket.toFixed(2)}}个</div>
 			<van-cell-group>
 				<van-field v-model="form4AppointDeal.transferAmount" required clearable label="转让数量" placeholder="请填写转让数量" @blur="validate4AppointDeal('transferAmount')" :error-message="errorInfo4AppointDeal.transferAmount"/>
 				<van-field v-model="curerntPlatformPrice" required disabled label="指导单价"/>
-				<van-field v-model="getGuidancePrice" required disabled label="指导总价"/>
+				<!-- <van-field v-model="getGuidancePrice" required disabled label="指导总价"/> -->
 				<van-field v-model="form4AppointDeal.price" required clearable label="转让单价" placeholder="请填写协商好的卖出单价" @blur="validate4AppointDeal('price')" :error-message="errorInfo4AppointDeal.price"/>
 				<van-field v-model="getAssurePrice" required clearable label="转让总价" placeholder="请先填写转让单价"/>
 				<van-field v-model="form4AppointDeal.blockAddress" required clearable label="区块地址" placeholder="请填写直推的区块地址" maxlength="36" @blur="validate4AppointDeal('blockAddress')" :error-message="errorInfo4AppointDeal.blockAddress"/>
@@ -107,9 +107,8 @@
 			<div class="placeholderLine10"></div>
 			<div class="paddingWing tip4model3">
 				<b class="textBold">定向转让矿石(会长)交易规则：</b><br>
-				1.青铜及以上级别的工会会长才有权限给自己的3代伞下会员单向转让矿石（下次减产后可能只对白银及以上级别的工会会长开放该权限）。<br>
-				2.转让手续费减半只收交易总金额10%的帮扶券。比如：交易总金额是200CNY，收20CNY价值的帮扶券作为手续费。该手续费，20%会用来做线下的公益事业(爱心帮扶活动)<br>
-				3.交易后所剩矿石数不得少于2个，注册所赠送的2个矿石只能用来复投矿机。<br>
+				1.青铜及以上级别的工会会长才有权限给自己的3代伞下会员单向转让矿石。<br>
+				2.转让手续费只收交易总金额10%的帮扶券。比如：交易总金额是200CNY，收20CNY价值的帮扶券作为手续费。<br>
 			</div>
 			<!-- <div class="margT10 paddingWing tip4model3" v-html="tipText4AppointDeal"></div> -->
 			<div class="placeholderLine40"></div>
@@ -189,22 +188,27 @@
 			_this.tipText4AppointDeal = _this.$api.tipText4AppointDeal;
 			let userInfo = localStorage.getItem("_USERINFO_");
 			if(userInfo){
-				console.log("userInfo_localStorage");
 				_this.userInfo = JSON.parse(userInfo);
 				_this.userId = _this.userInfo.userId;
 			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
-			if(_this.$cookies.get('haveDealPageInfo')){
+			_this.getDealPageInfo();
+			/* if(_this.$cookies.get('haveDealPageInfo')){
 				_this.dealPageInfo = JSON.parse(localStorage.getItem('dealPageInfo'));
 				_this.curerntPlatformPrice = parseFloat(_this.dealPageInfo.currentPlatformPrice);
 				_this.maxAddPrice = (parseFloat((_this.dealPageInfo.maxPrice))*1.1).toFixed(2);
 				_this.maxPrice = (parseFloat((_this.dealPageInfo.maxPrice))*1.2).toFixed(2);
 			}else{
 				_this.getDealPageInfo();
-			}
+			} */
 		},
 		methods: {
 			back(){
@@ -212,15 +216,12 @@
 			},
 			getDealPageInfo(){
 				let _this = this;
-				_this.$ajax.ajax(_this.$api.getDealPageInfo, 'POST', null, function(res) {
+				_this.$ajax.ajax(_this.$api.getBuyBillInfo, 'GET', null, function(res) {
 					if (res.code == _this.$api.CODE_OK) {
 						_this.dealPageInfo = res.data;
-						_this.curerntPlatformPrice = parseFloat(_this.dealPageInfo.currentPlatformPrice).toFixed(2);
-						_this.maxAddPrice = (parseFloat((_this.dealPageInfo.maxPrice))*1.1).toFixed(2);
-						_this.maxPrice = (parseFloat((_this.dealPageInfo.maxPrice))*1.2).toFixed(2);
-						_this.$cookies.remove('haveDealPageInfo');
-						_this.$cookies.set("haveDealPageInfo",1, 60 * 60 * 2);
-						localStorage.setItem("dealPageInfo",JSON.stringify(_this.dealPageInfo))
+						_this.curerntPlatformPrice = parseFloat(_this.dealPageInfo.maxPrice).toFixed(2);
+						_this.maxAddPrice = (parseFloat((_this.dealPageInfo.maxPrice))).toFixed(2);
+						_this.maxPrice = (parseFloat((_this.dealPageInfo.maxPrice))*1.1).toFixed(2);
 					}
 				})
 			},
@@ -300,15 +301,7 @@
 					return;
 				} */
 				let leaveNum = (Number(_this.userInfo.thisWeekMineral) - Number(_this.form4AppointDeal.transferAmount)).toFixed(2);
-				if(leaveNum<2){
-					Dialog.alert({
-					  title: '系统提示',
-					  message: `您当前可售矿石数为${_this.userInfo.thisWeekMineral-2}，转出后得保留注册所送的2个矿石，用来复投矿机`
-					}).then(() => {
-					  // on close
-					});
-					return;
-				}
+				
 				Dialog.confirm({
 				  title: '提示信息',
 				  confirmButtonText:'确定',
@@ -353,22 +346,10 @@
 						_this.$toast('请填写完整信息');
 						return;
 					}
-					console.log('_this.errorInfo4BuyBill',_this.errorInfo4BuyBill);
 					if(_this.$utils.hasVal(_this.errorInfo4AppointDeal)){
 						_this.$toast('请按要求填写信息');
 						return;
 					}
-					// if(_this.userInfo.manType==1){
-					// 	if(_this.userInfo.realnameNum<30||_this.userInfo.teamCalculationPower<30||_this.userInfo.buyAmount<300){
-					// 		Dialog.alert({
-					// 		  title: '系统提示',
-					// 		  message: _this.$api.manType1Tip
-					// 		}).then(() => {
-					// 		  // on close
-					// 		});
-					// 		return;
-					// 	}
-					// }
 					params.safePassword = _this.$JsEncrypt.encrypt(_this.form4AppointDeal.safePassword);
 					_this.loading = true;
 					_this.$ajax.ajax(_this.$api.insertTransaction4LevelTeamBill, 'POST', params, function(res) {

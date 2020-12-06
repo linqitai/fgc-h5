@@ -72,6 +72,8 @@
 				</div>
 			</div>
 			<van-pull-refresh v-model="loading" @refresh="refreshEvent">
+				<van-tabs v-model="activeName" :background="$api.tabBgColor" :color="$api.tabActiveColor" :title-active-color="$api.tabActiveColor"
+				:title-inactive-color="$api.tabTextColor" :border="false" @change="tabChange" animated sticky>
 					<van-tab title="感恩券" name="ticket">
 						<div class="list">
 							<div class="item" v-for="item in list4" :key="item.id">
@@ -86,26 +88,36 @@
 						</div>
 						<van-button @click="loadingMore4Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading4" loading-type="spinner">加载更多</van-button>
 					</van-tab>
-					<van-tab title="FGC值" name="contribution">
+					<van-tab title="团队算力" name="calculation">
+						<div class="list">
+							<div class="item" v-for="item in list2" :key="item.id">
+								<div class="flex">
+									<div class="line">{{item.createTime}}</div>
+									<div class="line margT6">{{item.type | calculationType}}后拥有算力 {{item.currentCalculationNum}}</div>
+								</div>
+								<div class="flexRight">{{item.addOrReduce}} {{item.calculation}}</div>
+							</div>
+						</div>
+						<van-button @click="loadingMore2Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading2" loading-type="spinner">加载更多</van-button>
+					</van-tab>
+					<van-tab title="钻石值" name="contribution">
 						<div class="list">
 							<div class="item" v-for="item in list3" :key="item.id">
 								<div class="flex">
 									<div class="line">{{item.createTime}}</div>
-									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有FGC值 {{item.currentContributionValue}}</div>
+									<div class="line margT6" :class="item.type==20?'red':item.type==15?'red2':item.type==22?'green':''">{{item.type | contributeType}}后拥有钻石值 {{item.currentContributionValue}}</div>
 								</div>
 								<div class="flexRight">{{item.addOrReduce}} {{item.contributionValue}}</div>
 							</div>
 						</div>
 						<van-button @click="loadingMore3Btn" color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" :loading="loading3" loading-type="spinner">加载更多</van-button>
 					</van-tab>
-					<van-tab title="FGC" name="mineral">
+					<van-tab title="钻石" name="mineral">
 						<div class="list">
 							<div class="item" v-for="item in list1" :key="item.id">
 								<div class="flex">
 									<div class="line">{{item.createTime}}</div>
-									<!-- <div class="line margT6" v-if="item.type==2||item.type==3">从<i class="mainAdornColor">{{item.fromUserName}}</i>到<i class="mainAdornColor">{{item.toUserName}}</i></div> -->
-									<!-- <div class="line margT6" v-if="item.type==2||item.type==3">从<i class="mainAdornColor">{{item.fromUserId}}</i>到<i class="mainAdornColor">{{item.toUserId}}</i></div> -->
-									<div class="line margT6">{{item.type | mineralBookType}}后拥有FGC数 {{item.currentMineralNum}}</div>
+									<div class="line margT6">{{item.type | mineralBookType}}后拥有钻石数 {{item.currentMineralNum}}</div>
 								</div>
 								<div class="flexRight">{{item.addOrReduce}} {{item.number}}</div>
 							</div>
@@ -358,7 +370,9 @@
 					pageno:_this.currentPage1
 				}
 				_this.loading1 = true;
+				console.log("refresh2");
 				_this.$ajax.ajax(_this.$api.getMineralBookListByUserId, 'GET', params, function(res) {
+					console.log("refresh3");
 					_this.loading = false;
 					if (res.code == _this.$api.CODE_OK) {
 						let list = res.data;
@@ -543,7 +557,7 @@
 				_this.loading5 = true;
 				_this.$ajax.ajax(_this.$api.getAssistLoveValueList, 'GET', params, function(res) {
 					if (res.code == _this.$api.CODE_OK) {
-						let list = res.data.list;
+						let list = res.data;
 						_this.list5.push(...list);
 						_this.loading5 = false;
 						if(res.data.endRow == res.data.total){

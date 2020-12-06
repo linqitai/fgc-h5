@@ -175,6 +175,11 @@
 			</div>
 			<i class="iconfont iconfont-question rightBox icon" @click="showTip"></i>
 		</m-header> -->
+		<!-- <van-notice-bar
+		  mode = "closeable"
+		  left-icon="volume-o"
+		  text="当前批次的矿机全部被租赁完后,才会开启下一批的矿机"
+		/> -->
 		<div class="millContent">
 			<!-- <div class="tip4model3 tip">任何一种矿机被租赁完，所有类型的矿机就会集体调整</div> -->
 			<div class="selectBox">

@@ -78,9 +78,13 @@
 			<div class="title">选区入口</div>
 			<div class="placeholderLine10"></div>
 			<span class="margR20" v-for="item in serverListResult" :key="item.id">
-				<van-tag type="warning" @click="toServerGameView(item)">服务{{item.id}}区({{item.busy>0.7?'拥挤':item.busy<0.5?'空闲':'繁忙'}})</van-tag>
+				<van-tag type="warning" @click="toServerGameView(item)"  v-if="item.id>=3">服务{{item.id}}区({{item.busy>0.7?'拥挤':item.busy<0.5?'空闲':'繁忙'}})</van-tag>
 			</span>
-			<div class="tip4model3RedText margT10">系统提示：<b class="yellow">该游戏电脑上玩体验更佳。</b>升到80级(一转)后即可打神域BOSS爆出HPC，打出HPC后要立马回到该页面兑换成钻石值，否则该HPC将会消失，消失后系统不做补发。</div>
+			<div class="tip4modelNew margT10">
+				系统提示：<br>
+				1.<b class="yellow">该游戏电脑上玩体验更佳。</b>升到80级(一转)后即可打神域BOSS爆出HPC，打出HPC后要立马回到该页面兑换成钻石值，否则该HPC将会消失，消失后系统不做补发。<br>
+				2.<b class="yellow">每新增一个区后游戏挖矿的难度也会随着增加。</b>
+			</div>
 		  </div>
 		  <div class="placeholderLine20"></div>
 		  <div class="paddingWing">
@@ -95,7 +99,7 @@
 			  </van-row>
 		  </div>
 		  <div class="placeholderLine20"></div>
-		  <div class="tip4model3RedText paddingWing margT10">充值提醒：通过支付宝/微信充值的时候，若充值月卡、至尊卡或礼品若没到账，请找【客服】提供【账号和角色昵称】来领取</div>
+		  <div class="tip4modelNew paddingWing margT10">充值提醒：通过支付宝/微信充值的时候，若充值月卡、至尊卡或礼品若没到账，请找【客服】提供【账号和角色昵称】来领取</div>
 		  
 		  <div class="placeholderLine20"></div>
 		</van-action-sheet>
@@ -165,7 +169,7 @@
 				<div class="placeholderLine10"></div>
 				<van-radio-group v-model="selectRadioValue">
 				  <div v-for="item in serverList" :key="item.id">
-					  <van-radio :name="item.id">服务{{item.id}}区</van-radio>
+					  <van-radio :name="item.id" v-if="item.id>=3">服务{{item.id}}区</van-radio>
 					  <div class="placeholderLine10"></div>
 				  </div>
 				</van-radio-group>

@@ -124,15 +124,7 @@
 		</div>
 	</div>
 	<div class="items" v-if="userInfo.actived==1||userInfo.actived==3">
-		<div class="my-cell">
-			<div class="flex1">
-				级别
-			</div>
-			<div class="flex2">
-				<span class="ellipsis">{{userInfo.level | getUserType}}</span>
-				<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
-			</div>
-		</div>
+		
 		<div class="my-cell" @click="update('nickName')">
 			<div class="flex1">
 				昵称
@@ -163,14 +155,14 @@
 				<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
 			</div>
 		</div>
-		<div class="my-cell" @click="update('wechartNum')">
+		<div class="my-cell">
 			<div class="flex1">
 				微信号
 			</div>
 			<div class="flex2">
 				<span class="ellipsis">{{userInfo.wechartNum}}</span>
 				<!-- <span class="ellipsis">{{$JsEncrypt.decrypt(userInfo.wechartNum)}}</span> -->
-				<i class="iconfont iconfont-right-arrow2"></i>
+				<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
 			</div>
 		</div>
 		 <!-- @click="update('alipayNum')" -->
@@ -420,7 +412,7 @@ export default {
 		}
 		
 		//_this.$JsEncrypt.decrypt(a);
-		_this.getUserInfo();
+		//_this.getUserInfo();
 		_this.initializeHintInfo();
 	},
 	methods:{
@@ -521,12 +513,12 @@ export default {
 		getUserInfo(){
 			let _this = this;
 			_this.loading = true;
-			_this.$ajax.ajax(_this.$api.getAssistUserInfo, 'GET', null, function(res){
-				console.log('res',res);
+			_this.$ajax.ajax(_this.$api.getAssistUserInfo4RealName, 'GET', null, function(res){
+				//console.log('res',res);
 				if(res.code == _this.$api.CODE_OK){
 					_this.userInfo = res.data;
 					// _this.$cookies.set("_USERINFO_", _this.userInfo, 60 * 60 * 12);
-					localStorage.setItem("_USERINFO_",JSON.stringify(res.data))
+					//localStorage.setItem("_USERINFO_",JSON.stringify(res.data))
 					_this.userId = _this.userInfo.userId;
 					if(_this.userInfo.actived==1){
 						_this.isRealName = true;
@@ -616,7 +608,7 @@ export default {
 			let _this = this;
 			Dialog.alert({
 			  title: '系统提示',
-			  message: `安全密码是实名认证的时候所设置的，您的安全密码头2位是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号！`,
+			  message: `安全密码是实名认证的时候所设置的，系统对您的安全密码提醒是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号！`,
 			  confirmButtonText:'好的，我再试试'
 			}).then(() => {
 			  // on close resetRealName
@@ -671,7 +663,7 @@ export default {
 					return;
 				} */
 				params.securityPassword = _this.$JsEncrypt.encrypt(_this.form.safePassword);
-				console.log('params',params);
+				//console.log('params',params);
 				_this.update1Loading = true;//updateAssistNickName
 				_this.$ajax.ajax(_this.$api.updateAssistUsrInfo, 'POST', params, function(res){
 					// console.log('res',res);

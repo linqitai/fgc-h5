@@ -110,6 +110,95 @@
 				<div class="line text margT10">
 					成为青铜级工会会长<br>
 					需要：<br>
+					有效直推10名 + 团队算力10Gh/s<br>
+					完成后:<br>
+					奖励50个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==1"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务2
+				</div>
+				<div class="line text margT10">
+					成为白银级工会会长<br>
+					需要：<br>
+					有效直推100名 + 团队算力100Gh/s + 伞下三个青铜会长<br>
+					完成后:<br>
+					奖励200个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==2"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务3
+				</div>
+				<div class="line text margT10">
+					成为黄金级工会会长<br>
+					需要：<br>
+					有效直推200名 + 团队算力300Gh/s + 伞下三个白银会长<br>
+					完成后:<br>
+					奖励1000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==3"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务4
+				</div>
+				<div class="line text margT10">
+					成为铂金级工会会长<br>
+					需要：<br>
+					有效直推300名 + 团队算力900Gh/s + 伞下三个黄金会长<br>
+					完成后:<br>
+					奖励3000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==4"></i>
+			</div>
+		</div>
+		<div class="placeholderLine10"></div>
+		<div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务5
+				</div>
+				<div class="line text margT10">
+					成为钻石级工会会长<br>
+					需要：<br>
+					有效直推500名 + 团队算力2700Gh/s + 伞下三个铂金会长<br>
+					完成后:<br>
+					奖励10000个感恩值<br>
+				</div>
+			</div>
+			<div class="flexRight">
+				<i class="iconfont iconfont-finished" v-if="userInfo.level==5"></i>
+			</div>
+		</div>
+		<!-- <div class="box finishInfo">
+			<div class="flexLeft">
+				<div class="line title">
+					升级任务1
+				</div>
+				<div class="line text margT10">
+					成为青铜级工会会长<br>
+					需要：<br>
 					有效直推10名 + 个人持币10个 + 一代团队持币1000个<br>
 					完成后:<br>
 					奖励10个感恩值<br>
@@ -190,7 +279,7 @@
 			<div class="flexRight">
 				<i class="iconfont iconfont-finished" v-if="userInfo.level==5"></i>
 			</div>
-		</div>
+		</div> -->
 		<van-divider>我是有底线的</van-divider>
 	</div>
 	<van-dialog v-model="showTipModel" title="问题小帮手" confirmButtonText="好的">

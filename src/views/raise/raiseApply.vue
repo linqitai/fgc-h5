@@ -156,7 +156,7 @@
 				1.禁止广告。<br>
 				2.禁止负能量。<br>
 				3.禁止发无关链接。<br>
-				4.禁止讨论别项目。<br>
+				4.禁止讨论其他项目。<br>
 			</div>
 			<div class="sureBtn">
 				<!-- <div class="tip">点击登录即表示您同意<span class="agreement">《服务协议》</span></div> -->

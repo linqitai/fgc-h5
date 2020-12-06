@@ -30,18 +30,21 @@
 				}
 			}
 		}
+		.van-field__error-message{
+			color: $main-adorn-color !important;
+		}
 		.formBox{
 			padding:0 $boxPadding1;
 			.van-cell__value,.van-cell__value--alone,.van-field__control{
-				color: $mainTextColor !important;
+				color: white !important;
 			}
 			.van-cell-group,.van-cell{
 				background-color: inherit !important;
 			}
 			.van-cell{
-				color: $mainTextColor !important;
+				color: white !important;
 				padding: 10px 0 !important;
-				border-bottom: 1px solid $main-blue-black-color !important;
+				border-bottom: 1px solid $bottomLineColor !important;
 				/* &::last-child{
 					border-bottom: 1px solid $main-adorn-color !important;
 				} */
@@ -119,9 +122,6 @@
 			}
 		}
 	}
-	.van-field__error-message{
-		color: red !important;
-	}
 </style>
 
 <template>
@@ -149,12 +149,12 @@
 				<div class="labelText">确认账号</div>
 				<van-field v-model="form.phone2" type="password" clearable :placeholder="placeholder.phone2" @blur="validate('phone2')" :error-message="errorHint.phone2" maxlength="11"/>
 				<div class="tip4model5 margT6">
-					温馨提示：注册账号即是本人的手机号，需填写绑定了自己【微信和支付宝】的手机号。若是港澳台及海外用户，只要有自己的支付宝和微信号即可注册并实名。
+					温馨提示：注册账号需填写本人的手机号，需填写绑定了自己【微信和支付宝】的手机号。若是港澳台及海外用户，只要有自己的支付宝和微信号即可注册并实名。
 					<!-- 2.若不是看好帮扶的理念，而是单纯想撸羊毛的用户请不要注册，因为每次交易的数据都公开透明，纯撸者会被会员控告并冻结账号。 -->
 				</div>
 				<div class="labelText">登录密码</div>
 				<van-field v-model="form.password" type="password" clearable :placeholder="placeholder.password" @blur="validate('password')" :error-message="errorHint.password" />
-				<div class="labelText">确认密码</div>
+				<div class="labelText">确认登录密码</div>
 				<van-field v-model="form.password2" type="password" clearable :placeholder="placeholder.password2" @blur="validate('password2')" :error-message="errorHint.password2"/>
 				<!-- <van-field v-model="form.realName" clearable label="真实姓名" placeholder="请填写真实姓名" maxlength="15" @blur="validate('realName')"/> -->
 				<div class="labelText">真实姓名</div>
@@ -197,7 +197,7 @@
 			<!-- <div class="tip">点击注册即表示您同意<span class="agreement" @click="$router.push('agreement')">《用户协议》</span></div> -->
 			<van-button color="linear-gradient(to right, #ffae00 , #ffae00)" size="normal" :block="true" @click="registerBtn" :loading="isLoading" loading-type="spinner">注  册</van-button>
 			<div class="placeholderLine10"></div>
-			<van-button color="linear-gradient(to right, #e7e7e7, #c5c5c5)" size="normal" :block="true" @click="loginBtn">已有账号，去登录</van-button>
+			<van-button size="normal" :block="true" @click="loginBtn">已有账号，去登录</van-button>
 			<div class="placeholderLine10"></div>
 		</div>
 		<div class="helpList">
@@ -374,7 +374,7 @@
 					return;
 				}
 				_this.getSCLoading = true;
-				_this.$ajax.ajax(_this.$api.getSecurityCode, 'POST', params, function(res) {
+				_this.$ajax.ajax(_this.$api.getSecurityCode, 'GET', params, function(res) {
 					if (res.code == _this.$api.CODE_OK) {
 						// console.log('securityCode4Web',res.data);
 						_this.getInitCode = res.data;
@@ -486,7 +486,7 @@
 					// console.log('res', res);
 					if (res.code == _this.$api.CODE_OK) {
 						localStorage.setItem("mobilePhone",_this.form.phone);
-						_this.$toast('注册成功');
+						_this.$toast('注册成功,请登录');
 						//_this.securitypInsert();
 						_this.$router.push('/login');
 					}else{

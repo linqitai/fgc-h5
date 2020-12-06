@@ -242,28 +242,40 @@
 						<div class="mlBox left">有效人数 {{userInfo.validNum}}</div>
 					</div> -->
 					<div class="line">
-						<span @click="toBookView('3')">钻石值 {{userInfo.contributionValue}}</span> <i class="iconfont iconfont-question" @click="showTip('contribution')"/>
+						<span @click="toBookView('3',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">钻石值 {{userInfo.contributionValue}}</span>
+						<span v-if="userInfo4Me.userId!='17y60355638oks179u51'">钻石值 {{userInfo.contributionValue}}</span>
 					</div>
 					<div class="line">
-						<span>信誉分 {{userInfo4Me.credit}}</span>
+						<span @click="toBookView('6',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">信誉分 {{userInfo.credit}}</span>
+						<span v-if="userInfo4Me.userId!='17y60355638oks179u51'">信誉分 {{userInfo.credit}}</span>
 					</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
 			<div class="box box2">
-				
+				<div class="flex flex1">
+					<div class="value" @click="toBookView('1',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.teamCalculationPower}}</div>
+					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.teamCalculationPower}}</div>
+					<div class="text" @click="showTip('teamCalculationPower')">团队算力</div>
+				</div>
 				<div class="flex flex4">
-					<div class="value" @click="toBookView('2',userInfo4Me.userId)">{{userInfo4Me.platformTicket}}</div>
+					<div class="value" @click="toBookView('2',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.platformTicket}}</div>
+					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.platformTicket}}</div>
 					<div class="text">感恩券</div>
 				</div>
 				<div class="flex flex2">
-					<div class="value" @click="toBookView('4',userInfo4Me.userId)">{{userInfo4Me.thisWeekMineral}}</div>
+					<div class="value" @click="toBookView('4',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.thisWeekMineral}}</div>
+					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.thisWeekMineral}}</div>
 					<div class="text">钻石</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
 			<div class="box box3">
-				
+				<div class="flex flex1">
+					<div>{{userInfo.myCalculationPower}}</div>
+					<!-- <NumberGrow :value="userInfo.myCalculationPower"></NumberGrow> -->
+					<div class="text" @click="showTip('myCalculationPower')">个人算力</div>
+				</div>
 				<div class="flex flex4">
 					<div>{{userInfo.temporaryFreezePlatformTicket}}</div>
 					<div class="text">交易中<br>感恩券</div>

@@ -122,6 +122,9 @@
 			<div class="myCell">
 				<van-field label="优惠后价格" required clearable @blur="validate('discountsPrice')" v-model="form.discountsPrice" maxlength="10" placeholder="请填写商品优惠后的价格" />
 			</div>
+			<div class="myCell">
+				<van-field label="商品库存" required clearable @blur="validate('inventory')" v-model="form.inventory" maxlength="10" placeholder="请填写商品的库存" />
+			</div>
 			<div class="label">
 				<span class="star">*</span>
 				<span class="text">商品展示图(最多传1张)</span>
@@ -170,6 +173,7 @@
 					introduce:'',
 					marketPrice:'',
 					discountsPrice:'',
+					inventory:'',
 					fileShowList:[],
 					fileDetailList:[],
 					// filePaymentList:[]
@@ -233,6 +237,11 @@
 						_this.$toast('请填写优惠后价格');
 						return;
 					}
+				}else if(flag == 'inventory'){
+					if(_this.form.inventory==''){
+						_this.$toast('请填写商品库存');
+						return;
+					}
 				}
 			},
 			toListView(){
@@ -257,6 +266,7 @@
 				// 	return;
 				// }
 				let params = {
+					
 				}
 				params = _this.form;
 				console.log('params',params);
@@ -264,7 +274,7 @@
 					_this.$toast(`请填写完整信息`);
 				}else{
 					console.log('可提交信息');
-					// _this.$ajax.ajax(_this.$api.updateAssistUsrInfo, 'POST', params, function(res){
+					// _this.$ajax.ajax(_this.$api.insertAssistProduct, 'POST', params, function(res){
 					// 	console.log('res',res);
 					// 	if(res.code == _this.$api.CODE_OK){
 							

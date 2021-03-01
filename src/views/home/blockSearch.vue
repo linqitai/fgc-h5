@@ -49,7 +49,7 @@
 						font-size: $fs-16;
 					}
 					.flexRight2{
-						flex: 0 0 100px;
+						flex: 0 0 120px;
 						text-align: right;
 						font-size: $fs-12;
 					}
@@ -87,7 +87,7 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				区块浏览器·全
+				区块浏览器
 			</div>
 			<i class="rightBox icon"></i>
 		</m-header>
@@ -115,8 +115,8 @@
 									<span class="nickName"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.toUserName}}</i></span>
 									<i class="iconfont iconfont-right-arrow2"></i>
 								</div> -->
-								<div class="line margT6"  @click="toMy4OtherView(item.toUserId)">
-									<span class="nickName"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.toUserId}}</i></span>
+								<div class="line margT6"  @click="toMy4OtherView(item.userId)">
+									<span class="nickName"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.userId}}</i></span>
 									<i class="iconfont iconfont-right-arrow2"></i>
 								</div>
 								<div class="line margT6">
@@ -136,7 +136,7 @@
 									<span class="nickName">区块高度 <i class="textColor">{{item.id}}</i></span>
 								</div>
 							</div>
-							<div class="flexRight2">所剩<span class="textAdornColor">{{item.currentMineralNum}}</span>个</div>
+							<div class="flexRight2">当前拥有<span class="textAdornColor">{{item.currentMineralNum}}</span>个</div>
 						</div>
 					 </div>
 				</van-list>
@@ -254,7 +254,6 @@
 				// console.log("refresh1")
 				let _this = this;
 				if(_this.activeName == 'mineral'){
-					console.log("refresh1");
 					_this.currentPage1 = 1;
 					_this.list1 = [];
 					_this.finished1 = false;
@@ -269,8 +268,7 @@
 				let _this = this;
 				let params = {
 					pageNo: _this.currentPage1,
-					pageSize: _this.pageSize,
-					userId: _this.value
+					pageSize: _this.pageSize
 				}
 				_this.loading1 = true;
 				_this.$ajax.ajax(_this.$api.getMineralBookList, 'GET', params, function(res) {
@@ -282,13 +280,13 @@
 								item.fromUserName = '系统';
 							}
 						}); */
-						list = list.filter((item)=>{
+						/* list = list.filter((item)=>{
 							let b = _this.$utils.inArray(item.fromUserId,_this.manTypeList);
 							if(b==false){
 								b = _this.$utils.inArray(item.toUserId,_this.manTypeList);
 							}
 							return b==false;
-						});
+						}); */
 						_this.list1.push(...list);
 						_this.loading1 = false;
 						if(res.data.endRow == res.data.total){

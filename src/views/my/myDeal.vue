@@ -984,14 +984,14 @@
 				if(_this.$route.query.dealType==1){
 					if(_this.$route.query.isSelf) {
 						_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请给对方发个短信提醒。";
-						_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
+						_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的交易--待付款”的订单详情中查看并及时完成交易。`;
 					}else{
 						_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请提醒代理审核单子。";
 						_this.smsContent = `【${_this.$api.projectName}】我的定向交易单子选择了您做担保，请审核，谢谢。`;
 					}
 				}else{
 					_this.sendSmsTipText = "订单匹配成功，为了让交易顺利进行，请给对方发个短信提醒。";
-					_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的单子--待付款”的订单详情中查看并及时完成交易。`;
+					_this.smsContent = `【${_this.$api.projectName}】我所转让的${_this.$route.query.num}个钻石已经匹配到了您，请在“个人中心--我的交易--待付款”的订单详情中查看并及时完成交易。`;
 				}
 				_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 				//发送短信提示end
@@ -1165,9 +1165,6 @@
 					    let dataOri = canvas.toDataURL("image/png");
 						let img = new Image();
 						img.src = dataOri;//base64
-						// ////console.log("dataOri",dataOri);
-						////console.log('********未压缩前的图片大小(KB)********');
-						////console.log(dataOri.length / 1024);
 						img.onload = function() {
 							let data = _this.$utils.compress(img, 0.4);//调整压缩比例
 							let params = {
@@ -1187,7 +1184,7 @@
 									}else{
 										_this.mobilePhone = _this.detail4sellerInfo.mobilePhone;
 									}
-									_this.smsContent = `【${_this.$api.projectName}】我的付款凭证已上传，请在“个人中心--我的单子--待收款”的订单详情中查看。`;
+									_this.smsContent = `【${_this.$api.projectName}】我的付款凭证已上传，请在“个人中心--我的交易--待收款”的订单详情中查看。`;
 									_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 									//发送短信提示end
 									_this.showSellerDetailModel = false;
@@ -1592,18 +1589,23 @@
 				_this.loading = true;
 				if(_this.activeName == "buy"){
 					_this.currentPage1 = 1;
+					_this.list1 = [];
 					_this.onLoad1();
 				}else if(_this.activeName == "pay"){
 					_this.currentPage2 = 1;
+					_this.list2 = [];
 					_this.onLoad2();
 				}else if(_this.activeName == "get"){
 					_this.currentPage4 = 1;
+					_this.list4 = [];
 					_this.onLoad4();
 				}else if(_this.activeName == "complated"){
 					_this.currentPage3 = 1;
+					_this.list3 = [];
 					_this.onLoad3();
 				}else if(_this.activeName == "canceled"){
 					_this.currentPage5 = 1;
+					_this.list5 = [];
 					_this.onLoad5();
 				}
 			},
@@ -1905,7 +1907,7 @@
 							}else{
 								_this.mobilePhone = _this.detail4buyerInfo.mobilePhone;
 							}
-							_this.smsContent = `【${_this.$api.projectName}】您好，我并未收到款，请在“个人中心--我的单子--待付款”的订单详情中上传付款凭证。`;
+							_this.smsContent = `【${_this.$api.projectName}】您好，我并未收到款，请在“个人中心--我的交易--待付款”的订单详情中上传付款凭证。`;
 							_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 							_this.showBuyerDetailModel = false;
 							_this.onLoad4();
@@ -2020,7 +2022,7 @@
 								//发送短信提示start
 								_this.sendSmsTipText = "提交已付款状态成功，为了让交易顺利进行，请发个短信提醒对方确认收款并释放钻石。";
 								_this.mobilePhone = _this.detail4sellerInfo.mobilePhone;
-								_this.smsContent = `【${_this.$api.projectName}】所匹配的${item.num}个钻石已付款，请确认收款，并在“个人中心--我的单子--待收款”的订单详情中确认收款并释放钻石。感恩链感恩有您的支持!`;
+								_this.smsContent = `【${_this.$api.projectName}】所匹配的${item.num}个钻石已付款，请确认收款，并在“个人中心--我的交易--待收款”的订单详情中确认收款并释放钻石。感恩链感恩有您的支持!`;
 								_this.setSendSmsHref(_this.mobilePhone,_this.smsContent);
 								//发送短信提示end
 								_this.showSellerDetailModel = false;

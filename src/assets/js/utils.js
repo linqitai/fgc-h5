@@ -95,7 +95,7 @@ function formClear(params) {
 }
 
 function isNUll(value) {
-	if (value == "" || value == null) {// || value == undefined
+	if (value == "" || value == null || value == undefined) {// || value == undefined
 		return true;
 	} else {
 		return false;

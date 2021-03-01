@@ -197,7 +197,7 @@
 			<div class="text">
 				我的矿机
 			</div>
-			<i class="iconfont iconfont-question rightBox icon" @click="showTip"></i>
+			<i class="iconfont rightBox icon"></i>
 		</m-header>
 		<canvas class="matrix" id="matrix"></canvas>
 		<div class="millContent" id="millContent">
@@ -205,7 +205,7 @@
 			<van-notice-bar
 			  mode = "closeable"
 			  left-icon="volume-o"
-			  text="每次领取收益需和上次领取收益时间间隔24小时"
+			  text="每次领取收益需和上次领取收益时间间隔24小时以上,允许多天甚至一年领取一次收益"
 			/>
 			<div class="statistics" v-if="remainCount">
 				<div class="line clearBoth flexCenter f-14">
@@ -341,7 +341,7 @@
 	  <van-dialog v-model="showTipModel" title="问题小帮手" confirmButtonText="好的">
 	  	<div class="paddingWing f-12 lineHeight tip4model2">
 	  		<div class="textIndent">
-	  			奖励(赠送)型的矿机不加算力，从矿机商城中所租赁的矿机才加算力。请广大会员们在24~168小时内领取一次收益，否则矿机会被临时暂停，需要重新启动后再过24小时来领取收益，感谢您的配合。
+	  			每次领取收益需和上次领取收益时间间隔24小时以上,允许多天甚至一年领取一次收益
 	  		</div>
 	  	</div>
 	  </van-dialog>

@@ -78,8 +78,8 @@
 		<div class="wrapperIn">
 			<div class="header">
 				<div class="leftBox">
-					<i class="f-15 underline" v-if="$route.meta.showMillRecordIcon" @click="toView('millRecord')">租赁记录</i>
-					<i class="f-15 underline" v-if="$route.meta.showRecordIcon" @click="toView('dealRecord')">交易记录</i>
+					<!-- <i class="f-12 underline" v-if="$route.meta.showMillRecordIcon" @click="toView('millRecord')">租赁记录</i> -->
+					<i class="f-12 underline" v-if="$route.meta.showRecordIcon" @click="toView('dealRecord')">交易记录</i>
 					<i class="iconfont iconfont-left-arrow f-12" v-if="$route.meta.back" @click="back"></i>
 				</div>
 				<div class="centerBox">
@@ -87,8 +87,8 @@
 				</div>
 				<div class="rightBox">
 					<!-- <i class="iconfont f-18"></i> -->
-					<i class="f-15 underline" v-if="$route.meta.toMyMill" @click="toView('myMill')">我的矿机</i>
-					<i class="f-15 underline" v-if="$route.meta.toMyDeal" @click="toView('myDeal')">我的交易</i>
+					<i class="f-12 underline" v-if="$route.meta.toMyMill" @click="toView('myMill')">我的矿机</i>
+					<i class="f-12 underline" v-if="$route.meta.toMyDeal" @click="toView('myDeal')">我的交易</i>
 					<!-- <i class="iconfont iconfont-question f-18" v-if="$route.meta.question" @click="showTip($route.meta.questionName)"></i> -->
 				</div>
 			</div>
@@ -97,7 +97,7 @@
 				<!-- <router-view></router-view> -->
 			  <!-- </keep-alive> -->
 				<transition name="van-fade">
-					<keep-alive include="login,register,voteList,dealRecord,millRecord,raiseApplyList">
+					<keep-alive include="login,register,deal,mill,home,voteList,dealRecord,millRecord,raiseApplyList">
 						<router-view></router-view>
 					</keep-alive>
 					<!-- <keep-alive v-if="$route.meta.keepAlive==true">

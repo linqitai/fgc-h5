@@ -88,8 +88,9 @@
 			<div class="paddingWing tip4model3" v-if="userInfo">当前拥有 感恩券 {{userInfo.platformTicket.toFixed(2)}} 个</div>
 			<div class="paddingWing tip4model3">
 				<!-- <b class="textBold">定向转让感恩券的规则：</b><br> -->
-				每个会员都可以向自己的三代伞下会员转感恩券，转让感恩券不收手续费，感恩券恒价1CNY/个。<br>
+				每个会员都可以向自己的三代伞下会员转感恩券。<br>
 			</div>
+			<div class="placeholderLine10"></div>
 			<van-cell-group>
 				<van-field v-model="form4AppointDeal.transferAmount" required clearable label="转让数量" placeholder="请填写转让数量" @blur="validate4AppointDeal('transferAmount')" :error-message="errorInfo4AppointDeal.transferAmount"/>
 				<van-field v-model="form4AppointDeal.mobilePhone" required clearable label="手机号" placeholder="请粘贴对方的手机号" maxlength="11" @blur="validate4AppointDeal('mobilePhone')" :error-message="errorInfo4AppointDeal.mobilePhone"/>

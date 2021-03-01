@@ -182,7 +182,7 @@
 		<!-- <van-button round type="primary" @click="init" size="normal">开始新的游戏</van-button>
 		<van-button round type="warning" @click="end" size="normal"结算总分</van-button> -->
 		<button class="bg_green" @click="init">开始挑战</button>
-		<button class="bg_yellow" @click="end">保存总分</button>
+		<button class="bg_yellow" @click="end">结算总分</button>
 	  </div>
 	</div>
 	<div class="layout">
@@ -211,14 +211,12 @@
 		</div>
 	</div>
 	<div class="tip4model3">
-	  玩法：<br>
-	  1.在方块中上下左右滑动即可。<br>
-	  2.每滑动一次方块即会产生新的一个数字为2的小方块。<br>
-	  3.两个相同的数字方块碰撞在一起即会融合且相加。<br>
-	  4.挑战该游戏需花1个帮扶券/次。<br>
-	  5.当天进入排行榜的会员可瓜分当天此游戏所销毁帮扶券的50%分红。<br>
-	  6.每人每天最多挑战10次。<br>
-	  7.竞技分红区游戏开放时间为：0~20点。<br>
+	    玩法：<br>
+	    1.在方块中上下左右滑动即可。<br>
+	    2.每滑动一次方块即会产生新的一个数字为2的小方块。<br>
+	    3.两个相同的数字方块碰撞在一起即会融合且相加。<br>
+	    4.挑战该游戏需花0.1个钻石/次，每次挑战总分达到3万分可获得0.12个钻石奖励。<br>
+	    5.每人每天最多挑战1次。<br>
 	</div>
 	<!-- <button @click="gamePopOutMineral">扣矿石</button> -->
 	<van-dialog v-model="showRankBox" title="每日排行版" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
@@ -278,7 +276,7 @@
         directX: 30,
 		rankList:[],
 		currentPage:1,
-		pageSize:10,
+		pageSize:20,
 		userInfo:'',
 		
       };
@@ -424,7 +422,7 @@
 		  Dialog.confirm({
 		    title: '确认信息',
 		    confirmButtonText:'确定',
-		    message: '挑战该游戏需花1个帮扶券/次，当天进入排行榜的会员可瓜分当天此游戏所销毁帮扶券的50%分红，您是否确认开始挑战该游戏？'
+		    message: '挑战该游戏需花0.1个钻石/次，您是否确认开始挑战该游戏？'
 		  }).then(() => {
 		    // on close
 			Toast.loading({
@@ -475,6 +473,9 @@
 					  message: res.message
 					}).then(() => {
 					  // on close
+					  /* _this.$cookies.set("tab_name_book", 'ticket', _this.$api.cookiesTime)
+					  _this.$router.push('/myBook'); */
+					  _this.back()
 					});
 					//_this.init();
 				}

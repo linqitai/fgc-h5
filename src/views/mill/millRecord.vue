@@ -217,7 +217,7 @@
 					 		<div class="flex flex2">
 					 			<div class="line1">
 					 				<span class="millName">{{item.type | machineTypeType}}</span>
-									<span class="nickName margL10"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.nickName}}</i></span>
+									<span class="nickName margL10"><i class="iconfont iconfont-name"></i> <i class="textColor">{{item.userId}}</i></span>
 					 			</div>
 					 			<div class="line">租金{{item.price}} 算力{{item.calculationPower}}G 租赁时间{{item.getTime}}</div>
 					 		</div>
@@ -266,6 +266,7 @@
 	import mRefresh from '@/components/Refresh.vue';
 	// import mFullscreen from '@/components/Fullscreen.vue';
 	export default {
+		name:'millRecord',
 		data() {
 			return {
 				userId:"",
@@ -298,6 +299,7 @@
 					{ text: '体验矿机', value: 0 },
 					{ text: '微型矿机', value: 1 },
 					{ text: '小型矿机', value: 2 },
+					{ text: '中型矿机', value: 3 },
 				],
 				option2: [
 					{ text: '最近7天', value: 7 },

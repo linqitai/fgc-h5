@@ -75,6 +75,9 @@ $noticeHeight:40px;
 	.HomeContent{
 		position: relative;
 		.swipe {
+			.img{
+				width: 100%;
+			}
 			.van-swipe-item {
 				img {
 					width: 100%;
@@ -359,142 +362,115 @@ $noticeHeight:40px;
 				</div>
 				<div class="placeholderLine20"></div>
 				<div class="title">{{attendanceTitle}}</div>
-				<div class="tomorrowContribution">签到可释放钻石值，连续签到30天可额外获得0.1个感恩券</div>
+				<div class="tomorrowContribution">签到可释放钻石值并加0.01券，连续签到30天可额外获得0.1个券</div>
 				<div class="tomorrowContribution">系统提示：日常签到建议在白天完成，若因特殊因素而导致错过签到的，原则上不补签</div>
 				<!-- <div class="tomorrowContribution">随着矿石价值的增加，签到所得贡献值会不定期做调整</div> -->
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(1)">0.01</div>
-						<div class="day">1天</div>
+						<div class="circle" :class="getAttendanceBgColor(1)">1</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(2)">0.01</div>
-						<div class="day">2天</div>
+						<div class="circle" :class="getAttendanceBgColor(2)">2</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(3)">0.01</div>
-						<div class="day">3天</div>
+						<div class="circle" :class="getAttendanceBgColor(3)">3</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(4)">0.01</div>
-						<div class="day">4天</div>
+						<div class="circle" :class="getAttendanceBgColor(4)">4</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(5)">0.01</div>
-						<div class="day">5天</div>
+						<div class="circle" :class="getAttendanceBgColor(5)">5</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(6)">0.01</div>
-						<div class="day">6天</div>
+						<div class="circle" :class="getAttendanceBgColor(6)">6</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(7)">0.02</div>
-						<div class="day">7天</div>
+						<div class="circle" :class="getAttendanceBgColor(7)">7</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(8)">0.02</div>
-						<div class="day">8天</div>
+						<div class="circle" :class="getAttendanceBgColor(8)">8</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(9)">0.02</div>
-						<div class="day">9天</div>
+						<div class="circle" :class="getAttendanceBgColor(9)">9</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(10)">0.02</div>
-						<div class="day">10天</div>
+						<div class="circle" :class="getAttendanceBgColor(10)">10</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(11)">0.02</div>
-						<div class="day">11天</div>
+						<div class="circle" :class="getAttendanceBgColor(11)">11</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(12)">0.02</div>
-						<div class="day">12天</div>
+						<div class="circle" :class="getAttendanceBgColor(12)">12</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(13)">0.03</div>
-						<div class="day">13天</div>
+						<div class="circle" :class="getAttendanceBgColor(13)">13</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(14)">0.03</div>
-						<div class="day">14天</div>
+						<div class="circle" :class="getAttendanceBgColor(14)">14</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(15)">0.03</div>
-						<div class="day">15天</div>
+						<div class="circle" :class="getAttendanceBgColor(15)">15</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(16)">0.03</div>
-						<div class="day">16天</div>
+						<div class="circle" :class="getAttendanceBgColor(16)">16</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(17)">0.03</div>
-						<div class="day">17天</div>
+						<div class="circle" :class="getAttendanceBgColor(17)">17</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(18)">0.03</div>
-						<div class="day">18天</div>
+						<div class="circle" :class="getAttendanceBgColor(18)">18</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(19)">0.04</div>
-						<div class="day">19天</div>
+						<div class="circle" :class="getAttendanceBgColor(19)">19</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(20)">0.04</div>
-						<div class="day">20天</div>
+						<div class="circle" :class="getAttendanceBgColor(20)">20</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(21)">0.04</div>
-						<div class="day">21天</div>
+						<div class="circle" :class="getAttendanceBgColor(21)">21</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(22)">0.04</div>
-						<div class="day">22天</div>
+						<div class="circle" :class="getAttendanceBgColor(22)">22</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(23)">0.04</div>
-						<div class="day">23天</div>
+						<div class="circle" :class="getAttendanceBgColor(23)">23</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(24)">0.04</div>
-						<div class="day">24天</div>
+						<div class="circle" :class="getAttendanceBgColor(24)">24</div>
 					</div>
 				</div>
 				<div class="placeholderLine10"></div>
 				<div class="flexBox">
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(25)">0.05</div>
-						<div class="day">25天</div>
+						<div class="circle" :class="getAttendanceBgColor(25)">25</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(26)">0.05</div>
-						<div class="day">26天</div>
+						<div class="circle" :class="getAttendanceBgColor(26)">26</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(27)">0.05</div>
-						<div class="day">27天</div>
+						<div class="circle" :class="getAttendanceBgColor(27)">27</div>
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(28)">0.05</div>
-						<div class="day">28天</div>
+						<div class="circle" :class="getAttendanceBgColor(28)">28</div>
+						<!-- <div class="day">28天</div> -->
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(29)">0.05</div>
-						<div class="day">29天</div>
+						<div class="circle" :class="getAttendanceBgColor(29)">29</div>
+						<!-- <div class="day">29天</div> -->
 					</div>
 					<div class="flex">
-						<div class="circle" :class="getAttendanceBgColor(30)">0.05</div>
-						<div class="day">30天</div>
+						<div class="circle" :class="getAttendanceBgColor(30)">30</div>
+						<!-- <div class="day">30天</div> -->
 					</div>
 				</div>
 				<div class="placeholderLine20"></div>
@@ -504,7 +480,7 @@ $noticeHeight:40px;
 				</div>
 				<div v-if="todayIsAttendance">
 					<div class="textCenter red f-13">今日签到已领取{{getTodayAttendanceValue}}感恩券</div>
-					<div class="tomorrowContribution" v-if="dayNum<30">明日签到可领取{{getTomorrowContributionValue}}感恩券</div>
+					<!-- <div class="tomorrowContribution" v-if="dayNum<30">明日签到可领取{{getTomorrowContributionValue}}感恩券</div> -->
 					<!-- <div class="tomorrowContribution" v-if="dayNum==30">恭喜您：今日已成功获取一台体验矿机，明日将重置签到</div> -->
 					<div class="tomorrowContribution" v-if="dayNum==30">恭喜您：签到满30天，已成功额外领得0.1个感恩券奖励，明日将重置签到</div>
 					<div class="placeholderLine20"></div>
@@ -540,41 +516,39 @@ $noticeHeight:40px;
 				  text="有效直推:完成基础任务2后即可成为有效直推"
 				/> -->
 				<div class="swipe">
+					<!-- <img class="img" :src="imageUrl" /> -->
+					<img class="img" src="../../assets/image/bannerfgc1.jpg"/>
 					<!-- <van-swipe :autoplay="3000" style="height: 190px;" @change="onChange4Swipe">
 					  <van-swipe-item v-for="(item, index) in noticeList4Swipe" :key="index">
 						<img :src="item.imgUrl" v-lazy="item.imgUrl"/>
 					  </van-swipe-item>
 					</van-swipe> -->
-					<van-swipe :autoplay="3000" style="height: 176px;" :lazy-render="true">
+					<!-- <van-swipe :autoplay="3000" style="height: 176px;" :lazy-render="true">
 					  <van-swipe-item v-for="(image, index) in images" :key="index">
 						<img v-lazy="image" />
 					  </van-swipe-item>
-					  <!-- <template #indicator>
-					      <div class="custom-indicator">
-					        {{ currentImage + 1 }}/4
-					      </div>
-					    </template> -->
-					</van-swipe>
+					</van-swipe> -->
 				</div>
 				<div class="placeholderLine2"></div>
 				<!-- <van-notice-bar :text="qqFlock" left-icon="volume-o" @click="toServicePage"/> -->
 				<!-- <div class="notice">
 					<van-notice-bar :text="lastNoticeItem.noticeTitle" left-icon="volume-o" @click="toNoticeDetail(lastNoticeItem)" />
 				</div> -->
-				<div class="millInfo" v-if="!statistics.allMineralNum">
+				<!-- <div class="millInfo" v-if="!statistics.allMineralNum">
 					<div class="placeholderLine10"></div>
 					<van-skeleton :row="4"/>
 					<div class="placeholderLine10"></div>
-				</div>
-				<!-- <div class="millInfo" v-if="statistics.allMineralNum">
+				</div> -->
+				<div class="millInfo" v-if="statistics.allMineralNum">
 					<div class="infoBox">
-						<div class="amount">{{ statistics.allMineralNum || 0 }}</div>
-						<div class="margT6">FGC总量</div>
+						<div class="amount">2000000</div>
+						<div class="margT6">钻石总量</div>
 					</div>
 					<div class="infoBox">
 						<div class="amount">{{ statistics.allMineralNum - statistics.beDigNum - statistics.awardNum - statistics.beDestroyNum  || 0}}</div>
 						<div class="margT6">所剩数量</div>
-				</div> -->
+					</div>
+				</div>
 				<!-- <div class="millInfo">
 					<div class="infoBox">
 						<div>
@@ -583,7 +557,7 @@ $noticeHeight:40px;
 					</div>
 				</div> -->
 				<div class="cateInfo">
-					<div class="infoBox">
+					<!-- <div class="infoBox">
 						<router-link to="/volunteer">
 							<div class="iconBox">
 								<div class="iconBackground iconBackgroundAttendance">
@@ -592,11 +566,11 @@ $noticeHeight:40px;
 							</div>
 							<div class="text">志愿者</div>
 						</router-link>
-					</div>
+					</div> -->
 					<div class="infoBox" @click="toBlcokSearchView">
 						<div class="iconBox">
-							<div class="iconBackground iconBackgroundRank">
-								<van-icon class-prefix="iconfont" name="rank" />
+							<div class="iconBackground iconBackground3">
+								<van-icon class-prefix="iconfont" name="share3" />
 							</div>
 						</div>
 						<div class="text">区块浏览器</div>
@@ -612,21 +586,6 @@ $noticeHeight:40px;
 							</div>
 							<div class="text">共识投票</div>
 						</router-link>
-					</div>
-					<div class="infoBox">
-						<!-- <div class="bubble" v-if="isbubble1">
-							该模块正在内测中，暂时只对个人算力大于20G的矿工开放内测权限，内测完毕后方可对全体矿工开放！
-						</div> -->
-						<div class="bubble" v-if="isbubble1" @click="isbubble1 = false">
-							游戏模块已开通！
-						</div>
-						<div class="triangleRight" v-if="isbubble1"></div>
-						<div class="iconBox" @click="waiting">
-							<div class="iconBackground iconBackground1">
-								<van-icon class-prefix="iconfont" name="game" size="35"/>
-							</div>
-						</div>
-						<div class="text">娱乐游戏</div>
 					</div>
 				</div>
 				<div class="cateInfo">
@@ -780,13 +739,14 @@ $noticeHeight:40px;
 				isLoading:false,
 				userId:"",
 				userInfo:"",
-				getTodayAttendanceValue:0.02,
-				getTomorrowContributionValue: 0.02,
+				getTodayAttendanceValue:0.01,
+				getTomorrowContributionValue: 0.01,
 				dayNum:0,
 				showAttendanceModel:false,
 				attendanceTitle:"",
 				currentPage:1,
 				pageSize:3,
+				imageUrl:this.$api.domainName + '/image/banner/master.jpg',
 				images: [
 					this.$api.domainName + '/image/banner/master.jpg',
 				],
@@ -863,6 +823,7 @@ $noticeHeight:40px;
 				_this.$router.replace('login');
 				/* return; */
 			}
+			_this.getNoticeList();
 			_this.getHomeMineralStaticInfo();
 		},
 		methods: {
@@ -917,6 +878,19 @@ $noticeHeight:40px;
 					//console.log('sure');
 				})
 			},
+			toGameListView(){
+				let _this = this;
+				if(_this.$utils.getDateTime(new Date())>'2020/12/21 23:59:59'){
+					_this.$router.push("gameList")
+				}else{
+					Dialog.alert({
+					  title: '系统提示',
+					  message: '此功能正在努力建设中'
+					}).then(() => {
+					  // on close
+					});
+				}
+			},
 			waiting(){
 				let _this = this;
 				/* _this.$toast("此功能正在努力建设中"); */
@@ -943,8 +917,10 @@ $noticeHeight:40px;
 					_this.dayNum = _this.userInfo.attendanceBook.split(',').length;
 				}
 				_this.attendanceTitle = `已连续签到${_this.dayNum}天`;
-				_this.getTomorrowContributionValue = _this.$utils.getNextAttendanceValue(_this.dayNum);
-				_this.getTodayAttendanceValue = _this.$utils.getTodayAttendanceValue(_this.dayNum);
+				_this.getTomorrowContributionValue = 0.01;
+				_this.getTodayAttendanceValue = 0.01;
+				/* _this.getTomorrowContributionValue = _this.$utils.getNextAttendanceValue(_this.dayNum);
+				_this.getTodayAttendanceValue = _this.$utils.getTodayAttendanceValue(_this.dayNum); */
 				//判断今天是否已经签到
 				let nowDate = _this.$utils.getDate(new Date());
 				if(nowDate == _this.userInfo.beforeAttendanceDate) {
@@ -1266,7 +1242,7 @@ $noticeHeight:40px;
 			refreshEvent() {
 				/* alert("refresh"); */
 				let _this = this;
-				_this.getHomeMineralStaticInfo();
+				//_this.getHomeMineralStaticInfo();
 				// _this.getNoticeList4Swipe();
 				setTimeout(() => {
 				  _this.getNoticeList();
@@ -1359,6 +1335,7 @@ $noticeHeight:40px;
 					pageSize: 1,
 					type:0
 				}
+				_this.loading = true;
 				_this.$ajax.ajax(_this.$api.getNoticePageList, 'GET', params, function(res) {
 					// //console.log('res', res);
 					if (res.code == _this.$api.CODE_OK) {
@@ -1376,6 +1353,8 @@ $noticeHeight:40px;
 					}else{
 						//_this.$toast(res.message);
 					}
+				},function(){
+					_this.loading = false;
 				})
 			},
 			noticeTap() {

@@ -39,7 +39,7 @@
 				新手练习区
 			</div>
 			<div class="logoBox color2" @click="game2Btn">
-				竞技分红区
+				竞技奖励区
 			</div>
 		</div>
 	</div>
@@ -137,7 +137,7 @@
 			},
 			game2Btn(){
 				let _this = this;
-				if(_this.$utils.getTimeHMS(new Date())>'20:00:00'&&_this.$utils.getTimeHMS(new Date())<'23:59:59'){
+				/* if(_this.$utils.getTimeHMS(new Date())>'20:00:00'&&_this.$utils.getTimeHMS(new Date())<'23:59:59'){
 					Dialog.alert({
 					  title: '系统提示',
 					  message: '20~24点是系统清算时间，请明日再来'
@@ -145,7 +145,7 @@
 					  // on close
 					});
 					return;
-				}
+				} */
 				_this.$router.push('/game1024');
 			},
 		}

@@ -2,7 +2,7 @@
 	// @import '@/assets/scss/variable.scss';
 	@import '~@/assets/scss/index.scss';
 	$main-box-color:#ffffff;
-	.myPage{
+	.myPage1{
 		position: absolute;
 		min-height: 100%;
 		width: 100%;
@@ -89,15 +89,6 @@
 		}
 		
 		$avatorWidth:80px;
-		.level {
-			background-color: $main-adorn-color;
-			color: $main-box-fh-text-color;
-			height: 24px;
-			line-height: 24px;
-			font-size: 11px;
-			border-radius: 0 10px 10px 0;
-			padding: 4px 8px 4px 4px;
-		}
 		.box1 {
 			/* background-color: $main-box-fh-bg-color;
 			color: $main-box-fh-text-color; */
@@ -131,6 +122,16 @@
 							font-size: 14px;
 							height: 20px;
 							line-height: 20px;
+						}
+						
+						.level {
+							background-color: $main-adorn-color;
+							color: $main-box-fh-text-color;
+							height: 24px;
+							line-height: 24px;
+							font-size: 11px;
+							border-radius: 0 10px 10px 0;
+							padding: 4px 8px 4px 4px;
 						}
 					}
 					.line{
@@ -204,7 +205,7 @@
 	}
 </style>
 <template>
-	<div class="myPage">
+	<div class="myPage1">
 	<div v-if="$route.meta.footer==true">
 		<m-header>
 			<i class="leftBox"></i>
@@ -247,6 +248,7 @@
 						<span @click="toBookView('6')">信誉分 {{userInfo.credit}}</span> <i class="iconfont iconfont-question" @click="showTip('credit')"/>
 						
 					</div>
+					<div class="placeholderLine"></div>
 					<div class="line">
 						<span class="">
 							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" :loading="giveLevelDealProfitLoading" @click="giveLevelDealProfit">全球分红</van-button>
@@ -255,7 +257,7 @@
 							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="giveCashProfit">持钻挖矿</van-button>
 						</span>
 						<span class="margL10">
-							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="buyTicketBtn">购买感恩券</van-button>
+							<van-button size="mini" color="linear-gradient(to right, #ffae00, #ff8400)" @click="handleCopy4BuyTicket(userInfo.mobilePhone,$event)">购买感恩券</van-button>
 						</span>
 					</div>
 				</div>
@@ -370,7 +372,7 @@
 				</div>
 				<div class="infoBox">
 					 <!-- @click="waiting" -->
-					 <div class="iconBox" @click="waiting">
+					 <div class="iconBox" @click="waiting4Share">
 					 	<div class="iconBackground iconBackground1">
 					 		<van-icon class-prefix="iconfont" name="share2"/>
 					 	</div>
@@ -421,7 +423,7 @@
 					</div>
 				</router-link>
 			</div>
-			<div class="items">
+			<!-- <div class="items">
 				<router-link to="myRaiseList">
 					<div class="my-cell">
 						<div class="flex1">
@@ -432,7 +434,7 @@
 						</div>
 					</div>
 				</router-link>
-			</div>
+			</div> -->
 			<div class="items" v-if="userInfo.isAgent==3">
 				<router-link to="dealList">
 					<div class="my-cell">
@@ -465,7 +467,7 @@
 					</div>
 				</router-link>
 			</div>
-			<div class="items" v-if="userInfo.isAgent>=3">
+			<div class="items">
 				<div class="items">
 					<router-link to="lookInfo">
 						<div class="my-cell">
@@ -496,7 +498,7 @@
 				<router-link to="abandonFirst">
 					<div class="my-cell">
 						<div class="flex1">
-							放弃首码
+							转到帮扶链上级下面
 						</div>
 						<div class="flex2">
 							<i class="iconfont iconfont-right-arrow2"></i>
@@ -517,7 +519,15 @@
 				</router-link>
 			</div>
 		</van-pull-refresh>
-		
+		<van-dialog v-model="showToBuyTicketModel" title="买券提示" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
+			<div class="paddingWing">
+				<div class="placeholderLine20"></div>
+				<div class="tip4modelNew">感恩券1CNY/张，另加少许服务费，<b class="red textBold">为了避免充值的时候填写错手机号，系统已经帮您复制了手机号</b>，前去买券页面粘贴即可！</div>
+				<div class="placeholderLine20"></div>
+			</div>
+			<!-- <van-button type="info" @click="buyMillLoading=true;" :disabled="buyMillLoading" :block="true">租赁</van-button> -->
+			<van-button type="info" size="large" @click="buyTicketBtn" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true">好的</van-button>
+		</van-dialog>
 		<!-- <m-fullscreen></m-fullscreen> -->
 		<!-- <m-refresh @refreshEvent="refreshEvent"></m-refresh> -->
 		<van-dialog v-model="showTipModel" title="系统提示" :showCancelButton="isShowCancelBtn" cancelButtonText="稍后" confirmButtonText="好的" @confirm="confirmBtn">
@@ -556,6 +566,7 @@
 	export default {
 		data() {
 			return {
+				showToBuyTicketModel:false,
 				idCard:'',
 				showDeleteAccountModel:false,
 				isShowCancelBtn:true,
@@ -586,37 +597,11 @@
 			mRefresh,
 			// mFullscreen
 		},
-		// beforeRouteEnter(to,from,next) {
-		// 	//console.log("enter");
-		// 	next();
-		// },
-		watch:{
-			/* $route(now,old){
-				let _this = this;
-				//console.log("watch $route change");
-				if(_this.$cookies.get('isRefreshUserInfo')==1){
-					_this.getUserInfo();
-					_this.$cookies.set('isRefreshUserInfo',0,_this.$api.cookiesTime);
-				}
-			}, */
-		},
 		created() {
 			let _this = this;
 			if(_this.$utils.getDate(new Date())>'2020/11/02'){
 				_this.isShowBuyProfit = false;
 			}
-			/* let cv = 0;
-			let loveValue = 2000;
-			for(let i=0;i<180;i++){
-				cv=cv+0.1;
-				loveValue = loveValue - 0.1*19;
-			}
-			/* setTimeout(function(){
-				console.log("123200000")
-			},2000) */
-			//console.log("getTime:" + Date.parse(new Date('2020/04/30 09:45:12:123')));
-			/* let JsDecrypt = _this.$JsCrypto.myDecode2("FIeZaO8MkOVJTu2sSmbdcw==");
-			console.log("JsDecrypt",JsDecrypt); */
 			let userInfo = localStorage.getItem("_USERINFO_");
 			if(userInfo){
 				////console.log("userInfo_localStorage");
@@ -636,15 +621,16 @@
 				_this.$router.replace('login');
 				return;
 			}
-			if(_this.$cookies.get('isRefreshUserInfo')==1){
+			_this.getUserInfo();
+			/* if(_this.$cookies.get('isRefreshUserInfo')==1){
 				_this.getUserInfo();
-			}
-			if(_this.userInfo.isAgent==1){
+			} */
+			/* if(_this.userInfo.isAgent==1){
 				_this.getAssistAgentInfo4Province();
 			}
 			if(_this.userInfo.isAgent==2){
 				_this.getAssistAgentInfo4City();
-			}
+			} */
 			/* if(_this.userInfo.manType==2){
 				_this.getServiceDsPassword();
 			} */
@@ -657,6 +643,21 @@
 					return cityInfo.cityName
 				}
 				
+			},
+			waiting4Share(){
+				let _this = this;
+				/* _this.$toast("此功能正在努力建设中"); */
+				if(_this.$utils.getDateTime(new Date())>'2020/12/19 00:00:01'){
+					_this.$router.push('myShare');
+				}else{
+					Dialog.alert({
+					  title: '系统提示',
+					  confirmButtonText:'加油',
+					  message: "20年12月19号开始对接团队长，每个号可对接66个，正是推广功能将会在21年1月1号开放"
+					}).then(() => {
+					  // on confirm
+					})
+				}
 			},
 			waitingInnerRegister(){
 				let _this = this;
@@ -704,19 +705,8 @@
 			},
 			buyTicketBtn(){
 				let _this = this;
-				Dialog.confirm({
-				  title: '购买提示',
-				  confirmButtonText:'确认',
-				  message: "感恩券1CNY/张，另加少许服务费，请问是否确认要购买感恩券?"
-				}).then(() => {
-				  // on confirm
-				  //_this.account="1234567";
-				  let url = `http://pay.8gesy.com/payment/fenqu.html?id=D7501BC7C9641EDE`;
-				  //window.open(url);
-				  window.open(url,'_self');
-				}).catch(()=>{
-					//cancel
-				})
+				let url = `http://pay.8gesy.com/payment/fenqu.html?id=D7501BC7C9641EDE`;
+				window.open(url,'_blank');
 			},
 			toBlcokSearchView(){
 				let _this = this;
@@ -802,6 +792,10 @@
 			},
 			giveCashProfit(){
 				let _this = this;
+				if(_this.userInfo.actived!=1){
+					_this.$toast('请先去实名');
+					return;
+				}
 				_this.$router.push('mill2');
 			},
 			giveLevelDealProfit(){
@@ -856,6 +850,12 @@
 				_this.showSendSMSTipModel = false;
 				clip(text,event,function(res){
 					_this.$toast(`复制成功`);
+				});
+			},
+			handleCopy4BuyTicket(text, event) {
+				let _this = this;
+				clip(text,event,function(res){
+					_this.showToBuyTicketModel=true;
 				});
 			},
 			getServiceDsPassword(){
@@ -962,11 +962,15 @@
 				}else if(val=='platformTicket'){
 					message = '感恩券：可用于交易的时候当手续费。获取途径：购买。';
 				}else if(val=='contribution'){
-					message = '钻石值：由系统奖励或母币兑换而来，每天签到释放1%。';
+					message = '钻石值：由母币兑换而来，每天签到释放百分之一。';
 				}else if(val=='credit'){
 					message = '信誉分：交易时候的信用度，顺利完成交易增加10,交易被取消或交易超时确认减20，小于70则无法参与交易，小于60则自动被冻结账号。';
 				}else if(val=='actived'){
 					message = '激活账户：连续签到15天后即可激活账户。';
+				}else if(val=='teamCalculationPower'){
+					message = '团队算力：个人算力+近代下级的个人算力。它决定着您的用户等级，分别有：青铜、白银、黄金、铂金、钻石五个等级，具体请查看【个人中心--任务中心】。';
+				}else if(val=='myCalculationPower'){
+					message = '个人算力：由个人所拥有的矿机所决定。';
 				}
 				Dialog.alert({
 				  title: '温馨提示',
@@ -1013,18 +1017,20 @@
 				let _this = this;
 				_this.$ajax.ajax(_this.$api.loginOut, 'GET', null, function(res){
 					if(res.code == _this.$api.CODE_OK){
-						_this.$toast('账户异常且退出登录');
-						// localStorage.clear();//若不允许多账号登录，请把这个给去掉
-						// //console.log("_this.$cookies.keys()",_this.$cookies.keys());
-						// _this.$cookies.remove('_USERINFO_');
-						// _this.$cookies.remove('buyAndSellInfo');
+						localStorage.removeItem('_USERINFO_');
 						_this.$cookies.remove('userId');
 						_this.$cookies.remove('token');
-						// //console.log("_this.$cookies.keys()",_this.$cookies.keys());
+						_this.$cookies.remove('isRefreshDealInfo');
+						_this.$cookies.remove('tab_raise_list');
 					}else{
 						_this.$toast(res.message);
 					}
 				},function(){
+					localStorage.removeItem('_USERINFO_');
+					_this.$cookies.remove('userId');
+					_this.$cookies.remove('token');
+					_this.$cookies.remove('isRefreshDealInfo');
+					_this.$cookies.remove('tab_raise_list');
 					_this.$router.replace('login');
 				})
 			},
@@ -1057,10 +1063,14 @@
 							_this.logout();
 						}
 					}else{
+						if(res.code == 4003){
+							_this.logout();
+						}
 						_this.$toast(res.message);
 						if(res.message=='登录已过期，请重新登录'){
-							_this.$router.push('/login');
+							_this.logout();
 						}
+						
 					}
 				},function(){
 					_this.loading = false;

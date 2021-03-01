@@ -109,7 +109,7 @@
 		},
 		methods: {
 			back(){
-				this.$router.go(-1);
+				this.$router.replace('home');
 			},
 			judgeTime4VoteStatus(val){
 				let _this = this;

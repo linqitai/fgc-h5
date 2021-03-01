@@ -199,7 +199,7 @@
 			<div class="textJustify lineHeight">
 				尊敬的原始矿工实名前请认真阅读以下规则：<br>
 				<div class="placeholderLine4"></div>
-				【1】平台为保证交易的顺利进行，<b class="blue">【真实姓名务必和支付宝、微信中的实名信息一致，且支付宝和微信都要设置照片头像，不然会当作违规账号且冻结处理】</b>。<br>
+				【1】平台为保证交易的顺利进行，<b class="blue">【真实姓名务必和支付宝、微信中的实名信息一致，不然会当作违规账号且冻结处理】</b>。<br>
 				<div class="placeholderLine4"></div>
 				【2】<i class="textBold">支付宝</i>默认为注册手机号，您的支付宝若没绑定该手机号，请先在微信的【我的--设置--安全设置】中绑定，且在【设置--隐私--常用隐私设置】里开启【向好友公开我的真实姓名】和【通过手机号查找到我】的功能。<br>
 				<div class="placeholderLine4"></div>
@@ -381,6 +381,11 @@ export default {
 					clearInterval(result);
 				}else{
 					_this.timeRead = _this.timeRead - 1;
+					if(_this.timeRead==0){
+						_this.timeRead = "已阅读";
+						_this.isDealDisabled = false;
+						clearInterval(result);
+					}
 				}
 			},1000);
 		},

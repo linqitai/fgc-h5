@@ -1,10 +1,9 @@
-export const hostImg = 'http://192.168.100.3:8088';
 const host = '/fgcApp/'
 const domainName = 'https://www.assist-china.co.ax';
 const hostIPPort = 'http://localhost:8081';
 
 export default {
-	tabBgColor:'#d40303',
+	tabBgColor:'#be0000',
 	tabTextColor:'#ffffff',
 	tabActiveColor:'#ffae00',
 	projectName:'感恩链',
@@ -27,7 +26,6 @@ export default {
 	bsTip:'您若是在微信中打开感恩链，在[提交实名]与[交易钻石]的时候，建议优先使用UC等主流浏览器打开感恩链并进行操作。',
 	manType1Tip:'经系统检测，您的账号数据异常(没买入量也没怎么发展团队为何刚开始就有那么高的产量?)。若是第一批对接的团队长，得了中型而没去发展团队的，请直推实名超过30名且团队算力大于30G且买入个数大于300个，才能进行该操作。',
 	raiseTip:'为了保证赠与人的每一个感恩券都能全额给付求助者，钻石感恩链平台不收取任何手续费。求助者筹到多少兑现多少，不让任何一份爱心流失。感恩券：成本价0.7￥，求助者筹到多少，平台就以0.7￥的价格向求助者购买多少。',
-	HOST_IMG: hostImg,
 	cookiesTime: 60 * 60 * 72,
 	cookiesTime8h: 60 * 60 * 8,
 	cookiesTime24h: 60 * 60 * 24,
@@ -215,6 +213,7 @@ export default {
 	//deal
 	getAssistTransactionByCoinRT: host + "assist/transaction/getAssistTransactionByCoinRT",
 	sureDeal4SellerById: host + "assist/transaction/sureDeal4SellerById",
+	setDealToWaitSure4S: host + "assist/transaction/setDealToWaitSure4S",
 	cancelAssistTransaction4S: host + "assist/transaction/cancelAssistTransaction4S",
 	getAssistTransactionExtendById: host + "assist/transaction/getAssistTransactionExtendById",
 	getAssistTransactionListByPage: host + "assist/transaction/getAssistTransactionListByPage",

@@ -105,23 +105,25 @@
 			  <div slot="action" @click="onSearch">搜索</div>
 			</van-search> -->
 			<van-pull-refresh v-model="loading" @refresh="refreshEvent">
-				<van-list v-model="loading1" :finished="finished1" finished-text="没有更多了" @load="onLoad1">
+				 <!-- finished-text="没有更多了" -->
+				<van-list :finished="finished1" finished-text="我是有底线的">
 					 <div class="list">
 						<div class="item" v-for="item in list1" :key="item.id">
 							<div class="flex">
-								<div class="">{{item.coinReleaseTime}}</div>
-								<div class="line margT10">
-									<span @click="toMy4OtherView(item.buyerId)">
-										<!-- <i class="iconfont iconfont-name"></i> -->
-										<span class="nickName"><i class="textColor">{{item.buyerId}}</i></span>
+								<!-- <div class="">{{item.coinReleaseTime}}</div> -->
+								<div class="line">
+									<span>
+										<!-- <i class="iconfont iconfont-name">@click="toMy4OtherView(item.buyerId)"</i> -->
+										<span class="nickName" @click="toMy4OtherView(item.buyerId)"><i class="textColor">{{item.buyerId2}}</i></span>
 										<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
 									</span>
 									从
-									<span @click="toMy4OtherView(item.sellerId)">
-										<span class="nickName"><i class="textColor">{{item.sellerId}}</i></span>
-										<!-- <i class="iconfont iconfont-right-arrow2"></i> -->
+									<span>
+										<span class="nickName" @click="toMy4OtherView(item.sellerId)"><i class="textColor">{{item.sellerId2}}</i></span>
+										<!-- <i class="iconfont iconfont-right-arrow2">@click="toMy4OtherView(item.sellerId)"</i> -->
 									</span>
-									买<i class="textAdornColor">{{item.num}}</i>个
+									买入<i class="textAdornColor">{{item.num}}</i>个
+									<!-- <div class="margT10"></div> -->
 								</div>
 								<!-- <div class="line margT16">
 									<span class="nickName">区块高度 <i class="textColor">{{item.id}}</i></span>
@@ -194,6 +196,7 @@
 		},
 		create() {
 			this.toScrollTop();
+			
 			//console.log("inArray:",_this.utils.inArray('a',['a','b']));
 		},
 		mounted() {
@@ -204,6 +207,7 @@
 			}else{
 				_this.activeName = "mineral";
 			}
+			_this.onLoad1();
 			//console.log("inArray:",_this.$utils.inArray('c',['a','b']));
 		},
 		methods: {
@@ -253,7 +257,7 @@
 				let _this = this;
 				this.$cookies.set("tab_name_dealRecord", name, _this.$api.cookiesTime)
 			},
-			onLoad1(){
+			/* onLoad1(){
 				let _this = this;
 				let params = {
 					pageNo: _this.currentPage1,
@@ -284,40 +288,28 @@
 						_this.$toast(res.message);
 					}
 				})
-			},
-			/* onLoad1(){
+			}, */
+			onLoad1(){
 				let _this = this;
 				let params = {
 					pageNo: _this.currentPage1,
-					pageSize: _this.pageSize,
-					type:3
+					pageSize: 20
 				}
 				_this.loading1 = true;
-				_this.$ajax.ajax(_this.$api.getMineralBookList4Type, 'GET', params, function(res) {
+				_this.$ajax.ajax(_this.$api.getAssistTransactionByCoinRT, 'GET', params, function(res) {
 					_this.loading = false;
 					if (res.code == _this.$api.CODE_OK) {
-						let list = res.data.list;
-						list = list.filter((item)=>{
-							let b = _this.$utils.inArray(item.fromUserId,_this.manTypeList);
-							if(b==false){
-								b = _this.$utils.inArray(item.toUserId,_this.manTypeList);
-							}
-							return b==false;
-						});
-						_this.list1.push(...list);
-						_this.loading1 = false;
-						if(res.data.endRow == res.data.total){
-							_this.finished1 = true;
-						}else{
-							_this.currentPage1 = _this.currentPage1 + 1;
-						}
+						_this.list1 = res.data.list;
 					}else{
 						_this.loading1 = false;
 						_this.finished1 = true;
 						_this.$toast(res.message);
 					}
+				},function(){
+					_this.loading1 = false;
+					_this.finished1 = true;
 				})
-			}, */
+			},
 		}
 	}
 </script>

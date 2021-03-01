@@ -226,7 +226,7 @@
 					<!-- <div class="textCenter margT10">
 						<i class="iconfont iconfont-complaint f-18" @click="toComplainView(userInfo.userId)"></i> <i class="f-16">{{userInfo.beComplaintTimes}}</i>
 					</div> -->
-					<div class="textCenter margT10" v-if="userInfo4Me.isAgent==3&&(userInfo4Me.userId=='en15079AQ107o91Y7217'||userInfo4Me.userId=='1502d824670iQ1215VW8'||userInfo4Me.userId=='1580I60773e1XBJ52634')">
+					<div class="textCenter margT10" v-if="userInfo4Me.isAgent==3&&(userInfo4Me.userId=='17y60355638oks179u51')">
 						<van-button color="linear-gradient(to right, #ffae00, #ff8400)" size="mini" :loading="loading4Freeze" @click="freeze">冻结TA</van-button>
 						<div class="placeholderLine10"></div>
 						<van-button color="linear-gradient(to right, #ffae00, #ff8400)" size="mini" :loading="loading4CancelAccount" @click="cancelAccount">注销账号</van-button>
@@ -234,38 +234,49 @@
 				</div>
 				<div class="flex flex2">
 					<div class="line1">
-						<span class="nick_name" v-if="userInfo4Me.isAgent<3">***</span>
+						<span class="nick_name" v-if="userInfo4Me.isAgent<3">匿名</span>
 						<span class="nick_name" v-if="userInfo4Me.isAgent>2">{{$JsCrypto.myDecode1(userInfo.nickName)}} </span>
 					</div>
-					<!-- <div class="line">
+					<div class="line">
 						<div class="left">直推人数 {{userInfo.teamateNum}}</div>
 						<div class="mlBox left">有效人数 {{userInfo.validNum}}</div>
-					</div> -->
-					<div class="line">
-						<span @click="toBookView('3',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">钻石值 {{userInfo.contributionValue}}</span>
-						<span v-if="userInfo4Me.userId!='17y60355638oks179u51'">钻石值 {{userInfo.contributionValue}}</span>
+					</div>
+					<div class="line" v-if="userInfo4Me.isAgent==3&&(userInfo4Me.userId=='17y60355638oks179u51')">
+						<div class="left">买入次数 {{userInfo.buyTimes}}</div>
+						<div class="mlBox left">买入数量 {{userInfo.buyAmount}}</div>
+					</div>
+					<div class="line" v-if="userInfo4Me.isAgent==3&&(userInfo4Me.userId=='17y60355638oks179u51')">
+						<div class="left">卖出次数 {{userInfo.sellTimes}}</div>
+						<div class="mlBox left">卖出数量 {{userInfo.sellAmount}}</div>
 					</div>
 					<div class="line">
-						<span @click="toBookView('6',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">信誉分 {{userInfo.credit}}</span>
-						<span v-if="userInfo4Me.userId!='17y60355638oks179u51'">信誉分 {{userInfo.credit}}</span>
+						<span @click="toBookView('3',userInfo.userId)">钻石值 {{userInfo.contributionValue}}</span>
+						<!-- <span v-if="userInfo4Me.userId!='17y60355638oks179u51'">钻石值 {{userInfo.contributionValue}}</span> -->
+					</div>
+					<div class="line">
+						<!-- <span @click="toBookView('6',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">信誉分 {{userInfo.credit}}</span> -->
+						<span @click="toBookView('6',userInfo.userId)">信誉分 {{userInfo.credit}}</span>
+					</div>
+					<div class="line" v-if="userInfo4Me.isAgent==3&&(userInfo4Me.userId=='17y60355638oks179u51')">
+						<i class="underline" @click="toMachineView(userInfo.userId)">查看TA的矿机</i>
 					</div>
 				</div>
 			</div>
 			<div class="line1pxbgcolor"></div>
 			<div class="box box2">
 				<div class="flex flex1">
-					<div class="value" @click="toBookView('1',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.teamCalculationPower}}</div>
-					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.teamCalculationPower}}</div>
+					<!-- <div class="value" @click="toBookView('1',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.teamCalculationPower}}</div> -->
+					<div class="value" @click="toBookView('1',userInfo.userId)">{{userInfo.teamCalculationPower}}</div>
 					<div class="text" @click="showTip('teamCalculationPower')">团队算力</div>
 				</div>
 				<div class="flex flex4">
-					<div class="value" @click="toBookView('2',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.platformTicket}}</div>
-					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.platformTicket}}</div>
+					<!-- <div class="value" @click="toBookView('2',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.platformTicket}}</div> -->
+					<div class="value" @click="toBookView('2',userInfo.userId)">{{userInfo.platformTicket}}</div>
 					<div class="text">感恩券</div>
 				</div>
 				<div class="flex flex2">
-					<div class="value" @click="toBookView('4',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.thisWeekMineral}}</div>
-					<div class="value" v-if="userInfo4Me.userId!='17y60355638oks179u51'">{{userInfo.thisWeekMineral}}</div>
+					<!-- <div class="value" @click="toBookView('4',userInfo.userId)" v-if="userInfo4Me.userId=='17y60355638oks179u51'">{{userInfo.thisWeekMineral}}</div> -->
+					<div class="value" @click="toBookView('4',userInfo.userId)">{{userInfo.thisWeekMineral}}</div>
 					<div class="text">钻石</div>
 				</div>
 			</div>
@@ -285,6 +296,7 @@
 					<div class="text">交易中<br>钻石</div>
 				</div>
 			</div>
+			
 			<div class="line1pxbgcolor"></div>
 			<div class="paddingWing f-11 white">
 				<div class="placeholderLine10"></div>

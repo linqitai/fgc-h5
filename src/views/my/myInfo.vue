@@ -510,7 +510,7 @@ export default {
 			let _this = this;
 			_this.showRealNameModel = true;
 		},
-		getUserInfo(){
+		/* getUserInfo(){
 			let _this = this;
 			_this.loading = true;
 			_this.$ajax.ajax(_this.$api.getAssistUserInfo4RealName, 'GET', null, function(res){
@@ -534,7 +534,7 @@ export default {
 					_this.isRealName = false;
 				}
 			})
-		},
+		}, */
 		initializeHintInfo(){
 			let _this = this;
 			
@@ -557,11 +557,11 @@ export default {
 		// 更新信息
 		update(flag){
 			let _this = this;
-			console.log('flag',flag);
+			//console.log('flag',flag);
 			this.showUpdateModel = true;
 			_this.flag = flag;
 			_this.form = _this.$utils.formClear(_this.form);
-			console.log('_this.form',_this.form);
+			//console.log('_this.form',_this.form);
 			if(flag == 'nickName'){
 				_this.label = '昵称';
 				_this.titleName = '修改昵称';
@@ -592,7 +592,7 @@ export default {
 		// 更新密码
 		updatePassword(flag){
 			let _this = this;
-			console.log('flag',flag);
+			//console.log('flag',flag);
 			this.showUpdatePasswordModel = true;
 			_this.flag = flag;
 			_this.form = _this.$utils.formClear(_this.form);
@@ -606,9 +606,10 @@ export default {
 		},
 		toUpdateSecurityPassword(){
 			let _this = this;
+			console.log("_this.userInfo.securityPassword",_this.userInfo.securityPassword);
 			Dialog.alert({
 			  title: '系统提示',
-			  message: `安全密码是实名认证的时候所设置的，系统对您的安全密码提醒是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号！`,
+			  message: `安全密码是实名认证的时候所设置的，系统对您的安全密码前几位提醒是:${_this.userInfo.securityPassword}，若忘记了，可找客服初始化成手机号！`,
 			  confirmButtonText:'好的，我再试试'
 			}).then(() => {
 			  // on close resetRealName
@@ -786,7 +787,7 @@ export default {
 				if(_this.$reg.safePassword.test(_this.form.securityPassword)){
 					_this.errorInfo.securityPassword = '';
 				}else{
-					_this.errorInfo.securityPassword = _this.$reg.securityPasswordHint;
+					_this.errorInfo.securityPassword = _this.$reg.safePasswordHint;
 				}
 				if(_this.form.securityPassword.length<6){
 					_this.errorInfo.securityPassword = '密码长度请填写6~16位之间';

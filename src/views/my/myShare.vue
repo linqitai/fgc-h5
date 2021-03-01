@@ -14,8 +14,8 @@
 		box-sizing: border-box;
 		z-index: 2;
 		.header{
-			background-color: #012755 !important;
-			border-bottom: 0.0625rem solid #001e41;
+			background-color: #be0000 !important;
+			border-bottom: 0.0625rem solid #a30000;
 		}
 		.poster {
 			// margin-top: $headerHeight;
@@ -29,7 +29,7 @@
 			.posterBG {
 				position: relative;
 				height: 520px;
-				background-color: #012755;
+				background-color: #be0000;
 				overflow: hidden;
 				$widthBox1: 240px;
 				$widthBox2: 120px;
@@ -238,8 +238,8 @@
 				<!-- <div class="box5">
 					<img src="../../assets/image/poster/PostText1.png">
 				</div> -->
-				<!-- <img class="helpPic" src="../../assets/image/cq.jpg"> -->
-				<img class="helpPic" :src="images[index]">
+				<img class="helpPic" src="../../assets/image/bannerfgc1.jpg">
+				<!-- <img class="helpPic" :src="images[index]"> -->
 				<!-- <div style="width: 100%;">
 					<van-swipe :autoplay="3000" :lazy-render="true">
 					  <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -263,8 +263,8 @@
 					分享链接: {{registerUrl}}
 				</div>
 				<div class="placeholderLine10"></div>
-				<van-button type="info" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" @click="switchImage" :block="true">切换招募图片</van-button>
-				<div class="placeholderLine10"></div>
+				<!-- <van-button type="info" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" @click="switchImage" :block="true">切换招募图片</van-button>
+				<div class="placeholderLine10"></div> -->
 				<van-button type="info" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" @click="handleCopy(registerUrl,$event)" :block="true">复制分享链接</van-button>
 				<div class="placeholderLine10"></div>
 				<div class="tip4model3">
@@ -298,10 +298,10 @@
 		data() {
 			return {
 				index:0,
-				images: [
+				/* images: [
 					this.$api.domainName + '/image/banner/master.jpg',
 					this.$api.domainName + '/image/banner/cq.jpg',
-				],
+				], */
 				showTipModel:false,
 				loading1: false,
 				finished1: false,
@@ -362,24 +362,18 @@
 				let _this = this;
 				let id = _this.userInfo.shareCode;
 				let href = window.location.href;
-				console.log('window.location.href:',window.location.href);
+				//console.log('window.location.href:',window.location.href);
 				let domainName = href.split('#')[0];
-				let registerUrl = ''
-				if (process.env.NODE_ENV === "development") {
+				let registerUrl = 'https://fgc.helpchain.co.ax/#/register?id=' + id;
+				/* if (process.env.NODE_ENV === "development") {
 					registerUrl = domainName + '#/register?id=' + id;
-					//registerUrl = _this.$api.domainName + '/#/register?id=' + id;
-					//console.log('registerUrl', registerUrl);
 				}else {
 					if(domainName=='https://www.assist-china.co.ax/'||domainName=='https://www.helpchain.co.ax/'){
 						registerUrl = domainName + '#/register?id=' + id;
 					}else{
 						registerUrl = domainName + '#/register?id=' + id;
-						//registerUrl = _this.$api.domainName + '/#/register?id=' + id;
 					}
-					//registerUrl = href.split('#')[0] + '#/register?id=' + id;
-					
-					//console.log('registerUrl', registerUrl);
-				}
+				} */
 				
 				let qrcode = new QRCode('qrcode', {
 					width: 120, // 设置宽度，单位像素

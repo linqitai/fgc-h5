@@ -151,9 +151,18 @@
 		},
 		created() {
 			let _this = this;
-			_this.userId = _this.$cookies.get('userId');
-			if(_this.$utils.isNUll(_this.userId)){
+			let userInfo = localStorage.getItem("_USERINFO_");
+			if(userInfo){
+				////console.log("userInfo_localStorage");
+				//_this.userInfo = JSON.parse(userInfo);
+				_this.userId = userInfo.userId;
+			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}

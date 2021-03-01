@@ -70,34 +70,6 @@
 			}
 		}
 	}
-	/* .shadeMaster{
-		position: fixed;
-		top: 0;
-		left: 0;
-		text-align: center;
-		width: 100%;
-		height: 100%;
-		background-color:rgba(0,0,0,0.5);
-		p{
-			position: absolute;
-			color: white;
-			font-size: 28px;
-			text-align: center;
-			top:50%;
-			width: 100%;
-			transform: translateY(-50%);
-			-webkit-transform: translateY(-50%);
-			span{
-				color:#5FD6FF;
-			}
-		}
-		.img{
-			position: absolute;
-			display: block;
-			right: 30px;
-			top:10px;
-		}
-	} */
 	.van-cell__value,.van-cell__value--alone,.van-field__control{
 		color: $mainTextColor !important;
 	}
@@ -158,7 +130,8 @@
 			</div>
 			<div class="placeholderLine6"></div>
 			<van-button color="linear-gradient(to right, #ffae00, #ffae00)" size="normal" :block="true" :loading="isLoading" @click="loginBtn" loading-type="spinner">登  录</van-button>
-		
+			<div class="placeholderLine10"></div>
+			<van-button type="primary" size="normal" :block="true" @click="toAppView" loading-type="spinner">下载APP</van-button>
 			<div class="placeholderLine10"></div>
 			<van-button size="normal" :block="true" @click="registerBtn" loading-type="spinner">去注册</van-button>
 			<div class="placeholderLine10"></div>
@@ -259,10 +232,9 @@
 			_this.getAssistMineralBookByRemark(citySN.cip);
 			
 			//_this.$cookies.remove('_USERINFO_')
-			
-			/* if(_this.$cookies.get('token')){
-				_this.$router.push("home");
-			} */
+			if(!_this.$utils.isNUll(_this.$cookies.get('token'))){
+				_this.$router.replace("home");
+			}
 			//_this.bsTip();
 			//_this.getAssistMaintainInfo();
 		},
@@ -300,6 +272,10 @@
 			isRememberChange(val){
 				let _this = this;
 				_this.isRemember = val;
+			},
+			toAppView(){
+				let _this = this;
+				_this.$router.replace('/downLoadApp');
 			},
 			forget(){
 				let _this = this;

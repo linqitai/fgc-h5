@@ -7,7 +7,7 @@
 		background-color: $main-box-color;
 		z-index: 2;
 		.unFreezePage{
-			min-height: 600px;
+			min-height: 300px;
 			color: $mainTextColor;
 			background-color: $main-box-color;
 			.formBox{
@@ -18,25 +18,6 @@
 				}
 				.van-cell-group,.van-cell{
 					background-color: inherit !important;
-				}
-				.van-cell{
-					color: $mainTextColor !important;
-					padding: 10px 0 !important;
-					border-bottom: 1px solid $main-blue-black-color !important;
-					/* &::last-child{
-						border-bottom: 1px solid #BABABA !important;
-					} */
-				}
-				.van-cell__value,.van-cell__value--alone,.van-field__control{
-					color: $mainTextColor !important;
-				}
-				.van-cell:not(:last-child)::after{
-					left: 0 !important;
-				}
-				.van-button__text{
-					font-size: 15px;
-					font-weight: bold;
-					letter-spacing: 2px;
 				}
 			}
 		}
@@ -57,17 +38,17 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				放弃首码
+				转移到帮扶链上级下面
 			</div>
 			<i class="iconfont rightBox icon"></i>
 		</m-header>
 		<div class="unFreezePage">
 			<div class="paddingWing f-12 lineHeight tip4model1">
-				放弃首码的条件：团队算力为0。<br>
-				放弃首码后上级会变回帮扶链里的上级
+				转移的条件：团队算力为0。<br>
+				转移后上级会变回帮扶链里的上级。
 			</div>
 			<van-cell-group>
-				<van-field v-model="idCard" clearable label="身份证号校验" placeholder="请填写身份证号" maxlength="18"/>
+				<van-field v-model="idCard" clearable label="身份证号校验" placeholder="请填写自己的身份证号" maxlength="18"/>
 			</van-cell-group>
 			<div class="placeholderLine10"></div>
 			<!-- <div class="formBox paddingWing">
@@ -78,7 +59,7 @@
 			</div> -->
 		</div>
 		<div class="sureBtn">
-			<van-button color="linear-gradient(to right, #ffae00, #ff8400)" :loading="loading" size="large" @click="submit">确认放弃首码</van-button>
+			<van-button color="linear-gradient(to right, #ffae00, #ff8400)" :loading="loading" size="large" @click="submit">确认转移</van-button>
 		</div>
 		<van-dialog v-model="showTipModel" title="问题小帮手" confirmButtonText="知道了">
 			<div class="paddingWing f-12 lineHeight tip4model2">
@@ -142,19 +123,28 @@
 			submit(){
 				let _this = this;
 				Dialog.confirm({
-				  title: '放弃首码确认',
-				  message: '请问是否要放弃首码，然后转移到原来帮扶券的上级下面？'
+				  title: '确认信息',
+				  message: '请问是否要转移到原来帮扶链的上级下面？'
 				}).then(() => {
 				  // on confirm
-				  console.log("sure");
 				  if(_this.userInfo.teamCalculationPower>0){
 					  Dialog.alert({
 					    title: '系统提示',
 					    confirmButtonText:'好的',
-					    message: "您已有团队算力，无法放弃该账号的首码"
+					    message: "您已有团队算力，无法转移"
 					  }).then(() => {
 					    // on confirm
-					  })
+					  });
+					  return;
+				  }
+				  if(_this.idCard==null||_this.idCard==''){
+					  Dialog.alert({
+						title: '系统提示',
+						confirmButtonText:'好的',
+						message: "请填写身份证号校验"
+					  }).then(() => {
+						// on confirm
+					  });
 					  return;
 				  }
 				  let params = {

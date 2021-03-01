@@ -79,7 +79,8 @@
 				</div>
 				<div class="line text margT10">
 					实名认证<br>
-					完成后即可获得系统所空投的FGC<br>
+					完成后即可获得系统所空投的钻石<br>
+					前30万名会员实名可获得0.5个钻石的空投<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -93,8 +94,8 @@
 					基础任务2
 				</div>
 				<div class="line text margT10">
-					激活账户<br>
-					连续签到15天后即可激活账户<br>
+					激活账户，开启出售权限<br>
+					连续签到15天后或升级成会长后或有过买入次数后，即可激活账户<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -112,7 +113,7 @@
 					需要：<br>
 					有效直推10名 + 团队算力10Gh/s<br>
 					完成后:<br>
-					奖励50个感恩值<br>
+					奖励50个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -130,7 +131,7 @@
 					需要：<br>
 					有效直推100名 + 团队算力100Gh/s + 伞下三个青铜会长<br>
 					完成后:<br>
-					奖励200个感恩值<br>
+					奖励200个钻石值并永久免交易手续费<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -148,7 +149,7 @@
 					需要：<br>
 					有效直推200名 + 团队算力300Gh/s + 伞下三个白银会长<br>
 					完成后:<br>
-					奖励1000个感恩值<br>
+					奖励1000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -166,7 +167,7 @@
 					需要：<br>
 					有效直推300名 + 团队算力900Gh/s + 伞下三个黄金会长<br>
 					完成后:<br>
-					奖励3000个感恩值<br>
+					奖励3000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -184,7 +185,7 @@
 					需要：<br>
 					有效直推500名 + 团队算力2700Gh/s + 伞下三个铂金会长<br>
 					完成后:<br>
-					奖励10000个感恩值<br>
+					奖励10000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -201,7 +202,7 @@
 					需要：<br>
 					有效直推10名 + 个人持币10个 + 一代团队持币1000个<br>
 					完成后:<br>
-					奖励10个感恩值<br>
+					奖励10个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -219,7 +220,7 @@
 					需要：<br>
 					有效直推100名 + 个人持币100个 + 一代团队持币10000个+三个青铜会长<br>
 					完成后:<br>
-					奖励100个感恩值<br>
+					奖励100个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -237,7 +238,7 @@
 					需要：<br>
 					有效直推200名 + 个人持币500个 + 一代团队持币50000个+三个白银会长<br>
 					完成后:<br>
-					奖励1000个感恩值<br>
+					奖励1000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -255,7 +256,7 @@
 					需要：<br>
 					有效直推300名 + 个人持币1000个 + 一代团队持币200000个+三个黄金会长<br>
 					完成后:<br>
-					奖励2000个感恩值<br>
+					奖励2000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -273,7 +274,7 @@
 					需要：<br>
 					有效直推400名 + 个人持币5000个 + 一代团队持币600000个+三个铂金会长<br>
 					完成后:<br>
-					奖励10000个感恩值<br>
+					奖励10000个钻石值<br>
 				</div>
 			</div>
 			<div class="flexRight">
@@ -385,10 +386,10 @@ export default {
 		}else{
 			_this.isRealName = false;
 		}
-		_this.getAssistMyMachineCount4Task();
+		/* _this.getAssistMyMachineCount4Task();
 		_this.getActivityCompleteInfo();
 		_this.getActivityMachineInventory();
-		_this.getAssistUserInfoList4RealName();
+		_this.getAssistUserInfoList4RealName(); */
 		// console.log('_this.isRealName',_this.isRealName);
 	},
 	methods:{

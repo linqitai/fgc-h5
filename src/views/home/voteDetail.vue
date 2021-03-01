@@ -282,12 +282,12 @@
 				this.showTipModel = true;
 			},
 			radioChange(val){
-				console.log('changeVal',val);
+				//console.log('changeVal',val);
 			},
 			judgeTime4VoteStatus(val){
 				let _this = this;
 				let now = _this.$utils.getDateTime(new Date());
-				console.log(`now:${now},deadTime:${val}`);
+				//console.log(`now:${now},deadTime:${val}`);
 				if(now>val){
 					return 1;
 				}else{
@@ -313,28 +313,6 @@
 					}
 				})
 			},
-			/* getAssistAnswer4Self(){
-				let _this = this;
-				let params = {
-					pageNo: _this.currentPage,
-					pageSize: _this.pageSize,
-					voteId:_this.voteId,
-					userId:_this.userId
-				}
-				_this.$ajax.ajax(_this.$api.getAssistAnswerListPage, 'GET', params, function(res) {
-					// console.log('res', res);
-					if (res.code == _this.$api.CODE_OK) { // 200
-						_this.myVoteInfo = res.data.list[0];
-					}else{
-						Dialog.alert({
-						  title: '系统提示',
-						  message: res.message
-						}).then(() => {
-						  // on close
-						});
-					}
-				})
-			}, */
 			getAssistAnswerListPage(){
 				let _this = this;
 				let params = {

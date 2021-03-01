@@ -205,7 +205,7 @@
 								</div>
 								<div class="line">租金 {{item.price}} 个钻石</div>
 								<div class="line">总产 {{item.totalOutput}} 个钻石</div>
-								<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(2)}}</b> 个钻石</div>
+								<div class="line">日产 <b class="yellow">{{(parseFloat(item.totalOutput)/parseFloat(item.allRuntime)*24).toFixed(3)}}</b> 个钻石</div>
 								<!-- <div class="line">增加流通值 <b class="yellow">{{item.type<10?(parseFloat(item.price)/2).toFixed(2):(parseFloat(item.price)).toFixed(2)}}</b></div> -->
 								<!-- <div class="line">运行总时长 {{item.allRuntime}}小时</div> -->
 								<div class="line">租赁上限 <b class="yellow">{{item.limitBuy}}</b>台 <b class="margL10">当前拥有</b> <b class="yellow">{{item.haveMill}}</b> 台</div>
@@ -227,15 +227,17 @@
 	  <van-dialog v-model="showSelectBox" title="请选择用什么租赁" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 	  		<div class="paddingWing">
 				<div class="placeholderLine20"></div>
-				<div class="f-14">您背包中拥有{{userInfo.thisWeekMineral}}钻石</div>
+				<div class="f-14">当前可用钻石：{{userInfo.thisWeekMineral}}</div>
 				<div class="placeholderLine10"></div>
-				<div class="f-14">租赁此矿机要花{{price}}个钻石</div>
+				<div class="f-14">当前可用钻石值：{{userInfo.contributionValue}}</div>
 				<div class="placeholderLine10"></div>
-				<!-- <van-radio-group v-model="selectRadioValue" @change="selectRadioChange">
+				<div class="f-14">租赁此矿机要花{{price}}个钻石或钻石值</div>
+				<div class="placeholderLine10"></div>
+				<van-radio-group v-model="selectRadioValue" @change="selectRadioChange">
 				  <van-radio name="1">钻石</van-radio>
 				  <div class="placeholderLine10"></div>
-				  <van-radio name="2">贡献值</van-radio>
-				</van-radio-group> -->
+				  <van-radio name="2">钻石值</van-radio>
+				</van-radio-group>
 				<van-field v-model="safePassword" label="安全密码" required type="password" clearable placeholder="请填写安全密码"/>
 				<div class="placeholderLine10"></div>
 				<div class="tip4model3RedText">安全密码是实名的时候所设置的安全(交易)密码</div>
@@ -271,6 +273,7 @@
 	import mHeader from '@/components/Header.vue';
 	import { Dialog,Toast } from 'vant';
 	export default {
+		name:"mill",
 		data() {
 			return {
 				option1: [
@@ -404,7 +407,9 @@
 				})
 			},
 			selectRadioChange(value){
-				////console.log(value);
+				let _this = this;
+				_this.selectRadioValue = value;
+				console.log("_this.selectRadioValue",_this.selectRadioValue);
 			},
 			validate(key){
 				let _this = this;
@@ -494,6 +499,10 @@
 			},
 			buyMill(item){
 				let _this = this;
+				if(_this.userInfo.actived!=1){
+					_this.$toast('请先去实名');
+					return;
+				}
 				_this.showSelectBox = true;
 				_this.price = item.price;
 				_this.machineId = item.id;
@@ -520,6 +529,11 @@
 						_this.$toast("您所拥有的钻石不够租赁该矿机");
 						_this.buyMillLoading = false;return;
 					}
+				}else if(_this.selectRadioValue==2){
+					if(_this.userInfo.contributionValue<_this.price){
+						_this.$toast("您所拥有的钻石值不够租赁该矿机");
+						_this.buyMillLoading = false;return;
+					}
 				}
 				// if(_this.userInfo.manType==1){
 				// 	if(_this.userInfo.realnameNum<30||_this.userInfo.teamCalculationPower<30||_this.userInfo.buyAmount<300){
@@ -535,6 +549,7 @@
 				let params = {
 					/* userId:_this.userInfo.userId, */
 					machineId:_this.machineId,
+					use:Number(_this.selectRadioValue),
 					safePassword:_this.safePassword
 				}
 				Toast.loading({

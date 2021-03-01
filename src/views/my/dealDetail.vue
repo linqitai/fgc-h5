@@ -190,19 +190,21 @@
 				<div class="placeholderLine10"></div>
 				<van-button size="normal" :block="true" @click="cancelBtn">给取消</van-button>1HW5f80P5N66z45835w5
 			</div> -->
-			<div v-if="form.status==5&&(loginerUserId=='en15079AQ107o91Y7217'||loginerUserId=='1502d824670iQ1215VW8'||loginerUserId=='1580I60773e1XBJ52634'||loginerUserId=='1HW5f80P5N66z45835w5')">
+			<div v-if="form.status==5&&(loginerUserId=='17y60355638oks179u51'||loginerUserId=='13620z77j4v9827555b8')">
 				<div class="placeholderLine10"></div>
 				<van-button size="normal" :block="true" @click="cancelBtn">给取消</van-button>
 				<div class="tip4model3">
-					注：若卖家确认超时后(过待确认时间尚未确认)，客服可给确认，并扣卖家1个贡献值。
+					注：若卖家确认超时后(过待确认时间尚未确认)，客服可给确认，并扣卖家10点信誉分。
 				</div>
+				<van-button size="normal" type="warning" :block="true" @click="waitSureBtn">设置成待确认</van-button>
+				<div class="placeholderLine10"></div>
 				<van-button size="normal" :block="true" type="primary" @click="sureBtn">给确认</van-button>
 			</div>
 			<!-- <van-button color="linear-gradient(to right, #ffae00 , #ff8400)" size="normal" :block="true" @click="passBtn">通 过</van-button> -->
 			<div v-if="form.status==2||form.status==4">
 				<div class="placeholderLine10"></div>
 				<div class="tip4model3">
-					注：若卖家确认超时后(过待确认时间尚未确认)，客服可给确认，并扣卖家1个贡献值。
+					注：若卖家确认超时后(过待确认时间尚未确认)，客服可给确认，并扣买家10点信誉分。
 				</div>
 				<van-button size="normal" :block="true" type="primary" @click="sureBtn">给确认</van-button>
 				<div class="placeholderLine10"></div>
@@ -322,9 +324,18 @@ export default {
 	},
 	mounted(){
 		let _this = this;
-		_this.loginerUserId = _this.$cookies.get('userId');
-		if(_this.$utils.isNUll(_this.loginerUserId)){
+		let userInfo = localStorage.getItem("_USERINFO_");
+		if(userInfo){
+			////console.log("userInfo_localStorage");
+			_this.userInfo = JSON.parse(userInfo);
+			_this.loginerUserId = _this.userInfo.userId;
+		}else{
 			_this.$toast(_this.$api.loginAgainTipText);
+			localStorage.removeItem('_USERINFO_');
+			_this.$cookies.remove('userId');
+			_this.$cookies.remove('token');
+			_this.$cookies.remove('isRefreshDealInfo');
+			_this.$cookies.remove('tab_raise_list');
 			_this.$router.replace('login');
 			return;
 		}
@@ -351,7 +362,7 @@ export default {
 			let params = {
 				id: _this.id
 			}
-			_this.$ajax.ajax4GetCheckDetail(_this.$api.getAssistTransactionExtendById, 'GET', params, function(res){
+			_this.$ajax.ajax(_this.$api.getAssistTransactionExtendById, 'GET', params, function(res){
 				if(res.code == _this.$api.CODE_OK){
 					// _this.form.idCardPic = res.data.idCardPic;
 					// _this.form.gesturePic = res.data.gesturePic;
@@ -405,9 +416,8 @@ export default {
 			  }
 			  let params = {
 			  	id:_this.form.id,
-			  	buyerId:_this.form.buyerId,
-			  	sellerId:_this.form.sellerId,
-			    addContributionValue:_this.addContributionValue.toFixed(2)
+			    addContributionValue:_this.addContributionValue.toFixed(2),
+				//safePassowrd:_this.$JsEncrypt.encrypt(_this.safePassword)
 			  }
 			  //console.log('params',params);
 			  
@@ -415,6 +425,37 @@ export default {
 			  	// //console.log('res',res)
 			  	if (res.code == _this.$api.CODE_OK) { // 
 					_this.$toast(`取消成功`);
+			  		_this.back();
+			  	}else{
+			  		Dialog.alert({
+			  		  title: '系统提示',
+			  		  message: res.message
+			  		}).then(() => {
+			  		  // on close
+			  		});
+			  	}
+			  })
+			}).catch(() => {
+			  // on cancel
+			  //console.log('cancel');
+			});
+		},
+		waitSureBtn(){
+			let _this = this;
+			Dialog.confirm({
+			  title: '系统提示',
+			  confirmButtonText:'继续',
+			  closeOnClickOverlay:true,
+			  message: '该操作将会把该笔交易设置成待确认，请问是否继续？'
+			}).then(() => {
+			  
+			  let params = {
+			  	id:_this.form.id
+			  }
+			  _this.$ajax.ajax(_this.$api.setDealToWaitSure4S, 'POST', params, function(res){
+			  	// //console.log('res',res)
+			  	if (res.code == _this.$api.CODE_OK) { // 
+					_this.$toast(`设置成功`);
 			  		_this.back();
 			  	}else{
 			  		Dialog.alert({

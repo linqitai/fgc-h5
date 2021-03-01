@@ -59,7 +59,7 @@
 			<van-notice-bar
 			  mode = "closeable"
 			  left-icon="volume-o"
-			  text="持钻挖矿每日领取收益数量：个人持钻数/全网矿工总持钻数*当天全网持钻挖矿总产量"
+			  text="持钻挖矿每日领取收益数量：个人可用钻石数量/全网可用钻石数量*当天全网持钻挖矿总产量"
 			/>
 			<canvas class="matrix" id="matrix"></canvas>
 			<!-- <div class="millType">
@@ -73,8 +73,8 @@
 			<div class="info">
 				<!-- <div class="">全网已实名会员量 {{millInfo.userNum}}</div>
 				<div class="placeholderLine10"></div> -->
-				<div class="">个人拥有钻石 {{userInfo.thisWeekMineral}}</div>
-				<div class="">全网拥有钻石 {{millInfo.totalFGC}}</div>
+				<div class="">个人可用钻石数量 {{userInfo.thisWeekMineral}}</div>
+				<!-- <div class="">全网可用钻石数量 {{millInfo.totalFGC}}</div> -->
 				<!-- <div class="">周期内全网持钻可挖钻石总量 {{millInfo.nowCBDN}}</div> -->
 				<div class="placeholderLine20"></div>
 				<!-- <div class="">当前可领取收益 {{millInfo.nowCBDN}}</div> -->
@@ -95,7 +95,7 @@
 		<van-dialog v-model="model4GetRecipt" title="收益验证" :show-cancel-button="false" :show-confirm-button="false" :close-on-click-overlay="true">
 			<div class="paddingWing">
 				<div class="placeholderLine20"></div>
-				<div class="tip4model3 textCenter">感恩宣言格式：感恩XX，XXXXXX</div>
+				<div class="tip4model3 textCenter">感恩宣言格式：感恩XXXXXXXX</div>
 				<div class="placeholderLine10"></div>
 				<van-field v-model="remark" label="感恩宣言" required type="textarea" maxlength="20" show-word-limit rows="2" autosize 	clearable placeholder="请填写感恩宣言"/>
 				<div class="placeholderLine10"></div>
@@ -133,6 +133,7 @@
 	import mHeader from '@/components/Header.vue';
 	import { Dialog,Toast } from 'vant';
 	export default {
+		name:"mill",
 		data() {
 			return {
 				remark:'',
@@ -232,13 +233,12 @@
 					_this.$toast("安全密码不能为空");
 					return;
 				}
-				console.log("_this.remark.indexOf('感恩')",_this.remark.indexOf('感恩'));
 				if(_this.remark.indexOf('感恩')<0){
 					_this.$toast("感恩宣言中需要有感恩两个字");
 					return;
 				}
-				if(_this.remark.length<8){
-					_this.$toast("感恩宣言不得少于8个字");
+				if(_this.remark.length<4){
+					_this.$toast("感恩宣言不得少于4个字");
 					return;
 				}
 				let params = {

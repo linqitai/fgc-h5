@@ -198,6 +198,7 @@
 				pageCount: 1000,
 				totalItems: 10000,
 				userId:"",
+				userInfo:'',
 				loading:false,
 				mobilePhone:'',
 				nickName:'',
@@ -210,37 +211,25 @@
 		},
 		mounted() {
 			let _this = this;
-			_this.userId = _this.$cookies.get('userId');
-			if(_this.$utils.isNUll(_this.userId)){
+			let userInfo = localStorage.getItem("_USERINFO_");
+			if(userInfo){
+				////console.log("userInfo_localStorage");
+				_this.userInfo = JSON.parse(userInfo);
+				_this.userId = _this.userInfo.userId;
+			}else{
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
+				return;
 			}
 		},
 		methods: {
 			back(){
 				this.$router.go(-1);
-			},
-			toListView(){
-				let _this = this;
-				_this.$router.push({
-					path: `/myWordList`
-				});
-			},
-			toBookView(val,userId){
-				let _this = this;
-				//console.log('toBookView');
-				let name = 'mineral';
-				if(val==1){
-					name = 'calculation';
-				}else if(val==2){
-					name = 'ticket';
-				}else if(val==3){
-					name = 'contribution';
-				}else if(val==4){
-					name = 'mineral';
-				}
-				_this.$cookies.set("tab_name_book", name, _this.$api.cookiesTime)
-				_this.$router.push({path:"lookBook",query:{lookUserId:userId}})
 			},
 			getUserInfoByNickName(){
 				let _this = this;
@@ -280,38 +269,6 @@
 					}
 				},function(){
 					_this.loading = false;
-				})
-			},
-			getUserFreezeInfo(){
-				let _this = this;
-				_this.$ajax.ajax(_this.$api.getAssistUserFreeze + _this.thisUserInfo.userId, 'GET', null, function(res) {
-					if (res.code == _this.$api.CODE_OK) { // 200  60 * 60 * 12
-						_this.userFreezeInfo = res.data;
-					}else{
-						_this.$toast(res.message);
-					}
-				})
-			},
-			submit(){
-				let _this = this;
-				let params = {
-					unFreezeUserId: _this.thisUserInfo.userId
-				}
-				_this.loading = true;
-				_this.$ajax.ajax(_this.$api.unFreeze, 'POST', params, function(res) {
-					_this.loading = false;
-					if (res.code == _this.$api.CODE_OK) {
-						_this.$toast('解冻成功');
-						_this.getUserInfo();
-						_this.userFreezeInfo = "";
-					}else{
-						Dialog.alert({
-						  title: '系统提示',
-						  message: res.message
-						}).then(() => {
-						  // on close
-						});
-					}
 				})
 			},
 		}

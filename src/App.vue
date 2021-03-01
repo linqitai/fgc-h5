@@ -13,7 +13,7 @@
 			<router-view></router-view>
 		</keep-alive>
 		<router-view v-if="$route.meta.keepAlive==false"></router-view> -->
-		<keep-alive include="login,register,voteList,dealRecord,millRecord,raiseApplyList">
+		<keep-alive include="login,register,deal,mill,home,millRecord,voteList,dealRecord,millRecord,raiseApplyList">
 			<router-view></router-view>
 		</keep-alive>
 	</transition>
@@ -47,21 +47,7 @@ export default {
 		    WeixinJSBridge.on('menu:setfont', function() {
 		        WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
 		    });
-		},
-		getDealPageInfo(){
-			let _this = this;
-			_this.$ajax.ajax(_this.$api.getDealPageInfo, 'POST', null, function(res) {
-				//console.log('getDealPageInfo', res);
-				if (res.code == _this.$api.CODE_OK) {
-					let dealPageInfo = res.data;
-					let currentBuyNum = _this.dealPageInfo.currentBuyNum.toFixed(2);
-					let serviceCharge = `${dealPageInfo.dealRatio*100}%矿石`;
-					localStorage.setItem("dealPageInfo",JSON.stringify(dealPageInfo))
-				}else{
-					_this.$toast(res.message);
-				}
-			})
-		},
+		}
 	}
 }
 </script>
@@ -256,6 +242,14 @@ b{font-weight: bold;}
 	font-size: 0.75rem;
 	line-height: 1.4em;
 	letter-spacing: 1px;
+}
+
+.tip4modelTextCenter{
+	color: $main-adorn-color;
+	font-size: 0.75rem;
+	line-height: 1.4em;
+	letter-spacing: 1px;
+	text-align: center;
 }
 
 .tip4model4{

@@ -57,9 +57,19 @@
 				<van-button type="info" size="normal" color="linear-gradient(to right, #ffae00, #ff8400)" :block="true" @click="addInCheck">申请加入HPC督察组</van-button>
 			</div> -->
 			<div class="placeholderLine10"></div>
-			<div class="tip4model3 textBold">有问题请先联系自己的上级或团队长，然后由上级或团队长再联系客服，尽量减少客服的压力，感恩您的配合。若无上级服务，可加首页的志愿者并备注来由，通过好友后让志愿者带您入群学习。</div>
+			<div class="tip4model3 textBold">有问题请先联系自己的上级或团队长，若上级和团队长都解答不了，就由上级或团队长联系客服，由此逐层传达，感恩您的配合。</div>
 			<div class="placeholderLine10"></div>
-			
+			<div class="placeholderLine10"></div>
+			<div class="title">感恩链微信工会群：</div>
+			<div class="placeholderLine10"></div>
+			<div class="cateInfo">
+				<div class="infoBox">
+					<img class="ewmBox" :src="groupPic">
+					<!-- <img class="ewmBox" src="../../assets/image/wechat.jpg"> -->
+					<div class="text">扫码进群</div>
+				</div>
+			</div>
+			<div class="placeholderLine10"></div>
 		</div>
 	</div>
 </template>
@@ -91,14 +101,16 @@
 				_this.userInfo = JSON.parse(userInfo);
 				_this.userId = _this.userInfo.userId;
 			}else{
-				/* localStorage.removeItem('_USERINFO_');
-				_this.$cookies.remove('userId');
-				_this.$cookies.remove('token'); */
 				_this.$toast(_this.$api.loginAgainTipText);
+				localStorage.removeItem('_USERINFO_');
+				_this.$cookies.remove('userId');
+				_this.$cookies.remove('token');
+				_this.$cookies.remove('isRefreshDealInfo');
+				_this.$cookies.remove('tab_raise_list');
 				_this.$router.replace('login');
 				return;
 			}
-			_this.getAdminUserPageList();
+			//_this.getAdminUserPageList();
 			_this.getGroupPic();
 			/* let qqFlock = _this.$cookies.get('qqFlock');
 			if(qqFlock){

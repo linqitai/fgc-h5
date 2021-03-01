@@ -1,5 +1,7 @@
 // import Vue from 'vue'
 import Router from 'vue-router'
+//import VueCookies from 'vue-cookies'
+//import store from './store/index'//引入store
 // import Register from './views/start/register'
 // import Login from './views/start/login'
 // import ForgetPassword from './views/start/forgetPassword'
@@ -12,10 +14,16 @@ Vue.use(Router)
 Router.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error=> error)
 } */
-export default new Router({
+const router = new Router({
 	// mode: 'history',
 	base: process.env.BASE_URL,
 	routes: [
+		{
+			path: '/downLoadApp',
+			name: 'downLoadApp',
+			component: resolve => require(['./views/start/downLoadApp'],resolve),
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
+		},
 		{
 			path: '/gameCharge',
 			name: '游戏充值',
@@ -32,30 +40,31 @@ export default new Router({
 			path: '/register',
 			name: '注册',
 			component: resolve => require(['./views/start/register'],resolve),
-			meta:{footer:false,keepAlive:true},
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
 		},
 		{
 			path: '/login',
 			name: '登录',
 			component: resolve => require(['./views/start/login'],resolve),
-			meta:{footer:false,keepAlive:true},
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
 		},
 		{
 			path: '/agreement',
 			name: '服务协议',
 			component: resolve => require(['./views/other/agreement'],resolve),
-			meta:{footer:false,keepAlive:true},
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
 		},
 		{
 			path: '/initPassword',
 			name: '初始化密码',
 			component: resolve => require(['./views/start/initPassword'],resolve),
-			meta:{footer:false,keepAlive:true},
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
 		},
 		{
 			path: '/tip',
 			name: '提示',
-			component: resolve => require(['./views/other/tip'],resolve)
+			component: resolve => require(['./views/other/tip'],resolve),
+			meta:{footer:false,keepAlive:true,requiredLogin:false},
 		},
 		{
 			path: '/404',
@@ -90,13 +99,13 @@ export default new Router({
 					component: resolve => require(['./views/home/home'],resolve),
 					meta:{footer:true,back:false,question:false,keepAlive:true},
 					children:[
-						{
+						/* {
 							path: '/rankingDeal',
 							name: '服务商排行榜',
 							component: resolve => require(['./views/home/rankingDeal'],resolve),
 							meta:{footer:false,keepAlive:true},
-						},
-						{
+						}, */
+						/* {
 							path: '/fundPoolRecord',
 							name: '帮扶基金池账本',
 							component: resolve => require(['./views/home/fundPoolRecord'],resolve),
@@ -107,7 +116,7 @@ export default new Router({
 							name: '帮扶基金池转出操作',
 							component: resolve => require(['./views/home/transferFundPoolTicket'],resolve),
 							meta:{footer:false,keepAlive:true},
-						},
+						}, */
 						{
 							path: '/gameList',
 							name: '游戏列表',
@@ -376,12 +385,12 @@ export default new Router({
 					component: resolve => require(['./views/home/cService'],resolve),
 					meta:{footer:false,keepAlive:true},
 				},
-				{
+				/* {
 					path: '/serviceDeal',
 					name: '服务商',
 					component: resolve => require(['./views/home/serviceDeal'],resolve),
 					meta:{footer:false,keepAlive:true},
-				},
+				}, */
 				{
 					path: '/auction',
 					name: '竞拍',
@@ -481,7 +490,7 @@ export default new Router({
 					component: resolve => require(['./views/home/volunteer'],resolve),
 					meta:{footer:false,keepAlive:true},
 				},
-				{
+				/* {
 					path: '/ranking4Level',
 					name: '会长排行榜',
 					component: resolve => require(['./views/home/ranking4Level'],resolve),
@@ -498,7 +507,7 @@ export default new Router({
 					name: '市代理',
 					component: resolve => require(['./views/home/agency2'],resolve),
 					meta:{footer:false,keepAlive:true},
-				},
+				}, */
 				{
 					path: '/voteList',
 					name: '投票中心',
@@ -629,3 +638,15 @@ export default new Router({
 		},
 	]
 })
+/* const token = VueCookies.get('token');
+router.beforeEach((to,from,next) => {
+	if(typeof to.meta.requiredLogin===undefined && (token==''||token==null)) {
+		next('login')
+	}else if(to.meta.requiredLogin==false && token!='' && token!=null) {
+		store.commit('setTabbarActive', 0)
+		router.replace('home')
+	}else{
+		next();
+	}
+}) */
+export default router

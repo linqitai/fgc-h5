@@ -80,7 +80,7 @@
 		<m-header>
 			<i class="leftBox iconfont iconfont-left-arrow" @click="back"></i>
 			<div class="text">
-				转让矿石(会长)
+				转让钻石(会长)
 			</div>
 			<i class="rightBox icon"></i>
 		</m-header>
@@ -106,9 +106,9 @@
 			<!-- <div class="paddingWing tip4model3" v-html="$api.tipText4Safe"></div> -->
 			<div class="placeholderLine10"></div>
 			<div class="paddingWing tip4model3">
-				<b class="textBold">定向转让矿石(会长)交易规则：</b><br>
-				1.青铜及以上级别的工会会长才有权限给自己的3代伞下会员单向转让矿石。<br>
-				2.转让手续费只收交易总金额10%的帮扶券。比如：交易总金额是200CNY，收20CNY价值的帮扶券作为手续费。<br>
+				<b class="textBold">定向转让钻石(会长)交易规则：</b><br>
+				1.青铜及以上级别的工会会长才有权限给自己的3代伞下会员单向转让钻石。<br>
+				2.转让手续费只收交易总金额10%的感恩券。比如：交易总金额是200CNY，收20CNY价值的感恩券作为手续费。<br>
 			</div>
 			<!-- <div class="margT10 paddingWing tip4model3" v-html="tipText4AppointDeal"></div> -->
 			<div class="placeholderLine40"></div>
@@ -305,7 +305,7 @@
 				Dialog.confirm({
 				  title: '提示信息',
 				  confirmButtonText:'确定',
-				  message: `请确定是否要给对方转${_this.form4AppointDeal.transferAmount}个矿石？`
+				  message: `请确定是否要给对方转${_this.form4AppointDeal.transferAmount}个钻石？`
 				}).then(() => {
 				  // on confirm
 					let params = {
@@ -331,7 +331,7 @@
 						return;
 					}
 					if(Number(_this.userInfo.thisWeekMineral)<Number(params.num)){
-						_this.$toast('您的矿石不够');
+						_this.$toast('您的钻石不够');
 						return;
 					}
 					/* if(_this.userInfo.contributionValue<params.num){
@@ -339,7 +339,7 @@
 						return;
 					} */
 					/* if(_this.userInfo.platformTicket<1){
-						_this.$toast('您的帮扶券不够');
+						_this.$toast('您的感恩券不够');
 						return;
 					} */
 					if(_this.$utils.hasNull(params)){

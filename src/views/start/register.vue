@@ -217,7 +217,7 @@
 				<div class="tip4modelNew">
 					<b class="textBold">尊敬的原始矿工注册前请认真阅读以下协议：</b><br>
 					<div class="placeholderLine4"></div>
-					会员的注册实名信息是矿工之间交换FGC时的重要凭据，<b class="textBold blue">一旦提交则无法修改</b>，若所填信息有误，只能注销自己的账号然后重新注册实名。<br>
+					会员的注册实名信息是矿工之间交换钻石时的重要凭据，<b class="textBold blue">一旦提交则无法修改</b>，若所填信息有误，只能注销自己的账号然后重新注册实名。<br>
 				</div>
 				<div class="placeholderLine20"></div>
 				<van-button color="linear-gradient(to right, #0e7de5, #0b6cc7)" @click="showPickRealNameModel=false" size="normal" :block="true" :disabled="isDealDisabled" loading-type="spinner">{{timeRead}}</van-button>
@@ -299,7 +299,12 @@
 			_this.form.shareCode = _this.$route.query.id;
 			_this.isWeixin = _this.$utils.isWeixin();
 			_this.helpList = _this.$config.helpList;
+			/* console.log("returnCitySN",returnCitySN);
+			let citySN = returnCitySN; */
+			/* let cip = localStorage.getItem('cip');
+			console.log("cip2",cip) */
 			let citySN = returnCitySN;
+			//console.log("citySN.cip",citySN.cip);
 			_this.securityp = _this.$JsEncrypt.encrypt(citySN.cip);
 		
 		},
